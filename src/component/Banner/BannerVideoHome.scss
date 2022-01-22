@@ -1,0 +1,21 @@
+#banner-wrapper {
+    .banner-container{
+        .p-top {
+            display: flex;
+            height: 100px;
+            align-items: center;
+            p {
+                margin: 0;
+                
+            }
+        }
+        .video-pText {
+            display: flex;
+            
+            
+        }
+        video {
+            width: 100%;
+        }
+    }
+}
