@@ -1,21 +1,225 @@
 #banner-wrapper {
-    .banner-container{
+    .banner-container {
+        margin-bottom: 80px;
         .p-top {
             display: flex;
             height: 100px;
             align-items: center;
             p {
                 margin: 0;
-                
             }
         }
         .video-pText {
             display: flex;
-            
-            
+            justify-content: space-evenly;
+
+            .p-left {
+                display: flex;
+                position: relative;
+
+                align-items: center;
+                padding: 20px;
+                font-size: 20px;
+                // justify-content: space-around;
+
+                .border-left {
+                    position: absolute;
+                    height: 300px;
+                    width: 2px;
+                    background: #000;
+                    animation: borderColor ease-in 2s infinite;
+                }
+                .p-text-left {
+                    display: block;
+
+                    font-size: 20px;
+                    transform: rotate(90deg);
+                    color: #bb9494;
+                }
+            }
+            .p-right {
+                display: flex;
+                position: relative;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+                padding: 20px;
+                font-size: 20px;
+                justify-content: space-around;
+
+                .p-text-right {
+                    display: block;
+
+                    font-size: 20px;
+                    transform: rotate(90deg);
+                    label {
+                        color: #bb9494;
+                    }
+                }
+
+                .scroll-clip {
+                    position: absolute;
+                    height: 300px;
+                    width: 2px;
+                    background: #000;
+                    animation: scrollClip 3s ease-in infinite;
+                }
+            }
         }
         video {
-            width: 100%;
+            width: 75%;
         }
+    }
+    .new-list-container {
+        
+        // .news-list-link{
+        //     margin-bottom: 50px;
+        // }
+        .p-index-container {
+            margin-top: 50px;
+
+            .p-index-about {
+                position: relative;
+                .animation-img {
+                    animation: animation 1s;
+                }
+                .p-index-about-description {
+                    width: 600px;
+                    position: absolute;
+                    bottom: -245px;
+                    right: 0;
+                    background: #fff;
+                    h3 {
+                        color: #8b8b8b;
+                        padding: 30px;
+                    }
+                    h2 {
+                        color: #1a1a1a;
+                        padding: 30px;
+                    }
+                    div {
+                        p {
+                            color: #1a1a1a;
+                        }
+                    }
+                }
+            }
+            .p-index-concept {
+                position: relative;
+                margin-bottom: 50px;
+                
+                .concept-img {
+                    transform: translateX(80px);
+                    box-shadow: 50px 0 100px 20px;
+                    width: 400px;
+                    height: 600px;
+                    border-radius: 15px;
+                }
+                .concept-text-div {
+                    .concept-text {
+                        position: absolute;
+                        bottom: 70px;
+                        left: 40%;
+                        font-weight: 600;
+                        font-size: 70px;
+                        color: #d4c280f7;
+                        z-index: 5;
+                    }
+                }
+            }
+            .concept-text-story {
+                position: relative;
+                padding-top: 50px;
+                height: 1300px;
+                margin-bottom: 125px;
+                .concept-story-desc {
+                    position: absolute;
+                    left: 30%;
+                    z-index: 5;
+                }
+
+                .concept-story-gif {
+                    .gif-right {
+                        img {
+                            position: absolute;
+                            width: 450px;
+                            height: 500px;
+                            right: 0;
+                            top: -150px;
+                        }
+                    }
+                    .gif-left {
+                        img {
+                            position: absolute;
+                            width: 400px;
+                            height: 300px;
+                            left: 0;
+                            top: 25%;
+                        }
+                    }
+                    .video-center {
+                        video {
+                            position: absolute;
+                            width: 700px;
+                            left: 20%;
+                            top: 42%;
+                            cursor: pointer;
+                            z-index: 5;
+                        }
+                    }
+                    .gif-left-bottom{
+                        img{
+                            
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes borderColor {
+    0% {
+        background: #bb9494;
+    }
+    50% {
+        background: #000;
+    }
+    100% {
+        background: #bb9494;
+    }
+}
+@keyframes scrollClip {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        height: 300px;
+    }
+    100% {
+        height: 0;
+    }
+}
+@keyframes textRigth {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        height: 20px;
+    }
+    100% {
+        height: 0;
+    }
+}
+@keyframes animation {
+    from {
+        transform: translateX(3000px);
+    }
+    to {
+        transform: translateX(0px);
     }
 }
