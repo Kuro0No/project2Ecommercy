@@ -1,42 +1,50 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
 import { Link } from 'react-router-dom';
 import VideoCenter from './Video/VideoCenter.webm'
+import productBanner from '../../img/productBanner.png'
+
 
 
 const BannerVideoHome = () => {
+    
 
-    return <div id='banner-wrapper'>
-        <div className='banner-container'>
-            <div className='p-top'>
-                Share -----
-                <p>Twitter</p> / <p>Facebook</p>
-            </div>
-            <div className='video-pText '>
-                <div className='p-left '>
-                    {/* <div className='border-news'></div> */}
-                    <p className='p-text-left'>
-                        Recent
-                    </p>
-                    <div className='border-left'></div>
+    return <>
 
-
-
+        
+        <div id='banner-wrapper'>
+            <div className='banner-container'>
+                <div className='p-top'>
+                    Share -----
+                    <p>Twitter</p> / <p>Facebook</p>
                 </div>
-                <video autoPlay loop muted src={Banner} ></video>
-                <div className='p-right'>
-                    <p className='p-text-right'> <label>Scroll</label> </p>
-                    <div className='scroll-clip'></div>
+                <div className='video-pText '>
+                    <div className='p-left '>
+                        {/* <div className='border-news'></div> */}
+                        <p className='p-text-left'>
+                            Recent
+                        </p>
+                        <div className='border-left'></div>
 
 
+
+                    </div>
+                    <video autoPlay loop muted src={Banner} ></video>
+                    <div className='p-right'>
+                        <p className='p-text-right'> <label>Scroll</label> </p>
+                        <div className='scroll-clip'></div>
+
+
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        <NewLists />
-        <Product />
-    </div>;
+            </div>
+            <NewLists />
+            <Product />
+
+        </div>;
+    </>
 };
 
 const NewLists = () => {
@@ -102,18 +110,118 @@ const NewLists = () => {
 
 
 const Product = () => {
+    const circle1Ref = useRef()
+    const circle2Ref = useRef()
+    const circle3Ref = useRef()
+    const circle4Ref = useRef()
+    const [hat, setHat] = useState('HAT')
+    const [trousers, setTrousers] = useState('TROUSERS')
+    const [shoes, setShoes] = useState('SHOES')
+    const [jacket, setJacket] = useState('JACKET')
+
+    const CircleMove1 = () => {
+        setHat(undefined)
+        circle1Ref.current.src = 'https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/3739ae6f20f04fefa5c5aa1701065db9_9366/Mu_len_tron_vanh_gan_soc_Adicolor_DJo_ED8726_01_standard.jpg'
+        circle1Ref.current.style.scale = 1.5
+    }
+    const MouseCircleLeave = () => {
+        circle1Ref.current.src = ''
+        setHat('HAT')
+
+
+    }
+    const CircleMove2 = () => {
+        setJacket(undefined)
+        circle2Ref.current.src = 'https://cdn.vuahanghieu.com/unsafe/0x900/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2021/01/ao-khoac-men-s-lacoste-sport-contrast-accents-print-zip-sweatshirt-mau-xanh-la-ten-tren-website-600572d1c5b38-18012021183649.jpg'
+        circle2Ref.current.style.scale = 1.5
+    }
+    const MouseCircleLeave2 = () => {
+        circle2Ref.current.src = ''
+        setJacket('JACKET')
+
+
+    }
+    const CircleMove3 = () => {
+        setShoes(undefined)
+        circle3Ref.current.src = 'https://bizweb.dktcdn.net/thumb/1024x1024/100/347/064/products/air-force-1-shadow-shoe-m8sqjm-839b03fe-6f28-48bd-ab6d-2e3ad2209713.jpg?v=1603421356143'
+        circle3Ref.current.style.scale = 1.5
+    }
+    const MouseCircleLeave3 = () => {
+        circle3Ref.current.src = ''
+        setShoes('SHOES')
+
+
+    }
+    const CircleMove4 = () => {
+        setTrousers(undefined)
+        circle4Ref.current.src = 'https://saigonsneaker.com/wp-content/uploads/2020/11/Quan-Baggy-Jean-Nam-Ong-Rong-Xanh-8.jpg'
+        circle4Ref.current.style.scale = 1.5
+    }
+    const MouseCircleLeave4 = () => {
+        circle4Ref.current.src = ''
+        setTrousers('TROUSERS')
+
+
+    }
 
 
     return (
         <>
-        <div className='text-center'>
-            
-            <h1>CLOTHING</h1>
-            <div className='product-introduce'>
-                <h3>1 Product: 20$</h3>
-                <h3>4 Product: 80$</h3>
+            <div className='text-center p-index-product'>
+
+                <h1 className='mb-5'>CLOTHING</h1>
+                <div className='product-introduce mb-5'>
+                    <h3>1 Product: 20$ <label>(Tax included)</label></h3>
+                    <h3>4 Product: 80$ <label>(Tax included)</label></h3>
+                </div>
+                <div className='banner-product'>
+                    <img src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
+                </div>
+                <div className='d-flex p-index-product-desc-feature'>
+
+                    <div className='product-feature col-6'>
+                        <img src={productBanner} />
+                        <div className="circle-multiple">
+                            <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
+                                <span>{hat}</span>
+                                <img  ref={circle1Ref} />
+                            </div>
+                        </div>
+                        <div className="circle-multiple2" onMouseMove={CircleMove2} onMouseLeave={MouseCircleLeave2}>
+                            <div className="circle text-center">
+                                <span>{jacket}</span>
+                                <img  ref={circle2Ref} />
+                            </div>
+                        </div>
+                        <div className="circle-multiple3">
+                            <div className="circle text-center" onMouseMove={CircleMove3} onMouseLeave={MouseCircleLeave3}>
+                                <span>{shoes}</span>
+                                <img  ref={circle3Ref} />
+                            </div>
+                        </div>
+                        <div className="circle-multiple4" onMouseMove={CircleMove4} onMouseLeave={MouseCircleLeave4}>
+                            <div className="circle text-center">
+                                <span>{trousers}</span>
+                                <img  ref={circle4Ref} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='p-index-product-desc col-6'>
+                        <h3 className="p-index-product-desc-title">Three different textures</h3>
+                        <p className="p-index-product-desc-text">POGG packs three different textures in one bite - A crispy pie crust that wraps fluffy sweet potato paste and velvety sweet potato cream.</p>
+                        <h3 className="p-index-product-desc-title">A carefully designed shape</h3>
+                        <p className="p-index-product-desc-text">We designed POGG’s sweet potato pies in a unique shape of a triangle so that it will encompass all three different textures together and surprise people with their image of a sweet potato.</p>
+                        <p className="p-index-product-desc-allergy">[Allergens] Clothes, Trousers, Shoes,...</p>
+                    </div>
+                </div>
+                <div className='p-index-product-sub-image'>
+                    <img src="https://thumbnails.cbc.ca/maven_legacy/thumbnails/2/995/CBC_MARKETPLACE_S49E01_thumbnail_v01.jpeg" alt="" />
+                </div>
+
+                <div className='p-index-product-sub-image-2'>
+                    <img src="https://media1.giphy.com/media/8cphEsRKEFSVlwtOA0/giphy.gif" alt="" />
+                </div>
             </div>
-        </div>
         </>
     )
 }
