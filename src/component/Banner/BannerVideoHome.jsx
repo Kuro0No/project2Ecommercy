@@ -1,18 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
 import { Link } from 'react-router-dom';
 import VideoCenter from './Video/VideoCenter.webm'
 import productBanner from '../../img/productBanner.png'
+import '../../responsive/responsiveHome.scss'
+
+
 
 
 
 const BannerVideoHome = () => {
-    
+
 
     return <>
 
-        
+
         <div id='banner-wrapper'>
             <div className='banner-container'>
                 <div className='p-top'>
@@ -43,7 +46,7 @@ const BannerVideoHome = () => {
             <NewLists />
             <Product />
 
-        </div>;
+        </div>
     </>
 };
 
@@ -51,13 +54,13 @@ const NewLists = () => {
 
 
     return (
-        <div className='new-list-container'>
+        <div className='new-list-container' id='about'>
             <Link className='news-list-link' to='news'> NEW LIST </Link>
             <div className='p-index-container'>
                 <div className='p-index-about'>
                     <img style={{ width: "100%" }} className='animation-img' src='https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-nu-dep-nhat-the-gioi_113857663.jpg' />
                     <div className='p-index-about-description text-center'>
-                        <h3 >ABOUT POGG</h3>
+                        <h3 >ABOUT PRODUCT</h3>
                         <h1> A SMART CHOICE </h1>
                         <h2> Crispy, Fluffy and Creamy in one little triangle!</h2>
                         <div>
@@ -118,6 +121,8 @@ const Product = () => {
     const [trousers, setTrousers] = useState('TROUSERS')
     const [shoes, setShoes] = useState('SHOES')
     const [jacket, setJacket] = useState('JACKET')
+    const [size,setSize] = useState(Math.round(window.innerWidth/30))
+    const [witdh,setWidth] = useState(window.innerWidth)
 
     const CircleMove1 = () => {
         setHat(undefined)
@@ -160,9 +165,53 @@ const Product = () => {
     const MouseCircleLeave4 = () => {
         circle4Ref.current.src = ''
         setTrousers('TROUSERS')
+    }
+    const mouseMoveShop = useRef()
+    const mouseMoveContact = useRef()
+    const mouseMoveShopHandle = (e) => {
+        mouseMoveShop.current.style.left = e.clientX + 'px'
+        mouseMoveShop.current.style.top = e.clientY + 'px'
+        mouseMoveShop.current.style.width = '80px'
+        mouseMoveShop.current.style.height = '80px'
+        mouseMoveShop.current.style.border = 'white solid 2px'
 
 
     }
+    const mouseLeaveShopHandle = () => {
+        mouseMoveShop.current.style.width = 0
+        mouseMoveShop.current.style.height = 0
+        mouseMoveShop.current.style.border = 'none'
+
+    }
+    const mouseMoveContactHandle = (e) => {
+        mouseMoveContact.current.style.left = e.clientX + 'px'
+        mouseMoveContact.current.style.top = e.clientY + 'px'
+        mouseMoveContact.current.style.width = '80px'
+        mouseMoveContact.current.style.height = '80px'
+        mouseMoveContact.current.style.border = '#ce009f solid 2px'
+
+    }
+    const mouseLeaveContactHandle = () => {
+        mouseMoveContact.current.style.width = 0
+        mouseMoveContact.current.style.height = 0
+        mouseMoveContact.current.style.border = 'none'
+
+    }
+    useEffect(() => {
+        const resizeHandle = () => {
+            setWidth(window.innerWidth)
+            setSize(Math.round(window.innerWidth /30))
+           
+        }
+        window.addEventListener('resize', resizeHandle)
+
+        return () => {
+            window.removeEventListener('resize', resizeHandle)
+        }
+    }, [])
+
+
+
 
 
     return (
@@ -170,49 +219,52 @@ const Product = () => {
             <div className='text-center p-index-product'>
 
                 <h1 className='mb-5'>CLOTHING</h1>
-                <div className='product-introduce mb-5'>
+                <div className='product-introduce mb-5' onClick={() => console.log(window.innerWidth)}>
                     <h3>1 Product: 20$ <label>(Tax included)</label></h3>
                     <h3>4 Product: 80$ <label>(Tax included)</label></h3>
                 </div>
                 <div className='banner-product'>
                     <img src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
                 </div>
-                <div className='d-flex p-index-product-desc-feature'>
+                <div className=' p-index-product-desc-feature'>
+                    <div className='p-index-product-desc-div'>
+                        <div className='p-index-product-desc col-6'>
+                            <h3 className="p-index-product-desc-title">Three different textures</h3>
+                            <p className="p-index-product-desc-text" >POGG packs three different textures in one bite - A crispy pie crust that wraps fluffy sweet potato paste and velvety sweet potato cream.</p>
+                            <h3 className="p-index-product-desc-title">A carefully designed shape</h3>
+                            <p className="p-index-product-desc-text">We designed POGG’s sweet potato pies in a unique shape of a triangle so that it will encompass all three different textures together and surprise people with their image of a sweet potato.</p>
+                            <strong className="p-index-product-desc-allergy">[Allergens] Clothes, Trousers, Shoes,...</strong>
+                        </div>
+                    </div>
 
-                    <div className='product-feature col-6'>
+                    <div className='product-feature'>
                         <img src={productBanner} />
                         <div className="circle-multiple">
                             <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
-                                <span>{hat}</span>
-                                <img  ref={circle1Ref} />
+                                <span style={{fontSize: size}}>{hat}</span>
+                                <img ref={circle1Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple2" onMouseMove={CircleMove2} onMouseLeave={MouseCircleLeave2}>
                             <div className="circle text-center">
-                                <span>{jacket}</span>
-                                <img  ref={circle2Ref} />
+                                <span style={{fontSize: size}}>{jacket}</span>
+                                <img ref={circle2Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple3">
                             <div className="circle text-center" onMouseMove={CircleMove3} onMouseLeave={MouseCircleLeave3}>
-                                <span>{shoes}</span>
-                                <img  ref={circle3Ref} />
+                                <span style={{fontSize: size}}>{shoes}</span>
+                                <img ref={circle3Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple4" onMouseMove={CircleMove4} onMouseLeave={MouseCircleLeave4}>
                             <div className="circle text-center">
-                                <span>{trousers}</span>
-                                <img  ref={circle4Ref} />
+                                <span style={{fontSize: size}}>{trousers}</span>
+                                <img ref={circle4Ref} />
                             </div>
                         </div>
                     </div>
-                    <div className='p-index-product-desc col-6'>
-                        <h3 className="p-index-product-desc-title">Three different textures</h3>
-                        <p className="p-index-product-desc-text">POGG packs three different textures in one bite - A crispy pie crust that wraps fluffy sweet potato paste and velvety sweet potato cream.</p>
-                        <h3 className="p-index-product-desc-title">A carefully designed shape</h3>
-                        <p className="p-index-product-desc-text">We designed POGG’s sweet potato pies in a unique shape of a triangle so that it will encompass all three different textures together and surprise people with their image of a sweet potato.</p>
-                        <p className="p-index-product-desc-allergy">[Allergens] Clothes, Trousers, Shoes,...</p>
-                    </div>
+
                 </div>
                 <div className='p-index-product-sub-image'>
                     <img src="https://thumbnails.cbc.ca/maven_legacy/thumbnails/2/995/CBC_MARKETPLACE_S49E01_thumbnail_v01.jpeg" alt="" />
@@ -220,6 +272,23 @@ const Product = () => {
 
                 <div className='p-index-product-sub-image-2'>
                     <img src="https://media1.giphy.com/media/8cphEsRKEFSVlwtOA0/giphy.gif" alt="" />
+                </div>
+                <div className='p-index-shop-container '>
+                    <div className=' p-index-shop-left' onMouseMove={mouseMoveShopHandle} onMouseLeave={mouseLeaveShopHandle}>
+                        <div id='mouseMoveShop' ref={mouseMoveShop}></div>
+                        <Link to='/product'>
+                            <h3>Buy Now!</h3>
+                            <p>Many hot products are waiting for you <i class="bi bi-cart"></i></p>
+                        </Link>
+                    </div>
+                    <div className='  p-index-contact-right' onMouseMove={mouseMoveContactHandle} onMouseLeave={mouseLeaveContactHandle}>
+                        <div id='mouseMoveContact' ref={mouseMoveContact}></div>
+                        <Link to='/contact'>
+                            <h3>Contact Now!</h3>
+                            <p>Contact me for more details <i class="bi bi-telephone"></i></p>
+                        </Link>
+
+                    </div>
                 </div>
             </div>
         </>

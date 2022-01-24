@@ -1,0 +1,28 @@
+.footer {
+    padding: 100px;
+    text-align: center;
+    .footer-social {
+        display: flex;
+        padding-bottom: 30px;
+
+        justify-content: center;
+        a {
+            padding: 10px;
+            .svg-child-1 {
+                height: 50px;
+                width: 50px;
+                
+                box-shadow: 2px 0px 19px 1px;
+                border-radius: 50%;
+            }
+            .svg-child-2 {
+                height: 50px;
+                width: 50px;
+                
+                box-shadow: 2px 0px 19px 1px;
+                border-radius: 32%;
+                
+            }
+        }
+    }
+}
