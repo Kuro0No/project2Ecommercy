@@ -1,27 +1,42 @@
-import { Link, useParams } from 'react-router-dom'
+import { useRef, useState } from 'react';
+import { Link, NavLink, useParams } from 'react-router-dom'
+import { memo } from 'react';
+import './Products.scss'
 
 
-const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
+const Pagination = ({ productsPerPage, totalProducts, paginate, handlePre, handleNext, currentPage }) => {
     const pageNumbers = []
     for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
         pageNumbers.push(i)
+        
     }
-    const resParam = useParams()
-    console.log(resParam)
+  
 
 
-    return <div>
+    return <div className='d-flex justify-content-center'>
         <nav aria-label="...">
             <ul className="pagination">
-                
-                {pageNumbers.map(number => (
-                    <li key={number} className="page-item"><Link to='' onClick={() => paginate(number)} className="page-link">{number}</Link></li>
-                ))}
-                
+                <li className='page-item '>
+                    <Link className='page-link' onClick={handlePre} to='' >Previous</Link>
+                </li>
+                {pageNumbers.map((number, index) => {
+                    const currentPageNumber = index + 1
+                    
+                    return (
+                        <li key={number} className='page-item' >
+                            <Link to='' onClick={() => { paginate(number)}} className={`page-link ${currentPage == currentPageNumber ? 'active' :''}`} >{number}</Link>
+                        </li>
+
+                    )
+                })}
+                <li className="page-item">
+                    <Link className="page-link" onClick={handleNext} to=''>Next</Link>
+                </li>
+
             </ul>
 
         </nav>
     </div>;
 };
 
-export default Pagination;
+export default memo(Pagination);

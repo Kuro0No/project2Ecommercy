@@ -82,7 +82,7 @@ const Menu = () => {
                             <Link to=''>NEWS</Link>
                         </li>
                         <li>
-                            <Link to=''>SHOP</Link>
+                            <Link to='/product'>SHOP</Link>
                         </li>
                         <li>
                             <Link to=''>CONTACT</Link>

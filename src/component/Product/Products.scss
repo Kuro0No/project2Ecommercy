@@ -8,3 +8,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+.pagination {
+    justify-content: center;
+    .page-item{
+        .active{
+            background: #0d6efd;
+            color: white;
+        }
+    }
+}
+

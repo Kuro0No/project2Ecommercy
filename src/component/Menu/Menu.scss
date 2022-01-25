@@ -25,13 +25,16 @@
         }
     }
 }
-.active {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: unset;
-    position: fixed;
-    z-index: 100;
+.menu-container {
+    .active {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: unset;
+        position: fixed;
+        z-index: 100;
+    }
 }
+
 .active-timeX {
     position: fixed;
     right: 5%;
