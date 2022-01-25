@@ -1,10 +1,11 @@
-import React, { useRef, useState,useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
 import { Link } from 'react-router-dom';
 import VideoCenter from './Video/VideoCenter.webm'
 import productBanner from '../../img/productBanner.png'
 import '../../responsive/responsiveHome.scss'
+import Menu from '../Menu/Menu';
 
 
 
@@ -14,7 +15,7 @@ const BannerVideoHome = () => {
 
 
     return <>
-
+        <Menu />
 
         <div id='banner-wrapper'>
             <div className='banner-container'>
@@ -121,8 +122,8 @@ const Product = () => {
     const [trousers, setTrousers] = useState('TROUSERS')
     const [shoes, setShoes] = useState('SHOES')
     const [jacket, setJacket] = useState('JACKET')
-    const [size,setSize] = useState(Math.round(window.innerWidth/30))
-    const [witdh,setWidth] = useState(window.innerWidth)
+    const [size, setSize] = useState(Math.round(window.innerWidth / 30))
+    const [witdh, setWidth] = useState(window.innerWidth)
 
     const CircleMove1 = () => {
         setHat(undefined)
@@ -200,8 +201,8 @@ const Product = () => {
     useEffect(() => {
         const resizeHandle = () => {
             setWidth(window.innerWidth)
-            setSize(Math.round(window.innerWidth /30))
-           
+            setSize(Math.round(window.innerWidth / 30))
+
         }
         window.addEventListener('resize', resizeHandle)
 
@@ -241,25 +242,25 @@ const Product = () => {
                         <img src={productBanner} />
                         <div className="circle-multiple">
                             <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
-                                <span style={{fontSize: size}}>{hat}</span>
+                                <span style={{ fontSize: size }}>{hat}</span>
                                 <img ref={circle1Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple2" onMouseMove={CircleMove2} onMouseLeave={MouseCircleLeave2}>
                             <div className="circle text-center">
-                                <span style={{fontSize: size}}>{jacket}</span>
+                                <span style={{ fontSize: size }}>{jacket}</span>
                                 <img ref={circle2Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple3">
                             <div className="circle text-center" onMouseMove={CircleMove3} onMouseLeave={MouseCircleLeave3}>
-                                <span style={{fontSize: size}}>{shoes}</span>
+                                <span style={{ fontSize: size }}>{shoes}</span>
                                 <img ref={circle3Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple4" onMouseMove={CircleMove4} onMouseLeave={MouseCircleLeave4}>
                             <div className="circle text-center">
-                                <span style={{fontSize: size}}>{trousers}</span>
+                                <span style={{ fontSize: size }}>{trousers}</span>
                                 <img ref={circle4Ref} />
                             </div>
                         </div>
@@ -278,14 +279,14 @@ const Product = () => {
                         <div id='mouseMoveShop' ref={mouseMoveShop}></div>
                         <Link to='/product'>
                             <h3>Buy Now!</h3>
-                            <p>Many hot products are waiting for you <i class="bi bi-cart"></i></p>
+                            <p>Many hot products are waiting for you <i className="bi bi-cart"></i></p>
                         </Link>
                     </div>
                     <div className='  p-index-contact-right' onMouseMove={mouseMoveContactHandle} onMouseLeave={mouseLeaveContactHandle}>
                         <div id='mouseMoveContact' ref={mouseMoveContact}></div>
                         <Link to='/contact'>
                             <h3>Contact Now!</h3>
-                            <p>Contact me for more details <i class="bi bi-telephone"></i></p>
+                            <p>Contact me for more details <i className="bi bi-telephone"></i></p>
                         </Link>
 
                     </div>
