@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { Link,   } from 'react-router-dom'
 import { memo } from 'react';
 import './Products.scss'
 
 
-const Pagination = ({ productsPerPage, totalProducts, paginate, handlePre, handleNext, currentPage }) => {
+const Pagination = ({ productsPerPage, totalProductsLength, paginate, handlePre, handleNext, currentPage }) => {
     const pageNumbers = []
-    for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalProductsLength / productsPerPage); i++) {
         pageNumbers.push(i)
         
     }
+    
   
 
 
@@ -24,7 +24,7 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, handlePre, handl
                     
                     return (
                         <li key={number} className='page-item' >
-                            <Link to='' onClick={() => { paginate(number)}} className={`page-link ${currentPage == currentPageNumber ? 'active' :''}`} >{number}</Link>
+                            <Link to='' onClick={() => { paginate(number)}} className={`page-link ${currentPage === currentPageNumber ? 'active' :''}`} >{number}</Link>
                         </li>
 
                     )
