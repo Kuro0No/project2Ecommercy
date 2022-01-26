@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react/cjs/react.development';
 import { memo } from 'react';
 import axios from 'axios';
 
-const Catalog = ({ products, setProducts, getProducts }) => {
+const Catalog = ({ products, getProducts }) => {
     const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"]
     const sortByPrice = ["Increase", "Decrease"]
     const [checkedCategory, setCheckedCategory] = useState()
@@ -14,7 +14,7 @@ const Catalog = ({ products, setProducts, getProducts }) => {
     const onChangeCategory = (category) => {
         setCheckedCategory(category)
         const filter = products.filter(product => product.category == category)
-        setProducts(filter)
+     
         
     }
 

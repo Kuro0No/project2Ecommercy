@@ -1,32 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import './Products.scss'
 import Pagination from "./Pagination";
 import Catalog from "./Catalog";
-import Header from '../Header/Header'
-
+import Header from '../Header/Header';
+import { productContext } from "../ProductContext/ProductContext";
 
 const Product = () => {
 
-
-    const [products, setProducts] = useState([])
+    const products = useContext(productContext).products
+    // const [products, setProducts] = useState([])
     const [getProducts, setGetProducts] = useState([])
-    useEffect(() => {
-        async function fetchData() {
 
-            let res = await axios.get('https://fakestoreapi.com/products')
-            let data = res && res.data ? res.data : []
-            setProducts(data)
-            setGetProducts(data)
-
-        }
-        fetchData()
-
-    }, [])
+    console.log(products)
     
     
-
-
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(8)
     const indexOfLastProduct = currentPage * productsPerPage
@@ -53,7 +41,7 @@ const Product = () => {
             <Header />
             <div className="product-container d-flex">
                 <div className="catalog col-3">
-                    <Catalog setProducts={setProducts} getProducts={getProducts} products={products} />
+                    <Catalog  getProducts={getProducts} products={products} />
                 </div>
                 <div className="product col-9">
                     <div className="row">
