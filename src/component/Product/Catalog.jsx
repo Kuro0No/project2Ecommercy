@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react/cjs/react.development';
 import { memo } from 'react';
 import axios from 'axios';
+
 
 const Catalog = ({ products, getProducts }) => {
     const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"]
     const sortByPrice = ["Increase", "Decrease"]
     const [checkedCategory, setCheckedCategory] = useState()
     const [checkedPirce, setCheckedPrice] = useState()
-
+    const initFilter ={
+        category:[],
+        sortPirce: [],
+    }
+    // const [filter, setFilter] = useState(initFilter)
+    // const filterSlected= (type,checked,item) => {
+    //     if(checked) {
+    //         switch(type) {
+    //             case "electronic" : setFilter(category: )
+    //         }
+    //     }
+    // }
+   
+   
     
   
     const onChangeCategory = (category) => {

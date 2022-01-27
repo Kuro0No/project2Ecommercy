@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import Catalog from "./Catalog";
 import Header from '../Header/Header';
 import { productContext } from "../ProductContext/ProductContext";
+import { Link } from "react-router-dom";
 
 const Product = () => {
 
@@ -48,7 +49,7 @@ const Product = () => {
                         {currentProducts.map((product, index) => {
 
 
-                            return <div key={index} className="col-6 col-sm-6 col-md-4 pb-3">
+                            return <Link to ={`${product.title}/${product.id}`} key={index} className="col-6 col-sm-6 col-md-4 pb-3">
                                 <div className="card" >
                                     <img src={product.image} className="card-img-top products-image" alt="..." />
                                     <div className="card-body">
@@ -57,7 +58,7 @@ const Product = () => {
                                         <a href="#" className="btn btn-primary">Add to cart</a>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         })}
                         <div className="mt-4">
                             <Pagination currentPage={currentPage} productsPerPage={productsPerPage} handleNext={handleNext} paginate={paginate} handlePre={handlePre} totalProductsLength={products.length} />

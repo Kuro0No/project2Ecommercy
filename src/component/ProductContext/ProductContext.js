@@ -10,16 +10,16 @@ const ProductContextProvide = ({ children }) => {
     const [products, setProducts] = useState([])
     useEffect(() => {
         async function fetchData() {
-
             let res = await axios.get('https://fakestoreapi.com/products')
             let data = res && res.data ? res.data : []
             setProducts(data)
-           
-
+            
+            
         }
         fetchData()
-
+        
     }, [])
+    
 
 
     return <productContext.Provider value={{products: [...products]}}>

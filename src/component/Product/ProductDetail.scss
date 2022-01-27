@@ -1,0 +1,29 @@
+.productDetail{
+    height: 800px;
+    .left{
+       padding-left: 50px;
+       margin: 0 auto;
+       img{
+           width: 100%;
+       }
+        
+    }
+    .right {
+        .quantityHandle{
+            position: relative;
+            display: inline-flex;
+            .bi-plus-lg{
+                // position: absolute;
+                left: 0;
+                z-index: 1;
+            }
+            .bi-dash-lg{
+                // position: absolute;
+                right: 0;
+            }
+            input{
+                width: 50px ;
+            }
+        }
+    }
+}

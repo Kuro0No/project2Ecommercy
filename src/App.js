@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import Footer from './component/Footer/Footer';
 import Product from './component/Product/Product';
 import ProductContextProvide from './component/ProductContext/ProductContext';
+import ProductDetail from './component/Product/ProductDetail';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Routes >
           <Route path='/' element={<BannerVideoHome />} />
           <Route path='/product' element={<Product />} />
+          <Route path='/product/:title/:id' element={<ProductDetail />} />
         </Routes>
 
         <Footer />
