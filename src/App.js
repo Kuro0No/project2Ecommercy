@@ -4,8 +4,9 @@ import Menu from './component/Menu/Menu';
 import { Routes, Route } from 'react-router-dom'
 import Footer from './component/Footer/Footer';
 import Product from './component/Product/Product';
-import ProductContextProvide from './component/ProductContext/ProductContext';
+import ProductContextProvide from './ProductContext/ProductContext';
 import ProductDetail from './component/Product/ProductDetail';
+import MainPage from './component/MainPage/MainPage';
 
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
 
         <Routes >
           <Route path='/' element={<BannerVideoHome />} />
-          <Route path='/product' element={<Product />} />
-          <Route path='/product/:title/:id' element={<ProductDetail />} />
+          
         </Routes>
+        <MainPage />
 
         <Footer />
       </ProductContextProvide>

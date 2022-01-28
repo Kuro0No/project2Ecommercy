@@ -5,10 +5,23 @@ import { Link } from 'react-router-dom'
 import '../../responsive/responsiveMenu.scss'
 
 
-const Menu = () => {
+const Menu = ({abouteRef,productRef}) => {
     const menuShowRef = useRef()
     const [active, setActive] = useState(false)
     const [menuText, setMenuText] = useState(true)
+    const handleAboutScroll = () => {
+        abouteRef && window.scrollTo({top:abouteRef.offsetTop, behavior: 'smooth' })
+        setActive(false)
+    }
+    const handleProductScroll = () => {
+        productRef && window.scrollTo({top:productRef.offsetTop, behavior: 'smooth' })
+        setActive(false)
+    }
+    const handleTopScroll = () => {
+        window.scrollTo({top:0, behavior: 'smooth' })
+        setActive(false)
+    }
+
    
 
     useEffect(() => {
@@ -70,13 +83,13 @@ const Menu = () => {
                 <div className='menu-container-contents ' >
                     <ul>
                         <li>
-                            <Link to=''>TOP</Link>
+                            <Link to='' onClick={handleTopScroll}>TOP</Link>
                         </li>
                         <li>
-                            <Link to='' >- ABOUT PRODUCT</Link>
+                            <Link to='' onClick={handleAboutScroll}>- ABOUT PRODUCT</Link>
                         </li>
                         <li>
-                            <Link to=''>- PRODUCT</Link>
+                            <Link to='' onClick={handleProductScroll}>- PRODUCT</Link>
                         </li>
                         <li>
                             <Link to=''>NEWS</Link>

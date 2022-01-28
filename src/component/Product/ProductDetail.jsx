@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
-import { productContext } from "../ProductContext/ProductContext";
+import { productContext } from "../../ProductContext/ProductContext";
 import './ProductDetail.scss'
 
 const ProductDetail = () => {
@@ -10,10 +10,10 @@ const ProductDetail = () => {
     const products = useContext(productContext).products
     let productDetail = products.find(item => item.id == id)
     console.log(products)
-    const [quantity,setQuantity] = useState(1)
-    const decreaseQuantity =() => {
-        quantity>1 ? setQuantity(quantity - 1) : setQuantity(1)
-        
+    const [quantity, setQuantity] = useState(1)
+    const decreaseQuantity = () => {
+        quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)
+
     }
 
 
@@ -35,24 +35,25 @@ const ProductDetail = () => {
                                 <span>Rate: {productDetail.rating.rate}</span>
                                 <span> {productDetail.rating.count} review</span>
                             </div>
-                            <div>
-                                <button type="button" class="btn btn-outline-primary btn-lg">Primary</button>
-                                <button type="button" class="btn btn-outline-danger btn-lg">Buy Now!</button>
-                            </div>
+
                             <div className="quantityHandle">
                                 <div>
 
-                                    <i class="bi bi-plus-lg" onClick={() => setQuantity(quantity + 1)}></i>
+                                    <i className="bi bi-plus-lg" onClick={() => setQuantity(quantity + 1)}></i>
                                 </div>
                                 <div>
 
-                                    <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
+                                    <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
                                 </div>
                                 <div>
 
-                                    <i class="bi bi-dash-lg" onClick={decreaseQuantity}></i>
+                                    <i className="bi bi-dash-lg" onClick={decreaseQuantity}></i>
                                 </div>
 
+                            </div>
+                            <div>
+                                <button type="button" className="btn btn-outline-primary btn-lg">Add To Cart</button>
+                                <button type="button" className="btn btn-outline-danger btn-lg">Buy Now!</button>
                             </div>
                         </div>
                     </div>

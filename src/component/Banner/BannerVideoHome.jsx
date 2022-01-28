@@ -12,12 +12,13 @@ import Menu from '../Menu/Menu';
 
 
 const BannerVideoHome = () => {
-
-
+    
+    const [abouteRef,setAboutRef] =  useState()
+    const [productRef,setProductRef] = useState()
     return <>
-        <Menu />
+        <Menu abouteRef={abouteRef} productRef={productRef}/>
 
-        <div id='banner-wrapper'>
+        <div id='banner-wrapper' >
             <div className='banner-container'>
                 <div className='p-top'>
                     Share -----
@@ -44,18 +45,21 @@ const BannerVideoHome = () => {
                 </div>
 
             </div>
-            <NewLists />
-            <Product />
+            <NewLists  setAboutRef={setAboutRef} />
+            <Product setProductRef={setProductRef}/>
 
         </div>
     </>
 };
 
-const NewLists = () => {
-
+const NewLists = ({setAboutRef}) => {
+    const ref = useRef()
+    useEffect(() => 
+    ref && setAboutRef(ref.current)
+    ,[])
 
     return (
-        <div className='new-list-container' id='about'>
+        <div className='new-list-container' id='about' ref={ref}>
             <Link className='news-list-link' to='news'> NEW LIST </Link>
             <div className='p-index-container'>
                 <div className='p-index-about'>
@@ -73,7 +77,7 @@ const NewLists = () => {
 
                     </div>
                 </div>
-                <div className='p-index-concept '>
+                <div className='p-index-concept ' >
                     <img className='concept-img' src='https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_23/3482366/210611-gender-fluid-clothing-2x1-cs.jpg' />
                     <div className='concept-text-div'>
                         <h1 className='concept-text text-center' >BEST <br /> & CLOTHING</h1>
@@ -113,7 +117,7 @@ const NewLists = () => {
 }
 
 
-const Product = () => {
+const Product = ({setProductRef}) => {
     const circle1Ref = useRef()
     const circle2Ref = useRef()
     const circle3Ref = useRef()
@@ -210,17 +214,21 @@ const Product = () => {
             window.removeEventListener('resize', resizeHandle)
         }
     }, [])
-
+    const productRef = useRef()
+    useEffect(() => {
+        setProductRef(productRef.current)
+    })
+    
 
 
 
 
     return (
         <>
-            <div className='text-center p-index-product'>
+            <div className='text-center p-index-product' ref={productRef}>
 
                 <h1 className='mb-5'>CLOTHING</h1>
-                <div className='product-introduce mb-5' onClick={() => console.log(window.innerWidth)}>
+                <div className='product-introduce mb-5' >
                     <h3>1 Product: 20$ <label>(Tax included)</label></h3>
                     <h3>4 Product: 80$ <label>(Tax included)</label></h3>
                 </div>
