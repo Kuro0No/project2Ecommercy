@@ -1,6 +1,60 @@
-.header {
-    height: 100px;
-    width: 100%;
-    background: #000;
-    margin-bottom: 30px;
+header {
+    background-color: #fff;
+    padding: 10px  0;
+    margin-bottom: 40px;
+    .container-fluid {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    input {
+        width: 300px;
+        border-radius: 4px;
+        outline: darksalmon;
+        border: solid 1px;
+    }
+    .header-nav-right {
+        font-size: 20px;
+        
+    }
+    .cart-icon {
+        display: flex;
+        i {
+            font-size: 36px;
+        }
+        .cart-count {
+            font-size: 18px;
+            background: #0e8ce4;
+            border-radius: 50%;
+            padding: 0 7px;
+            color: #fff;
+            position: absolute;
+            right: 0;
+        }
+    }
+    .cart-user {
+        i {
+            font-size: 36px;
+        }
+    }
+}
+.linkUser, .linkCart {
+    color: black;
+}
+.cart-left {
+    padding: 0 15px;
+    .textCart {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+}
+.userLink {
+    a{
+        display: block;
+        font-size: 14px;
+        color: black;
+        &:hover {
+            color: #0d6efd;
+        }
+    }
 }

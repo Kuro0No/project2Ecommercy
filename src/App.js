@@ -6,23 +6,31 @@ import Footer from './component/Footer/Footer';
 import Product from './component/Product/Product';
 import ProductContextProvide from './ProductContext/ProductContext';
 import ProductDetail from './component/Product/ProductDetail';
-import MainPage from './component/MainPage/MainPage';
+import Register from './component/Authentication/Register';
+import Login from './component/Authentication/Login';
+import AuthProvider from './AuthContext/AuthContext';
 
 
 function App() {
   return (
     <div className="App">
+      <AuthProvider>
 
-      <ProductContextProvide >
+        <ProductContextProvide >
 
-        <Routes >
-          <Route path='/' element={<BannerVideoHome />} />
-          
-        </Routes>
-        <MainPage />
+          <Routes >
+            <Route path='/' element={<BannerVideoHome />} />
+            <Route path='/product' element={<Product />} />
+            <Route path='/product/:title/:id' element={<ProductDetail />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
 
-        <Footer />
-      </ProductContextProvide>
+          </Routes>
+
+
+          <Footer />
+        </ProductContextProvide>
+      </AuthProvider>
     </div>
   );
 }

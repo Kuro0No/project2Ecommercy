@@ -1,6 +1,9 @@
 .App {
   background: rgba(249, 231, 231, 0.58);
   margin: 0 10px;
- overflow: hidden;
+  overflow: hidden;
+  min-height: 100vh;
 }
-
+a{
+  text-decoration: none;
+}

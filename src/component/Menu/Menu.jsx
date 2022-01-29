@@ -95,7 +95,7 @@ const Menu = ({abouteRef,productRef}) => {
                             <Link to=''>NEWS</Link>
                         </li>
                         <li>
-                            <Link to='/product'>SHOP</Link>
+                            <Link to='/product' onClick={() => window.scrollTo(0,0)}>SHOP</Link>
                         </li>
                         <li>
                             <Link to=''>CONTACT</Link>

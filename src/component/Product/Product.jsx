@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import Catalog from "./Catalog";
 import { productContext } from "../../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
+import Header from "../Header/Header";
 
 const Product = () => {
 
@@ -13,8 +14,8 @@ const Product = () => {
     const [getProducts, setGetProducts] = useState([])
 
     console.log(products)
-    
-    
+
+
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(8)
     const indexOfLastProduct = currentPage * productsPerPage
@@ -38,25 +39,35 @@ const Product = () => {
 
     return (
         <>
+        <Header/>
             <div className="product-container d-flex">
                 <div className="catalog col-3">
-                    <Catalog  getProducts={getProducts} products={products} />
+                    <Catalog getProducts={getProducts} products={products} />
                 </div>
                 <div className="product col-9">
                     <div className="row">
                         {currentProducts.map((product, index) => {
 
 
-                            return <Link onClick={() => window.scrollTo(0,0)} to ={`${product.title}/${product.id}`} key={index} className="col-6 col-sm-6 col-md-4 pb-3">
-                                <div className="card" >
-                                    <img src={product.image} className="card-img-top products-image" alt="..." />
-                                    <div className="card-body">
-                                        <h5 className="card-title products-title">{product.title}</h5>
-                                        <p className="card-text">${product.price}</p>
-                                        <button  className="btn btn-primary">Add to cart</button>
+                            return (
+                                <div className="col-6 col-sm-6 col-md-4 pb-3">
+                                    <div className="card">
+
+                                        <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >
+                                            <div  >
+                                                <img src={product.image} className="card-img-top products-image" alt="..." />
+                                                <div className="card-body">
+                                                    <h5 className="card-title products-title">{product.title}</h5>
+                                                    <p className="card-text">${product.price}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        <div className="card-body">
+                                        <button className="btn btn-primary" >Add to cart</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </Link>
+                            )
                         })}
                         <div className="mt-4">
                             <Pagination currentPage={currentPage} productsPerPage={productsPerPage} handleNext={handleNext} paginate={paginate} handlePre={handlePre} totalProductsLength={products.length} />
