@@ -14,8 +14,11 @@ export default function AuthProvider({ children }) {
     function register(email,password) {
        return auth.createUserWithEmailAndPassword(email,password)
     }
-    function login(email,password) {
-        return auth.signInWithEmailAndPassword(email,password)
+    async function login(email,password) {
+        return await auth.signInWithEmailAndPassword(email,password,)
+    }
+    function updateProfile(displayName) {
+        return currentUser.updateProfile({displayName: displayName})
     }
     
     useEffect(() => {
@@ -30,6 +33,7 @@ export default function AuthProvider({ children }) {
         currentUser,
         register,
         login,
+        updateProfile,
         
 
     }

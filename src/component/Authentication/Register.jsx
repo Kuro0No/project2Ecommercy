@@ -8,16 +8,25 @@ import { useAuth } from '../../AuthContext/AuthContext';
 
 
 const Register = () => {
+    const { currentUser } = useAuth()
     const emailRef = useRef()
-    const passwordRef= useRef()
-    const passwordConFirmRef= useRef()
+    const passwordRef = useRef()
+    const passwordConFirmRef = useRef()
     const displayName = useRef()
-    const {register } = useAuth()
+    const { register, updateProfile } = useAuth()
     const handleSignUpSubmit = (e) => {
         e.preventDefault()
 
         register(emailRef.current.value, passwordRef.current.value)
+        updateProfile(displayName.current.value)
+        try {
+            console.log(currentUser)
+
+        } catch {
+            console.log('Loi')
+        }
     }
+
     return (
         <>
             <Header />
@@ -26,7 +35,7 @@ const Register = () => {
                 <form className="registerForm " onSubmit={handleSignUpSubmit}>
                     <div className="mb-3">
                         <label htmlFor="displayname" className="form-label" >Display Name</label>
-                        <input type="text" className="form-control" ref={displayName} id="displayname"  />
+                        <input type="text" className="form-control" ref={displayName} id="displayname" />
 
                     </div>
                     <div className="mb-3">
@@ -42,7 +51,7 @@ const Register = () => {
                         <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
                         <input type="password" className="form-control" ref={passwordConFirmRef} id="confirmPassword" />
                     </div>
-                    
+
 
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
