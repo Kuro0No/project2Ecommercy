@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { productContext } from "../../ProductContext/ProductContext";
+import { CartContext } from "../Cart/CartContext";
+import Header from "../Header/Header";
 import './ProductDetail.scss'
 
 const ProductDetail = () => {
@@ -9,15 +11,21 @@ const ProductDetail = () => {
 
     const products = useContext(productContext).products
     let productDetail = products.find(item => item.id == id)
-    console.log(products)
     const [quantity, setQuantity] = useState(1)
     const decreaseQuantity = () => {
         quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)
 
     }
+    const shoppingCart = useContext(CartContext)
+    // console.log(productDetail)
+    const {dispath} = useContext(CartContext)
+    const handleAdd = () => {
+        dispath({type: 'add_to_cart', id: productDetail.id , product: productDetail})
+    }
 
 
     return <div>
+        <Header />
         <div className="d-flex productDetail">
             {products.length > 0 &&
                 <>
@@ -52,7 +60,7 @@ const ProductDetail = () => {
 
                             </div>
                             <div>
-                                <button type="button" className="btn btn-outline-primary btn-lg">Add To Cart</button>
+                                <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}>Add To Cart</button>
                                 <button type="button" className="btn btn-outline-danger btn-lg">Buy Now!</button>
                             </div>
                         </div>

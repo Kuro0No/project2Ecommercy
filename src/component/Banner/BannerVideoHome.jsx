@@ -285,14 +285,14 @@ const Product = ({setProductRef}) => {
                 <div className='p-index-shop-container '>
                     <div className=' p-index-shop-left' onMouseMove={mouseMoveShopHandle} onMouseLeave={mouseLeaveShopHandle}>
                         <div id='mouseMoveShop' ref={mouseMoveShop}></div>
-                        <Link to='/product'>
+                        <Link to='/product' onClick={() => window.scrollTo(0,0)}>
                             <h3>Buy Now!</h3>
                             <p>Many hot products are waiting for you <i className="bi bi-cart"></i></p>
                         </Link>
                     </div>
                     <div className='  p-index-contact-right' onMouseMove={mouseMoveContactHandle} onMouseLeave={mouseLeaveContactHandle}>
                         <div id='mouseMoveContact' ref={mouseMoveContact}></div>
-                        <Link to='/contact'>
+                        <Link to='/contact' onClick={() => window.scrollTo(0,0)}>
                             <h3>Contact Now!</h3>
                             <p>Contact me for more details <i className="bi bi-telephone"></i></p>
                         </Link>

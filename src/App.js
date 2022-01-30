@@ -10,6 +10,8 @@ import Register from './component/Authentication/Register';
 import Login from './component/Authentication/Login';
 import { useAuth } from './AuthContext/AuthContext';
 import { Navigate } from 'react-router-dom';
+import Cart from './component/Cart/Cart';
+import CartContextProvider from './component/Cart/CartContext';
 
 
 
@@ -20,17 +22,20 @@ function App() {
     <div className="App">
 
       <ProductContextProvide >
+        <CartContextProvider>
 
-        <Routes >
-          <Route path='/' element={<BannerVideoHome />} />
-          <Route path='/product' element={<Product />} />
-          <Route path='/product/:title/:id' element={<ProductDetail />} />
-          {/* <Route path='/login' element={<Login />} />
+          <Routes >
+            <Route path='/' element={<BannerVideoHome />} />
+            <Route path='/product' element={<Product />} />
+            <Route path='/product/:title/:id' element={<ProductDetail />} />
+            {/* <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} /> */}
-          <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login /> } />
-            <Route path='/register' element={currentUser ? <Navigate to='/product' />: <Register /> } />
+            <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
+            <Route path='/product/:title/:id' element={<ProductDetail />} />
+            <Route path='/cart' element={<Cart />} />
 
-        </Routes>
+          </Routes>
+        </CartContextProvider>
 
 
         <Footer />

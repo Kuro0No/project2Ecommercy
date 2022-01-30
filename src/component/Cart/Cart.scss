@@ -1,0 +1,11 @@
+.cart-container {
+    padding: 0 100px;
+}
+.cart-img {
+    img {
+        height: 100px;
+        width: 100px;
+        object-fit: fill;
+        // box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    }
+}
