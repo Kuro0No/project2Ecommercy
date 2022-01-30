@@ -13,7 +13,7 @@ const Product = () => {
     // const [products, setProducts] = useState([])
     const [getProducts, setGetProducts] = useState([])
 
-    console.log(products)
+    // console.log(products)
 
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -50,7 +50,7 @@ const Product = () => {
 
 
                             return (
-                                <div className="col-6 col-sm-6 col-md-4 pb-3">
+                                <div key={index} className="col-6 col-sm-6 col-md-4 pb-3">
                                     <div className="card">
 
                                         <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >

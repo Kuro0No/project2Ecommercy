@@ -14,8 +14,7 @@ const Login = () => {
         login(emailRef.current.value, passwordRef.current.value)
     }
     
-    console.log(currentUser && currentUser.displayName)
-
+    
     return (
         <>
             <Header />

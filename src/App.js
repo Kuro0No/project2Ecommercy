@@ -8,29 +8,33 @@ import ProductContextProvide from './ProductContext/ProductContext';
 import ProductDetail from './component/Product/ProductDetail';
 import Register from './component/Authentication/Register';
 import Login from './component/Authentication/Login';
-import AuthProvider from './AuthContext/AuthContext';
+import { useAuth } from './AuthContext/AuthContext';
+import { Navigate } from 'react-router-dom';
+
 
 
 function App() {
+  const { currentUser } = useAuth()
+
   return (
     <div className="App">
-      <AuthProvider>
 
-        <ProductContextProvide >
+      <ProductContextProvide >
 
-          <Routes >
-            <Route path='/' element={<BannerVideoHome />} />
-            <Route path='/product' element={<Product />} />
-            <Route path='/product/:title/:id' element={<ProductDetail />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+        <Routes >
+          <Route path='/' element={<BannerVideoHome />} />
+          <Route path='/product' element={<Product />} />
+          <Route path='/product/:title/:id' element={<ProductDetail />} />
+          {/* <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} /> */}
+          <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login /> } />
+            <Route path='/register' element={currentUser ? <Navigate to='/product' />: <Register /> } />
 
-          </Routes>
+        </Routes>
 
 
-          <Footer />
-        </ProductContextProvide>
-      </AuthProvider>
+        <Footer />
+      </ProductContextProvide>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Header from "../Header/Header";
 import './Register.scss'
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from '../../AuthContext/AuthContext';
 
@@ -8,28 +8,25 @@ import { useAuth } from '../../AuthContext/AuthContext';
 
 
 const Register = () => {
+    const navigate = useNavigate()
     const { currentUser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConFirmRef = useRef()
     const displayName = useRef()
     const { register, updateProfile } = useAuth()
-    const handleSignUpSubmit = (e) => {
+    const handleSignUpSubmit = async (e) => {
         e.preventDefault()
-
-        register(emailRef.current.value, passwordRef.current.value)
-        updateProfile(displayName.current.value)
-        try {
-            console.log(currentUser)
-
-        } catch {
-            console.log('Loi')
-        }
+       await register(emailRef.current.value, passwordRef.current.value,displayName.current.value)
+        navigate('/product')
+        
     }
+    console.log(currentUser)
 
     return (
         <>
             <Header />
+            
             <div className="registerDiv">
 
                 <form className="registerForm " onSubmit={handleSignUpSubmit}>

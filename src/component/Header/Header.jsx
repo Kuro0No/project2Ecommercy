@@ -1,8 +1,14 @@
 import './Header.scss'
 import logo from '../../img/logo.png'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../AuthContext/AuthContext';
+import { useState } from 'react';
+
 
 const Header = () => {
+  const { currentUser,logOut } = useAuth()
+
+
   return (
 
     <header>
@@ -40,10 +46,17 @@ const Header = () => {
               </div>
 
             </Link>
-            <div className='userLink'>
-              <Link  to='/login'>Login</Link>
-              <Link to='/register'>Register</Link>
-            </div>
+            {currentUser ?
+              <>
+
+                <div>{currentUser.displayName}</div>
+                <button onClick={() => logOut()}>SighOut</button>
+              </>
+              :
+              <div className='userLink'>
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+              </div>}
 
           </div>
         </div>
