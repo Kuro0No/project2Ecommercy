@@ -1,5 +1,4 @@
 @media only screen and (min-width: 360px) and (max-width: 1024px) {
-    
     @keyframes borderColor {
         0% {
             background: #bb9494;
@@ -407,12 +406,12 @@
 @media screen and (min-width: 550px) {
     .p-index-shop-container {
         display: flex;
-        
-        .p-index-contact-right{
+
+        .p-index-contact-right {
             flex: 0 0 auto;
             width: 50%;
         }
-        .p-index-shop-left{
+        .p-index-shop-left {
             flex: 0 0 auto;
             width: 50%;
         }
@@ -661,13 +660,17 @@
             position: relative;
             img {
                 width: 100%;
-                box-shadow: 30px 22px 140px 46px;
+                box-shadow: 30px 22px 70px 20px;
                 color: #9b54e8;
                 border-radius: 30px;
             }
         }
+        .p-index-product-desc-div {
+            display: flex;
+            flex-direction: row-reverse;
+            transform: translateY(-75px);
+        }
         .p-index-product-desc {
-            position: absolute;
             padding: 80px;
             background: #dedcda;
             top: 30%;
@@ -710,13 +713,17 @@
 
     .circle-multiple {
         position: absolute;
-        right: 15%;
+        right: 21%;
         top: 0;
         z-index: 5;
+        height: 115px;
+        width: 115px;
         .circle {
             border-radius: 66% 34% 81% 19% / 30% 77% 23% 70%;
             border: 2px solid;
             border: #fff;
+            width: 100%;
+            height: 100%;
 
             background: #f8f9fa;
             img {
@@ -727,13 +734,16 @@
     }
     .circle-multiple2 {
         position: absolute;
-        left: 5%;
+        left: 15%;
+        height: 115px;
+        width: 150px;
         top: 18%;
         .circle {
             border-radius: 72% 28% 57% 43% / 38% 54% 46% 62%;
             border: 2px solid;
             border: #fff;
-
+            width: 100%;
+            height: 100%;
             background: #f8f9fa;
             img {
                 border-radius: 72% 28% 57% 43% / 38% 54% 46% 62%;
@@ -744,12 +754,15 @@
     .circle-multiple3 {
         position: absolute;
         left: 20%;
-        bottom: 20%;
+        bottom: 27%;
+        height: 115px;
+        width: 150px;
         .circle {
             border-radius: 59% 41% 37% 63% / 55% 82% 18% 45%;
             border: 2px solid;
             border: #fff;
-
+            width: 100%;
+            height: 100%;
             background: #f8f9fa;
             img {
                 border-radius: 59% 41% 37% 63% / 55% 82% 18% 45%;
@@ -759,13 +772,16 @@
     }
     .circle-multiple4 {
         position: absolute;
-        right: 23%;
-        bottom: 40%;
+        right: 25%;
+        bottom: 48%;
+        height: 115px;
+        width: 150px;
         .circle {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             border: 2px solid;
             border: #fff;
-
+            width: 100%;
+            height: 100%;
             background: #f8f9fa;
             img {
                 border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -775,7 +791,8 @@
     }
     .circle {
         span {
-            font-size: 20px;
+            line-height: 100px;
+            font-weight: 600;
         }
     }
     .p-index-shop-container {

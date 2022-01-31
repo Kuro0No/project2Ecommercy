@@ -47,7 +47,7 @@ const Product = () => {
                 <div className="product col-9">
                     <div className="row">
                         {currentProducts.map((product, index) => {
-
+                           
 
                             return (
                                 <div key={index} className="col-6 col-sm-6 col-md-4 pb-3">
@@ -58,7 +58,7 @@ const Product = () => {
                                                 <img src={product.image} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body">
                                                     <h5 className="card-title products-title">{product.title}</h5>
-                                                    <p className="card-text">${product.price}</p>
+                                                    <p className="card-text">${Math.round(product.price)}</p>
                                                 </div>
                                             </div>
                                         </Link>

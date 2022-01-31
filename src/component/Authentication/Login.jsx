@@ -3,15 +3,20 @@ import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
 import { useRef } from 'react/cjs/react.development';
+import { useState } from 'react';
 
 
 const Login = () => {
     const { login, currentUser } = useAuth()
     const emailRef = useRef()
+    const [loading,setLoading] = useState(false)
     const passwordRef = useRef()
     const handleSubmitLogin = e => {
         e.preventDefault()
+        setLoading(true)
         login(emailRef.current.value, passwordRef.current.value)
+        setLoading(false)
+
     }
     
     
@@ -35,7 +40,7 @@ const Login = () => {
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button disabled={loading} type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <div className='div2login'>
                     Need an account? <Link to='/register'>Register!</Link>

@@ -22,6 +22,9 @@ const ProductDetail = () => {
     const handleAdd = () => {
         dispath({type: 'add_to_cart', id: productDetail.id , product: productDetail})
     }
+    const handleAddQty = () => {
+        dispath({type: 'add_qty_product', id: productDetail.id , product: productDetail})
+    }
 
 
     return <div>
@@ -45,7 +48,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className="quantityHandle">
-                                <div>
+                                <div onClick={handleAddQty}>
 
                                     <i className="bi bi-plus-lg" onClick={() => setQuantity(quantity + 1)}></i>
                                 </div>

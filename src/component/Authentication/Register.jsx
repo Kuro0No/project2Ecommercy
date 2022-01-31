@@ -1,7 +1,7 @@
 import Header from "../Header/Header";
 import './Register.scss'
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useAuth } from '../../AuthContext/AuthContext';
 
 
@@ -15,10 +15,14 @@ const Register = () => {
     const passwordConFirmRef = useRef()
     const displayName = useRef()
     const { register, updateProfile } = useAuth()
+    const [loading,setLoading] = useState(false)
+
     const handleSignUpSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
        await register(emailRef.current.value, passwordRef.current.value,displayName.current.value)
-        navigate('/product')
+       setLoading(false)
+       currentUser && navigate('/product')
         
     }
     console.log(currentUser)
@@ -50,7 +54,7 @@ const Register = () => {
                     </div>
 
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button disabled={loading} type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <div className="text-center">
                     Already have an account? <Link to='/login'>Log In</Link>

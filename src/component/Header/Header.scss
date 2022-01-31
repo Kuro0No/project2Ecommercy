@@ -1,6 +1,6 @@
 header {
     background-color: #fff;
-    padding: 10px  0;
+    padding: 10px 0;
     margin-bottom: 40px;
     .container-fluid {
         display: flex;
@@ -9,13 +9,13 @@ header {
     }
     input {
         width: 300px;
-        border-radius: 4px;
+        padding: 10px 10px;
         outline: darksalmon;
-        border: solid 1px;
+        border: none;
+        border-bottom: 1px solid;
     }
     .header-nav-right {
         font-size: 20px;
-        
     }
     .cart-icon {
         display: flex;
@@ -38,7 +38,8 @@ header {
         }
     }
 }
-.linkUser, .linkCart {
+.linkUser,
+.linkCart {
     color: black;
 }
 .cart-left {
@@ -49,12 +50,40 @@ header {
     }
 }
 .userLink {
-    a{
+    a {
         display: block;
         font-size: 14px;
         color: black;
         &:hover {
             color: #0d6efd;
+        }
+    }
+}
+.navLinkHeader {
+    ul {
+        display: flex;
+        margin: 0;
+        li {
+            margin: 0 10px;
+            list-style: none;
+            a {
+                padding: 5px 10px;
+                border: 1px solid #000;
+                border-radius: 10px;
+                font-size: 20px;
+                color: black;
+            }
+        }
+    }
+}
+.search-header {
+    position: relative;
+    div {
+        position: absolute;
+        right: 0;
+        top: 0;
+        i {
+            font-size: 25px;
         }
     }
 }

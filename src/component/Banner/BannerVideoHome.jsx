@@ -129,6 +129,10 @@ const Product = ({setProductRef}) => {
     const [size, setSize] = useState(Math.round(window.innerWidth / 30))
     const [witdh, setWidth] = useState(window.innerWidth)
 
+    useEffect(() => {
+        witdh > 1024 && setSize(28)
+    })
+
     const CircleMove1 = () => {
         setHat(undefined)
         circle1Ref.current.src = 'https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/3739ae6f20f04fefa5c5aa1701065db9_9366/Mu_len_tron_vanh_gan_soc_Adicolor_DJo_ED8726_01_standard.jpg'

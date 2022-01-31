@@ -9,3 +9,17 @@
         // box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
     }
 }
+.cart-tabel {
+    td {
+        text-align: center;
+        .changeQty {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+    }
+}
+.tabel-cart {
+    display: flex;
+    justify-content: space-between;
+}

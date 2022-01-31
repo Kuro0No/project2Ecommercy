@@ -7,14 +7,15 @@ import { BrowserRouter } from 'react-router-dom'
 import AuthProvider from './AuthContext/AuthContext'
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
 
         <App />
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

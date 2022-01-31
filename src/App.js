@@ -31,6 +31,7 @@ function App() {
             {/* <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} /> */}
             <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
+            <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
             <Route path='/product/:title/:id' element={<ProductDetail />} />
             <Route path='/cart' element={<Cart />} />
 
