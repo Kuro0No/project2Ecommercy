@@ -499,9 +499,7 @@
 
                 .p-index-about {
                     position: relative;
-                    .animation-img {
-                        animation: animation 1s;
-                    }
+                    
                     .p-index-about-description {
                         width: 600px;
                         position: absolute;
@@ -564,7 +562,7 @@
                                 width: 450px;
                                 height: 500px;
                                 right: 0;
-                                top: -150px;
+                                top: -135px;
                             }
                         }
                         .gif-left {
@@ -634,14 +632,7 @@
             height: 0;
         }
     }
-    @keyframes animation {
-        from {
-            transform: translateX(3000px);
-        }
-        to {
-            transform: translateX(0px);
-        }
-    }
+
 
     .p-index-product {
         position: relative;

@@ -6,17 +6,19 @@ import VideoCenter from './Video/VideoCenter.webm'
 import productBanner from '../../img/productBanner.png'
 import '../../responsive/responsiveHome.scss'
 import Menu from '../Menu/Menu';
-
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 
 
 
 const BannerVideoHome = () => {
-    
-    const [abouteRef,setAboutRef] =  useState()
-    const [productRef,setProductRef] = useState()
+
+    const [abouteRef, setAboutRef] = useState()
+    const [productRef, setProductRef] = useState()
+
     return <>
-        <Menu abouteRef={abouteRef} productRef={productRef}/>
+        <Menu abouteRef={abouteRef} productRef={productRef} />
 
         <div id='banner-wrapper' >
             <div className='banner-container'>
@@ -45,26 +47,29 @@ const BannerVideoHome = () => {
                 </div>
 
             </div>
-            <NewLists  setAboutRef={setAboutRef} />
-            <Product setProductRef={setProductRef}/>
+            <NewLists setAboutRef={setAboutRef} />
+            <Product setProductRef={setProductRef} />
 
         </div>
     </>
 };
 
-const NewLists = ({setAboutRef}) => {
+const NewLists = ({ setAboutRef }) => {
     const ref = useRef()
-    useEffect(() => 
-    ref && setAboutRef(ref.current)
-    ,[])
+    useEffect(() =>
+        ref && setAboutRef(ref.current)
+        , [])
 
+    useEffect(() => {
+        Aos.init({ duration: 1500 })
+    }, [])
     return (
         <div className='new-list-container' id='about' ref={ref}>
             <Link className='news-list-link' to='news'> NEW LIST </Link>
             <div className='p-index-container'>
                 <div className='p-index-about'>
-                    <img style={{ width: "100%" }} className='animation-img' src='https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-nu-dep-nhat-the-gioi_113857663.jpg' />
-                    <div className='p-index-about-description text-center'>
+                    <img data-aos="fade-left" style={{ width: "100%" }} className='animation-img' src='https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-nu-dep-nhat-the-gioi_113857663.jpg' />
+                    <div data-aos="fade-up"  className='p-index-about-description text-center'>
                         <h3 >ABOUT PRODUCT</h3>
                         <h1> A SMART CHOICE </h1>
                         <h2> Crispy, Fluffy and Creamy in one little triangle!</h2>
@@ -78,16 +83,16 @@ const NewLists = ({setAboutRef}) => {
                     </div>
                 </div>
                 <div className='p-index-concept ' >
-                    <img className='concept-img' src='https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_23/3482366/210611-gender-fluid-clothing-2x1-cs.jpg' />
-                    <div className='concept-text-div'>
+                    <img className='concept-img' data-aos="fade-up"  src='https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_23/3482366/210611-gender-fluid-clothing-2x1-cs.jpg' />
+                    <div data-aos="zoom-in-down" className='concept-text-div'>
                         <h1 className='concept-text text-center' >BEST <br /> & CLOTHING</h1>
 
                     </div>
 
                 </div>
                 <div className='concept-text-story'>
-                    <div className='concept-story-desc text-center'>
-                        <div>
+                    <div data-aos="fade-down-left" className='concept-story-desc text-center'>
+                        <div >
                             <h1 >UNEARTHING THE SECRET </h1>
                             <h1>OF GREAT SHOP</h1>
 
@@ -98,16 +103,16 @@ const NewLists = ({setAboutRef}) => {
                     </div>
                     <div className='concept-story-gif'>
                         <div className='gif-right'>
-                            <img src="https://cdn.dribbble.com/users/1976516/screenshots/8813235/media/d2727d138f75c89e6ca1ef2d56de9a99.gif" alt="" />
+                            <img data-aos="fade-up-left" src="https://cdn.dribbble.com/users/1976516/screenshots/8813235/media/d2727d138f75c89e6ca1ef2d56de9a99.gif" alt="" />
                         </div>
                         <div className='gif-left'>
-                            <img src="https://cdn.dribbble.com/users/1019864/screenshots/9189989/blue_dribbble.gif" alt="" />
+                            <img data-aos="fade-up-right" src="https://cdn.dribbble.com/users/1019864/screenshots/9189989/blue_dribbble.gif" alt="" />
                         </div>
                         <div className='video-center'>
-                            <video src={VideoCenter}></video>
+                            <video data-aos="zoom-in" src={VideoCenter}></video>
                         </div>
                         <div className='gif-left-bottom'>
-                            <img src="https://media4.giphy.com/media/3oipPTHYlTpCw8oBBy/giphy.gif" alt="" />
+                            <img data-aos="zoom-in-left" src="https://media4.giphy.com/media/3oipPTHYlTpCw8oBBy/giphy.gif" alt="" />
                         </div>
                     </div>
                 </div>
@@ -117,7 +122,7 @@ const NewLists = ({setAboutRef}) => {
 }
 
 
-const Product = ({setProductRef}) => {
+const Product = ({ setProductRef }) => {
     const circle1Ref = useRef()
     const circle2Ref = useRef()
     const circle3Ref = useRef()
@@ -222,7 +227,7 @@ const Product = ({setProductRef}) => {
     useEffect(() => {
         setProductRef(productRef.current)
     })
-    
+
 
 
 
@@ -237,11 +242,11 @@ const Product = ({setProductRef}) => {
                     <h3>4 Product: 80$ <label>(Tax included)</label></h3>
                 </div>
                 <div className='banner-product'>
-                    <img src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
+                    <img  data-aos="zoom-in-up" src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
                 </div>
                 <div className=' p-index-product-desc-feature'>
                     <div className='p-index-product-desc-div'>
-                        <div className='p-index-product-desc col-6'>
+                        <div className='p-index-product-desc col-6' data-aos="zoom-up">
                             <h3 className="p-index-product-desc-title">Three different textures</h3>
                             <p className="p-index-product-desc-text" >POGG packs three different textures in one bite - A crispy pie crust that wraps fluffy sweet potato paste and velvety sweet potato cream.</p>
                             <h3 className="p-index-product-desc-title">A carefully designed shape</h3>
@@ -250,8 +255,8 @@ const Product = ({setProductRef}) => {
                         </div>
                     </div>
 
-                    <div className='product-feature'>
-                        <img src={productBanner} />
+                    <div data-aos="flip-up" className='product-feature'>
+                        <img  src={productBanner} />
                         <div className="circle-multiple">
                             <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
                                 <span style={{ fontSize: size }}>{hat}</span>
@@ -280,23 +285,23 @@ const Product = ({setProductRef}) => {
 
                 </div>
                 <div className='p-index-product-sub-image'>
-                    <img src="https://thumbnails.cbc.ca/maven_legacy/thumbnails/2/995/CBC_MARKETPLACE_S49E01_thumbnail_v01.jpeg" alt="" />
+                    <img data-aos="fade-left" src="https://thumbnails.cbc.ca/maven_legacy/thumbnails/2/995/CBC_MARKETPLACE_S49E01_thumbnail_v01.jpeg" alt="" />
                 </div>
 
                 <div className='p-index-product-sub-image-2'>
-                    <img src="https://media1.giphy.com/media/8cphEsRKEFSVlwtOA0/giphy.gif" alt="" />
+                    <img data-aos="fade-right" src="https://media1.giphy.com/media/8cphEsRKEFSVlwtOA0/giphy.gif" alt="" />
                 </div>
                 <div className='p-index-shop-container '>
                     <div className=' p-index-shop-left' onMouseMove={mouseMoveShopHandle} onMouseLeave={mouseLeaveShopHandle}>
                         <div id='mouseMoveShop' ref={mouseMoveShop}></div>
-                        <Link to='/product' onClick={() => window.scrollTo(0,0)}>
+                        <Link to='/product' onClick={() => window.scrollTo(0, 0)}>
                             <h3>Buy Now!</h3>
                             <p>Many hot products are waiting for you <i className="bi bi-cart"></i></p>
                         </Link>
                     </div>
                     <div className='  p-index-contact-right' onMouseMove={mouseMoveContactHandle} onMouseLeave={mouseLeaveContactHandle}>
                         <div id='mouseMoveContact' ref={mouseMoveContact}></div>
-                        <Link to='/contact' onClick={() => window.scrollTo(0,0)}>
+                        <Link to='/contact' onClick={() => window.scrollTo(0, 0)}>
                             <h3>Contact Now!</h3>
                             <p>Contact me for more details <i className="bi bi-telephone"></i></p>
                         </Link>

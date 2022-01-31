@@ -12,6 +12,8 @@ import { useAuth } from './AuthContext/AuthContext';
 import { Navigate } from 'react-router-dom';
 import Cart from './component/Cart/Cart';
 import CartContextProvider from './component/Cart/CartContext';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-
+      <ToastContainer />
       <ProductContextProvide >
         <CartContextProvider>
 

@@ -5,17 +5,17 @@ import { productContext } from "../../ProductContext/ProductContext";
 import { CartContext } from "../Cart/CartContext";
 import Header from "../Header/Header";
 import './ProductDetail.scss'
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../../AuthContext/AuthContext";
 
 const ProductDetail = () => {
     const { title, id } = useParams()
+    const {currenUser} = useAuth()
 
     const products = useContext(productContext).products
     let productDetail = products.find(item => item.id == id)
-    const [quantity, setQuantity] = useState(1)
-    const decreaseQuantity = () => {
-        quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)
-
-    }
+  
     const shoppingCart = useContext(CartContext)
     // console.log(productDetail)
     const {dispath} = useContext(CartContext)
@@ -23,7 +23,11 @@ const ProductDetail = () => {
         dispath({type: 'add_to_cart', id: productDetail.id , product: productDetail})
     }
     const handleAddQty = () => {
-        dispath({type: 'add_qty_product', id: productDetail.id , product: productDetail})
+        console.log('add')
+        dispath({type: 'add_qty_product'})
+    }
+    const buyAtProductDetail =() => {
+        if(!currenUser ) { toast.warn('You need to login to buy this product!', {autoClose: 1500})}
     }
 
 
@@ -40,31 +44,17 @@ const ProductDetail = () => {
                                 <h1>{productDetail.title}</h1>
                             </div>
                             <div>
-                                <span>{productDetail.price}</span>
+                                <h4 >Price: {productDetail.price}$</h4>
                             </div>
-                            <div>
+                            <div className="py-3">
                                 <span>Rate: {productDetail.rating.rate}</span>
                                 <span> {productDetail.rating.count} review</span>
                             </div>
 
-                            <div className="quantityHandle">
-                                <div onClick={handleAddQty}>
-
-                                    <i className="bi bi-plus-lg" onClick={() => setQuantity(quantity + 1)}></i>
-                                </div>
-                                <div>
-
-                                    <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-                                </div>
-                                <div>
-
-                                    <i className="bi bi-dash-lg" onClick={decreaseQuantity}></i>
-                                </div>
-
-                            </div>
+                        
                             <div>
                                 <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}>Add To Cart</button>
-                                <button type="button" className="btn btn-outline-danger btn-lg">Buy Now!</button>
+                                <button type="button" onClick={buyAtProductDetail} className="btn btn-outline-danger btn-lg">Buy Now!</button>
                             </div>
                         </div>
                     </div>

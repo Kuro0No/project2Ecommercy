@@ -4,6 +4,8 @@ import Header from '../Header/Header';
 import { CartContext } from './CartContext';
 import './Cart.scss'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../AuthContext/AuthContext';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
     const data = useContext(CartContext).shoppingCart
@@ -11,6 +13,7 @@ const Cart = () => {
     const dataqty = useContext(CartContext).qty
     const datatotalPrice = useContext(CartContext).totalPrice
     const [checked,setChecked ] = useState(false)
+    const {currentUser} = useAuth()
 
     console.log(useContext(CartContext))
     
@@ -26,6 +29,11 @@ const Cart = () => {
     const deleteCart = (cart) => {
         dispath({ type: 'deleteProduct', id: cart.id, cart: cart })
 
+    }
+    const payment = () => {
+        if(!currentUser) {
+            toast.warn('You need to login to pay for products', {autoClose: 1500})
+        }
     }
     return <div>
         <Header />
@@ -81,16 +89,16 @@ const Cart = () => {
                     </table>
                 </div>
                 <div class="card text-white bg-danger mb-3 col-3" >
-                    <div class="card-header text-center">DETAIL</div>
+                    <h3 class="card-header text-center">DETAIL</h3>
                     <div class="card-body">
                         <h5 class="card-title">Total Product: {dataqty }</h5>
-                        <p class="card-text">Total Price : {dataqty * datatotalPrice}</p>
-                        <p class="card-text">Be careful! Before buying this product, you need to carefully check all the product in your cart! </p>
+                        <h5 class="card-text">Total Price : {dataqty * datatotalPrice}$</h5>
+                        <small class="card-text">Be careful! Before buying this product, you need to carefully check all the product in your cart! </small>
                         <div className='mb-5'>
                             <input type="checkbox" name="" id=""  className='mx-3' checked={checked} onChange={(e) => setChecked(!checked)}/>
                             <label htmlFor="">I checked</label>
                         </div>
-                        <button disabled={!checked} type="button" class="btn btn-primary">Payment</button>
+                        <button onClick={payment} style={{width: '100%'}} disabled={!checked || dataqty ==0} type="button" class="btn btn-primary">Payment</button>
                     </div>
                 </div>
             </div>

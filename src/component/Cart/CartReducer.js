@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify'; 
 
 export const CartReducer = (state, action) => {
     const { shoppingCart, totalPrice, qty } = state
@@ -12,12 +13,18 @@ export const CartReducer = (state, action) => {
         case 'add_to_cart':
             const check = shoppingCart.find(product => product.id == action.id)
             if (check) {
+                toast.warn('The product is already in your cart!', {
+                    autoClose: 1500, 
+                });
                 return state
             } else {
                 product = action.product
                 product['qty'] = 1
                 updateQty = qty + 1
                 updatePrice = totalPrice + product.price
+                toast.success('Add successfully!', {
+                    autoClose: 1500, 
+                });
                 return { shoppingCart: [product, ...shoppingCart], totalPrice: updatePrice, qty: updateQty }
             }
         case 'increaseProduct':
@@ -48,8 +55,9 @@ export const CartReducer = (state, action) => {
             updatePrice = totalPrice - product.price * product.qty
             return { shoppingCart: [...filterd], qty: updateQty, totalPrice: updatePrice, }
             break;
-            case 'add_qty_product':
-            
+        case 'add_qty_product':
+            product = action.cart
+            product.qty = product.qty + 1
 
             console.log('add')
             return { shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice, }
