@@ -1,39 +1,50 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useState, useEffect } from 'react/cjs/react.development';
 import { memo } from 'react';
 import axios from 'axios';
+import { productContext } from '../../ProductContext/ProductContext';
 
 
-const Catalog = ({ products, getProducts }) => {
+const Catalog = ({ setProducts, getProduct, setCurrentPage }) => {
     const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"]
     const sortByPrice = ["Increase", "Decrease"]
     const [checkedCategory, setCheckedCategory] = useState()
     const [checkedPirce, setCheckedPrice] = useState()
-    const initFilter ={
-        category:[],
-        sortPirce: [],
-    }
-    // const [filter, setFilter] = useState(initFilter)
-    // const filterSlected= (type,checked,item) => {
-    //     if(checked) {
-    //         switch(type) {
-    //             case "electronic" : setFilter(category: )
-    //         }
-    //     }
-    // }
-   
-   
-    
-  
+    const products = useContext(productContext).products
+
+
+
     const onChangeCategory = (category) => {
         setCheckedCategory(category)
         const filter = products.filter(product => product.category == category)
-     
-        
+        if (category == 'electronic') {
+            setProducts(filter)
+        } else if (category == 'jewelery') {
+            setProducts(filter)
+
+        } else if (category == "men's clothing") {
+            setProducts(filter)
+
+        } else {
+            setProducts(filter)
+
+        }
+        setCurrentPage(1)
+
     }
 
     const onChangPrice = (sortPrice) => {
         setCheckedPrice(sortPrice)
+        // const sortProduct = products.sort((a,b) => a-b)
+        const decreaseSort = products.sort((a, b) => a.price - b.price)
+        const increaseSort = products.sort((a, b) => b.price - a.price)
+        console.log(decreaseSort)
+
+        if (sortPrice == 'Increase') {
+            setProducts(increaseSort)
+        } else {
+            setProducts(decreaseSort)
+        }
     }
 
     return <div>
@@ -52,6 +63,15 @@ const Catalog = ({ products, getProducts }) => {
                 <label className='ps-3'>{sortPrice.toUpperCase()}</label>
             </div>
         ))}
+        <div>
+
+            <button onClick={() => {
+                setProducts(getProduct)
+                setCheckedCategory(false)
+                setCheckedPrice(false)
+            }} type="button" className="btn btn-outline-danger">Clear Filter</button>
+
+        </div>
 
     </div>;
 };

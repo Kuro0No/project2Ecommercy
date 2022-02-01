@@ -10,8 +10,9 @@ import { CartContext } from "../Cart/CartContext";
 
 const Product = () => {
 
-    const products = useContext(productContext).products
-    // const [products, setProducts] = useState([])
+    const productsInit = useContext(productContext).products
+    const [getProduct ] = useState(productsInit)
+    const [products, setProducts] = useState(useContext(productContext).products)
     const [getProducts, setGetProducts] = useState([])
     const { dispath } = useContext(CartContext)
 
@@ -55,7 +56,7 @@ const Product = () => {
             <Header />
             <div className="product-container d-flex">
                 <div className="catalog col-3">
-                    <Catalog getProducts={getProducts} products={products} />
+                    <Catalog  setProducts={setProducts} getProduct={getProduct} setCurrentPage={setCurrentPage}/>
                 </div>
                 <div className="product col-9">
                     <div className="row">
@@ -67,7 +68,7 @@ const Product = () => {
                                     <div className="card">
 
                                         <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >
-                                            <div  >
+                                               <div  >
                                                 <img src={product.image} height={height} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body ">
                                                     <h5 className="card-title products-title">{product.title}</h5>
