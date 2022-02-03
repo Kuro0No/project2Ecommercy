@@ -12,17 +12,16 @@ const ProductContextProvide = ({ children }) => {
         async function fetchData() {
             let res = await axios.get('https://fakestoreapi.com/products')
             let data = res && res.data ? res.data : []
-            setProducts(data)
-            
-            
+            setProducts(data)            
+
         }
         fetchData()
+        
         
     }, [])
     
 
-
-    return <productContext.Provider value={{products: [...products]}}>
+    return <productContext.Provider value={{ products: [...products] }}>
         {children}
     </productContext.Provider>;
 };

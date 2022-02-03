@@ -5,29 +5,42 @@ import { productContext } from "../../ProductContext/ProductContext";
 import { CartContext } from "../Cart/CartContext";
 import Header from "../Header/Header";
 import './ProductDetail.scss'
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../AuthContext/AuthContext";
+import { doc, setDoc,updateDoc  } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const ProductDetail = () => {
     const { title, id } = useParams()
-    const {currenUser} = useAuth()
-
+    const { currentUser } = useAuth()
+    const currentUserUid = currentUser && currentUser.uid
     const products = useContext(productContext).products
     let productDetail = products.find(item => item.id == id)
-  
-    const shoppingCart = useContext(CartContext)
+    const shoppingCart = useContext(CartContext).shoppingCart
+    const { qty, totalPrice } = useContext(CartContext)
+
+
+
     // console.log(productDetail)
-    const {dispath} = useContext(CartContext)
-    const handleAdd = () => {
-        dispath({type: 'add_to_cart', id: productDetail.id , product: productDetail})
+    const { dispath } = useContext(CartContext)
+    const handleAdd = async () => {
+        dispath({ type: 'add_to_cart', id: productDetail.id, product: productDetail })
+        const userRef = doc(db, "user", currentUser && currentUserUid);
+        await setDoc(userRef, { shoppingCart: [productDetail, ...shoppingCart], qty: qty, totalPrice: totalPrice });
+        
     }
-    const handleAddQty = () => {
-        console.log('add')
-        dispath({type: 'add_qty_product'})
-    }
-    const buyAtProductDetail =() => {
-        if(!currenUser ) { toast.warn('You need to login to buy this product!', {autoClose: 1500})}
+    useEffect( async() => {
+        const userRef = doc(db, "user", currentUser && currentUserUid);
+
+        await updateDoc(userRef, {
+            qty: qty,
+            totalPrice: totalPrice
+        });
+    },[qty,shoppingCart])
+
+    const buyAtProductDetail = () => {
+        if (!currentUser) { toast.warn('You need to login to buy this product!', { autoClose: 1500 }) }
     }
 
 
@@ -51,7 +64,7 @@ const ProductDetail = () => {
                                 <span> {productDetail.rating.count} review</span>
                             </div>
 
-                        
+
                             <div>
                                 <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}>Add To Cart</button>
                                 <button type="button" onClick={buyAtProductDetail} className="btn btn-outline-danger btn-lg">Buy Now!</button>

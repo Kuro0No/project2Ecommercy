@@ -1,20 +1,24 @@
-import React from 'react';
-import { toast } from 'react-toastify'; 
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from '../../AuthContext/AuthContext';
 
-export const CartReducer = (state, action) => {
+
+
+export const CartReducer =  (state, action) => {
     const { shoppingCart, totalPrice, qty } = state
     let product;
     let index;
     let updatePrice;
     let updateQty;
 
-
     switch (action.type) {
         case 'add_to_cart':
             const check = shoppingCart.find(product => product.id == action.id)
             if (check) {
                 toast.warn('The product is already in your cart!', {
-                    autoClose: 1500, 
+                    autoClose: 1500,
                 });
                 return state
             } else {
@@ -23,8 +27,9 @@ export const CartReducer = (state, action) => {
                 updateQty = qty + 1
                 updatePrice = totalPrice + product.price
                 toast.success('Add successfully!', {
-                    autoClose: 1500, 
+                    autoClose: 1500,
                 });
+  
                 return { shoppingCart: [product, ...shoppingCart], totalPrice: updatePrice, qty: updateQty }
             }
         case 'increaseProduct':
@@ -32,7 +37,9 @@ export const CartReducer = (state, action) => {
             product.qty = product.qty + 1
             updateQty = qty
             updatePrice = totalPrice + product.price
-
+            // localStorage.setItem('cart', JSON.stringify({
+            //     shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice 
+            // }))
             return { shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice }
         case 'decreaseProduct':
 
@@ -42,9 +49,14 @@ export const CartReducer = (state, action) => {
                 product.qty = product.qty - 1
                 updateQty = qty
                 updatePrice = totalPrice - product.price
+                // localStorage.setItem('cart', JSON.stringify({
+                //     shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice
+                // }))
             } else {
+
                 return state
             }
+
 
             return { shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice }
         case 'deleteProduct':
@@ -53,15 +65,12 @@ export const CartReducer = (state, action) => {
             product = action.cart
             updateQty = qty - 1
             updatePrice = totalPrice - product.price * product.qty
-            return { shoppingCart: [...filterd], qty: updateQty, totalPrice: updatePrice, }
+            // localStorage.setItem('cart', JSON.stringify({
+            //     shoppingCart: [...filterd], qty: updateQty, totalPrice: updatePrice 
+            // }))
+            return { shoppingCart: [...filterd], qty: updateQty, totalPrice: updatePrice }
             break;
-        case 'add_qty_product':
-            product = action.cart
-            product.qty = product.qty + 1
 
-            console.log('add')
-            return { shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice, }
-            break;
 
         default:
             return state

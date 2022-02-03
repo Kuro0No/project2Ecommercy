@@ -11,12 +11,10 @@ import { CartContext } from "../Cart/CartContext";
 const Product = () => {
 
     const productsInit = useContext(productContext).products
-    const [getProduct ] = useState(productsInit)
-    const [products, setProducts] = useState(useContext(productContext).products)
-    const [getProducts, setGetProducts] = useState([])
-    const { dispath } = useContext(CartContext)
-
-    // console.log(products)
+    const [products, setProducts] = useState([])
+        useEffect(() => {
+        setProducts(productsInit)
+    }, [productsInit])
 
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -25,7 +23,7 @@ const Product = () => {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
     const totalPage = Math.ceil(products.length / productsPerPage)
-    const [height,setHeight] = useState(window.innerWidth / 4.1)
+    const [height, setHeight] = useState(window.innerWidth / 4.1)
     useEffect(() => {
         const resizeHandle = () => {
             setHeight(window.innerWidth / 4.1)
@@ -56,7 +54,7 @@ const Product = () => {
             <Header />
             <div className="product-container d-flex">
                 <div className="catalog col-3">
-                    <Catalog  setProducts={setProducts} getProduct={getProduct} setCurrentPage={setCurrentPage}/>
+                    <Catalog setProducts={setProducts} productsInit={productsInit} setCurrentPage={setCurrentPage} />
                 </div>
                 <div className="product col-9">
                     <div className="row">
@@ -68,7 +66,7 @@ const Product = () => {
                                     <div className="card">
 
                                         <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >
-                                               <div  >
+                                            <div  >
                                                 <img src={product.image} height={height} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body ">
                                                     <h5 className="card-title products-title">{product.title}</h5>
@@ -76,12 +74,7 @@ const Product = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-around">
-                                                <button className="btn btn-primary col-5" onClick={() => dispath({ type: 'add_to_cart', id: product.id, product: product })} >Add to cart</button>
-                                                <button className="btn btn-danger col-5" >Detail</button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             )

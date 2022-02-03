@@ -2,15 +2,36 @@ import './Header.scss'
 import logo from '../../img/logo.png'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../Cart/CartContext';
-
+import { collection, query, where, getDoc, doc } from "firebase/firestore";
+import { db } from '../../firebase';
+import { productContext } from '../../ProductContext/ProductContext';
 
 const Header = () => {
-  const { currentUser,logOut } = useAuth()
+  const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
+  const [currentUserCart, setcurrentUserCart] = useState()
 
+  useEffect(() => {
+    async function getdata() {
 
+      const docRef = doc(db, "user",currentUser.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // setcurrentUserCart(docSnap.data())
+        console.log(docSnap.data() )
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+      
+    }
+    
+    
+    getdata()
+  }, [currentUserCart])
 
   return (
 
@@ -26,8 +47,8 @@ const Header = () => {
             <li><Link to='/contact'>Contact</Link></li>
           </ul>
         </div>
-        <div className='search-header'> 
-          <input type="text" placeholder='Search smt....'/>
+        <div className='search-header'>
+          <input type="text" placeholder='Search smt....' />
           <div ><i className="bi bi-search"></i></div>
         </div>
         <div className='d-flex header-nav-right header-nav-right'>
@@ -39,7 +60,7 @@ const Header = () => {
                 </i>
                 <div className='cart-count'>
                   <span className=''>
-                    {data.qty}
+                    {currentUser ? currentUserCart : data.qty}
                   </span>
                 </div>
               </div>

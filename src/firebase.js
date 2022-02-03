@@ -1,5 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+
 
 const app = firebase.initializeApp({
     apiKey: "AIzaSyDhZ5I_b4p58v1YX15Yy9sXF7C_rkOc1h0",
@@ -12,4 +14,19 @@ const app = firebase.initializeApp({
 })
 
 export const auth = app.auth()
+export const db = getFirestore();
+// const colRef = collection(d  b, 'user')
+// getDocs(colRef)
+//     .then((snapshot) => {
+//         let user = []
+//         snapshot.docs.forEach(doc => {
+//             user.push({...doc.data(), id:doc.id})
+
+//         })
+//         console.log(user)
+//     })
+
+
+
+
 export default app

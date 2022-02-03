@@ -10,7 +10,6 @@ const CartContextProvider = ({ children }) => {
         totalPrice: 0, qty: 0
     })
 
-
     return (
         <CartContext.Provider value={{...cart, dispath}}>
             {children}
