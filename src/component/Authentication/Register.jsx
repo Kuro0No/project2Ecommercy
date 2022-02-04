@@ -29,7 +29,7 @@ const Register = () => {
 
     return (
         <>
-            <Header />
+         
             
             <div className="registerDiv">
 

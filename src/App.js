@@ -13,6 +13,10 @@ import { Navigate } from 'react-router-dom';
 import Cart from './component/Cart/Cart';
 import CartContextProvider from './component/Cart/CartContext';
 import { ToastContainer, toast } from 'react-toastify';
+import DbContextProvider from './DbContext/dbContext';
+import 'antd/dist/antd.css';
+import Header from './component/Header/Header';
+import HeaderContextProvider from './component/HeaderContext/HeaderContext';
 
 
 
@@ -22,27 +26,33 @@ function App() {
 
   return (
     <div className="App">
+
       <ToastContainer />
       <ProductContextProvide >
         <CartContextProvider>
+          <DbContextProvider>
+            <HeaderContextProvider>
 
-          <Routes >
-            <Route path='/' element={<BannerVideoHome />} />
-            <Route path='/product' element={<Product />} />
-            <Route path='/product/:title/:id' element={<ProductDetail />} />
-            {/* <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} /> */}
-            <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
-            <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
-            <Route path='/product/:title/:id' element={<ProductDetail />} />
-            <Route path='/cart' element={<Cart />} />
+              <Header />
+              <Routes >
+                <Route path='/' element={<BannerVideoHome />} />
+                <Route path='/product' element={<Product />} />
+                <Route path='/product/:title/:id' element={<ProductDetail />} />
 
-          </Routes>
+                <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
+                <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
+                <Route path='/product/:title/:id' element={<ProductDetail />} />
+                <Route path='/cart' element={<Cart />} />
+
+              </Routes>
+            </HeaderContextProvider>
+          </DbContextProvider>
         </CartContextProvider>
 
 
         <Footer />
       </ProductContextProvide>
+
     </div>
   );
 }

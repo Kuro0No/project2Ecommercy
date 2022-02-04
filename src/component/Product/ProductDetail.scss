@@ -30,3 +30,45 @@
         }
     }
 }
+
+.anticon-shopping-cart {
+    transform: translateY(-6px);
+}
+.desciption-productDetail {
+    color: #58595b;
+    p {
+        font-size: 18px;
+    }
+}
+.price-productDetail {
+    h4 {
+        color: #848484;
+    }
+}
+.title-productDetail {
+    h1 {
+        font-weight: 650;
+    }
+}
+.star-productDetail {
+    display: flex;
+    span {
+        font-size: 20px;
+    }
+}
+.policy {
+    div {
+        font-size: 16px;
+        color: #58595b;
+        padding: 5px 0;
+        span{
+            font-size: 20px;
+            transform: translateY(-6px);
+            margin: 0 5px;
+        }
+    }
+    .isStock {
+        font-size: 20px;
+        color: #58595b;
+    }
+}

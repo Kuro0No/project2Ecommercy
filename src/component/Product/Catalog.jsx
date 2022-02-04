@@ -5,7 +5,7 @@ import axios from 'axios';
 import { productContext } from '../../ProductContext/ProductContext';
 
 
-const Catalog = ({ setProducts, getProduct, setCurrentPage }) => {
+const Catalog = ({ setProducts, productsInit, setCurrentPage }) => {
     const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"]
     const sortByPrice = ["Increase", "Decrease"]
     const [checkedCategory, setCheckedCategory] = useState()
@@ -56,17 +56,17 @@ const Catalog = ({ setProducts, getProduct, setCurrentPage }) => {
             </div>
         ))}
 
-        <div>Price</div>
+        {/* <div>Price</div>
         {sortByPrice.map((sortPrice, index) => (
             <div className='p-2' key={index}>
                 <input className="form-check-input mt-0" type="radio" checked={checkedPirce === sortPrice} onChange={() => onChangPrice(sortPrice)} aria-label="Checkbox for following text input" />
                 <label className='ps-3'>{sortPrice.toUpperCase()}</label>
             </div>
-        ))}
+        ))} */}
         <div>
 
             <button onClick={() => {
-                setProducts(getProduct)
+                setProducts(productsInit)
                 setCheckedCategory(false)
                 setCheckedPrice(false)
             }} type="button" className="btn btn-outline-danger">Clear Filter</button>

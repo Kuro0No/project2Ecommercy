@@ -7,25 +7,31 @@ import { productContext } from "../../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import { CartContext } from "../Cart/CartContext";
+import { headerContext } from "../HeaderContext/HeaderContext";
 
 const Product = () => {
 
     const productsInit = useContext(productContext).products
-    const [getProduct ] = useState(productsInit)
-    const [products, setProducts] = useState(useContext(productContext).products)
-    const [getProducts, setGetProducts] = useState([])
-    const { dispath } = useContext(CartContext)
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        setProducts(productsInit)
+    }, [productsInit])
 
-    // console.log(products)
-
-
+    const skeleLopArray = [1, 2, 3, 4, 5, 6, 7, 8]
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(8)
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
     const totalPage = Math.ceil(products.length / productsPerPage)
-    const [height,setHeight] = useState(window.innerWidth / 4.1)
+    const [height, setHeight] = useState(window.innerWidth / 4.1)
+    const { loading } = useContext(productContext)
+    
+    
+
+    
+
+
     useEffect(() => {
         const resizeHandle = () => {
             setHeight(window.innerWidth / 4.1)
@@ -51,24 +57,51 @@ const Product = () => {
         currentPage < totalPage && setCurrentPage(currentPage + 1)
     }
 
+
     return (
         <>
-            <Header />
+
             <div className="product-container d-flex">
                 <div className="catalog col-3">
-                    <Catalog  setProducts={setProducts} getProduct={getProduct} setCurrentPage={setCurrentPage}/>
+                    <Catalog setProducts={setProducts} productsInit={productsInit} setCurrentPage={setCurrentPage} />
                 </div>
                 <div className="product col-9">
                     <div className="row">
-                        {currentProducts.map((product, index) => {
 
+
+                        {loading && skeleLopArray.map(number => {
 
                             return (
+                                <div key={number} className="col-6 col-sm-6 col-md-4 pb-3 ">
+                                    <div className="card " aria-hidden="true">
+                                        <img src="https://semantic-ui.com/images/wireframe/square-image.png" className="card-img-top card-img-top products-image" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title placeholder-glow products-title">
+                                                <span className="placeholder col-6"></span>
+                                            </h5>
+                                            <p className="card-text placeholder-glow">
+                                                <span className="placeholder col-7"></span>
+                                                <span className="placeholder col-4"></span>
+                                                <span className="placeholder col-4"></span>
+                                                <span className="placeholder col-6"></span>
+                                                <span className="placeholder col-8"></span>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+
+
+                        {currentProducts.map((product, index) => {
+                            return (
+
                                 <div key={index} className="col-6 col-sm-6 col-md-4 pb-3 product-container-thumb">
                                     <div className="card">
 
                                         <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >
-                                               <div  >
+                                            <div  >
                                                 <img src={product.image} height={height} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body ">
                                                     <h5 className="card-title products-title">{product.title}</h5>
@@ -76,14 +109,11 @@ const Product = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-around">
-                                                <button className="btn btn-primary col-5" onClick={() => dispath({ type: 'add_to_cart', id: product.id, product: product })} >Add to cart</button>
-                                                <button className="btn btn-danger col-5" >Detail</button>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
+
+
                             )
                         })}
                         <div className="mt-4">

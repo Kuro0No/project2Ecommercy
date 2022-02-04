@@ -2,14 +2,23 @@ import './Header.scss'
 import logo from '../../img/logo.png'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../Cart/CartContext';
+import { collection, query, where, getDoc, doc } from "firebase/firestore";
+import { db } from '../../firebase';
+import { productContext } from '../../ProductContext/ProductContext';
+import { dbContext } from '../../DbContext/dbContext';
+import { headerContext } from '../HeaderContext/HeaderContext';
 
-
-const Header = () => {
-  const { currentUser,logOut } = useAuth()
+const Header = ({ userCartState }) => {
+  const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
-
+  const currentUserCart = useContext(dbContext)
+  const headerState = useContext(headerContext)
+  const [headerStateDetail,setHeaderStateDetail] = useState({})
+  useEffect(()=> {
+    setHeaderStateDetail(headerState)
+  },[headerState])
 
 
   return (
@@ -26,8 +35,8 @@ const Header = () => {
             <li><Link to='/contact'>Contact</Link></li>
           </ul>
         </div>
-        <div className='search-header'> 
-          <input type="text" placeholder='Search smt....'/>
+        <div className='search-header'>
+          <input type="text" placeholder='Search smt....' />
           <div ><i className="bi bi-search"></i></div>
         </div>
         <div className='d-flex header-nav-right header-nav-right'>
@@ -39,13 +48,13 @@ const Header = () => {
                 </i>
                 <div className='cart-count'>
                   <span className=''>
-                    {data.qty}
+                    {currentUser ? ( headerState ? headerState.headerState.qty: 0) : (data.qty > 0 ? data.qty : 0)}
                   </span>
                 </div>
               </div>
               <div className='textCart'>
                 <h5>Cart</h5>
-                <span>{data.totalPrice}$</span>
+                <span>{currentUser ? ( headerState.headerState.totalPrice || 0) : (data.totalPrice > 0 ? data.totalPrice : 0)}$</span>
               </div>
             </div>
           </Link>

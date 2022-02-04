@@ -22,7 +22,6 @@ const Login = () => {
     
     return (
         <>
-            <Header />
             {currentUser && currentUser.email}
             <div className='loginDiv' >
                 {/* {currentUser && <div>{}</div>} */}
