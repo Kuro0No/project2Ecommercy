@@ -1,0 +1,19 @@
+.container-setting {
+    
+    ul{
+        list-style: none;
+       
+        .setting-left-group {
+            padding: 0 0 15px 0px;
+            font-size: 20px;
+            a{
+                color: #000;
+            }
+            span{
+                transform: translateY(-6px);
+                padding-right: 10px;
+                color: #58595b;
+            }
+        }
+    }
+}

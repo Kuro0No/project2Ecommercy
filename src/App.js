@@ -17,6 +17,8 @@ import DbContextProvider from './DbContext/dbContext';
 import 'antd/dist/antd.css';
 import Header from './component/Header/Header';
 import HeaderContextProvider from './component/HeaderContext/HeaderContext';
+import Setting from './component/Setting/Setting';
+import NotFound from './component/NotFound/NotFound';
 
 
 
@@ -43,6 +45,11 @@ function App() {
                 <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
                 <Route path='/product/:title/:id' element={<ProductDetail />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/setting/*' element={<Setting />} />
+                <Route path='*' element={<NotFound />} />
+                  
+
+                
 
               </Routes>
             </HeaderContextProvider>

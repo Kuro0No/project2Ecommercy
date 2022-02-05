@@ -114,7 +114,7 @@ const Cart = () => {
                                             </div>
 
                                         </td>
-                                        <td>{userCart.price * userCart.qty} </td>
+                                        <td>${userCart.price * userCart.qty} </td>
                                         <td>
                                             <button onClick={() => deleteCart(userCart)} className='btn btn-danger'>Delete</button>
 

@@ -9,13 +9,28 @@ import { db } from '../../firebase';
 import { productContext } from '../../ProductContext/ProductContext';
 import { dbContext } from '../../DbContext/dbContext';
 import { headerContext } from '../HeaderContext/HeaderContext';
+import { Menu, Dropdown, Button, message, Space, Tooltip } from 'antd';
+import { LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+
 
 const Header = ({ userCartState }) => {
   const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
   const currentUserCart = useContext(dbContext)
   const headerState = useContext(headerContext)
-  
+  const menu = (
+    <Menu>
+      <Menu.Item key="1" icon={<SettingOutlined />}>
+        <Link to='/setting'>
+          Setting
+        </Link>
+      </Menu.Item>
+      <Menu.Item onClick={() => logOut()} key="2" icon={<LogoutOutlined />}>
+        Sign Out
+      </Menu.Item>
+
+    </Menu>
+  );
 
 
   return (
@@ -45,30 +60,39 @@ const Header = ({ userCartState }) => {
                 </i>
                 <div className='cart-count'>
                   <span className=''>
-                    {currentUser ? ( headerState ? headerState.headerState.qty: 0) : (data.qty > 0 ? data.qty : 0)}
+                    {currentUser ? (headerState ? headerState.headerState.qty : 0) : (data.qty > 0 ? data.qty : 0)}
                   </span>
                 </div>
               </div>
               <div className='textCart'>
                 <h5>Cart</h5>
-                <span>{currentUser ? ( headerState.headerState.totalPrice || 0) : (data.totalPrice > 0 ? data.totalPrice : 0)}$</span>
+                <span>{currentUser ? (headerState.headerState.totalPrice || 0) : (data.totalPrice > 0 ? data.totalPrice : 0)}$</span>
               </div>
             </div>
           </Link>
           <div className='d-flex align-items-center'>
-            <Link to='/user' className='linkUser'>
+
+            <div className='linkUser'>
               <div className='cart-user'>
-                <i className="bi bi-person"></i>
+
+                {currentUser ?
+                  <Space wrap>
+                    <Dropdown overlay={menu} trigger={['click']}>
+                      <Button size='large'>
+                        <i className="bi bi-person"></i>
+                      </Button>
+                    </Dropdown>
+                  </Space>
+                  :
+                  <i className="bi bi-person"></i>
+                }
               </div>
 
-            </Link>
-            {currentUser ?
-              <>
+            </div>
 
-                <div>{currentUser.displayName}</div>
-                <button onClick={() => logOut()}>SighOut</button>
-              </>
-              :
+
+            {!currentUser &&
+
               <div className='userLink'>
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>

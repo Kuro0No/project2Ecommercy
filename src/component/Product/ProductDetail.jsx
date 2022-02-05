@@ -50,6 +50,9 @@ const ProductDetail = () => {
                 })
                 const userRef = doc(db, "user", currentUser && currentUserUid);
                 await setDoc(userRef, { shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: dbUserCart.totalPrice + productDetail.price });
+                toast.success('Add successfully!', {
+                    autoClose: 1500,
+                });
             }
         }
     }
