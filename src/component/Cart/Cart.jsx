@@ -8,9 +8,8 @@ import { useAuth } from '../../AuthContext/AuthContext';
 import { toast } from 'react-toastify';
 import { db } from '../../firebase';
 import { dbContext } from '../../DbContext/dbContext';
-import { doc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-import { headerContext } from '../HeaderContext/HeaderContext';
-
+import { doc, setDoc, updateDoc, arrayUnion, arrayRemove, getDocs } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 
 const Cart = () => {
@@ -21,23 +20,24 @@ const Cart = () => {
     const [checked, setChecked] = useState(false)
     const { currentUser } = useAuth()
 
-    const currentUserCart = useContext(dbContext).shoppingCart
+    const currentUserCart = useContext(dbContext).currentUserCart.shoppingCart
     const dataUserCart = useContext(dbContext)
-    const headerContextState = useContext(headerContext)
-    console.log(headerContextState)
 
-    const increase = async (cart, id) => {
-        dispath({ type: 'increaseProduct', id: cart.id, cart: cart })
-        console.log(dataUserCart.shoppingCart[id].qty)
-        // if (currentUser) {
-        //     const userRef = doc(db, "user", currentUser.uid)
-        //     // To update :
-        //     await updateDoc(userRef, {
-        //         "dataUserCart.shoppingCart[id].qty": dataUserCart.shoppingCart[id].qty + 1,
-        //         "totalPrice": dataUserCart.totalPrice + cart.price
-        //     });
+    console.log(useContext(dbContext).currentUserCart)
 
-        // }
+    const increase = (cart, id) => {
+        if (!currentUser) dispath({ type: 'increaseProduct', id: cart.id, cart: cart })
+        if (currentUser) {
+        
+
+            // // To update :
+            const unsub = onSnapshot(doc(db, "user", currentUser.uid), async (document) => {
+                const productAfter = document.data().shoppingCart.find(item => item.id == cart.id);
+                productAfter.qty= productAfter.qty + 1
+                await setDoc(doc(db, 'user', currentUser.uid), { shoppingCart: [...currentUserCart], qty: dataUserCart.currentUserCart.qty, totalPrice: dataUserCart.currentUserCart.totalPrice + cart.price });
+            });
+
+        }
 
     }
     const decrease = (cart) => {
@@ -45,16 +45,16 @@ const Cart = () => {
 
     }
     const deleteCart = async (cart) => {
-        dispath({ type: 'deleteProduct', id: cart.id, cart: cart })
+        if (!currentUser) dispath({ type: 'deleteProduct', id: cart.id, cart: cart })
         if (currentUser) {
             const userRef = doc(db, 'user', currentUser.uid);
-            console.log(cart)
+
             // Remove the 'capital' field from the document
             await updateDoc(userRef, {
                 //     shoppingCart: deleteField()
                 shoppingCart: arrayRemove(cart),
-                qty: dataUserCart.qty - 1,
-                totalPrice: dataUserCart.totalPrice - cart.price
+                qty: dataUserCart.currentUserCart.qty - 1,
+                totalPrice: dataUserCart.currentUserCart.totalPrice - cart.price
             });
 
 
@@ -91,7 +91,7 @@ const Cart = () => {
                                     <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
-                            {currentUser && dataUserCart?.qty == 0 &&
+                            {currentUser && dataUserCart.currentUserCart?.qty == 0 &&
                                 <tr>
                                     <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
@@ -154,17 +154,17 @@ const Cart = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="card text-white bg-danger mb-3 col-3" >
+                <div className="card text-white bg-danger mb-3 col-3 cardPayment" >
                     <h3 className="card-header text-center">DETAIL</h3>
                     <div className="card-body">
-                        <h5 className="card-title">Total Product: {currentUser ? (dataUserCart.qty || dataUserCart.length) : dataqty}</h5>
-                        <h5 className="card-text">Total Price : {currentUser ? (dataUserCart.totalPrice * dataUserCart.qty) : dataqty * datatotalPrice}$</h5>
+                        <h5 className="card-title">Total Product: {currentUser ? (dataUserCart.currentUserCart.qty || dataUserCart.currentUserCart.length) : dataqty}</h5>
+                        <h5 className="card-text">Total Price : {currentUser ? (dataUserCart.currentUserCart.totalPrice * dataUserCart.currentUserCart.qty) : dataqty * datatotalPrice}$</h5>
                         <small className="card-text">Be careful! Before buying this product, you need to carefully check all the product in your cart! </small>
                         <div className='mb-5'>
                             <input type="checkbox" name="" id="" className='mx-3' checked={checked} onChange={(e) => setChecked(!checked)} />
                             <label htmlFor="">I checked</label>
                         </div>
-                        <button onClick={payment} style={{ width: '100%' }} disabled={!checked || (currentUser ? dataUserCart.qty == 0 || dataUserCart.length == 0 : dataqty == 0)} type="button" className="btn btn-primary">Payment</button>
+                        <button onClick={payment} style={{ width: '100%' }} disabled={!checked || (currentUser ? dataUserCart.currentUserCart.qty == 0 || dataUserCart.currentUserCart.length == 0 : dataqty == 0)} type="button" className="btn btn-primary">Payment</button>
                     </div>
                 </div>
             </div>

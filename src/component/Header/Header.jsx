@@ -15,10 +15,7 @@ const Header = ({ userCartState }) => {
   const data = useContext(CartContext)
   const currentUserCart = useContext(dbContext)
   const headerState = useContext(headerContext)
-  const [headerStateDetail,setHeaderStateDetail] = useState({})
-  useEffect(()=> {
-    setHeaderStateDetail(headerState)
-  },[headerState])
+  
 
 
   return (
