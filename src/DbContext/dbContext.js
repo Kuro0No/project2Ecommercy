@@ -11,22 +11,20 @@ const DbContextProvider = ({ children }) => {
 
     const [currentUserCart, setcurrentUserCart] = useState({})
     const { currentUser } = useAuth()
-    const [dataInit, setDataInit] = useState({})
-    const data = useContext(CartContext).shoppingCart
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         if (currentUser) {
-                const unsub = onSnapshot(doc(db, "user", currentUser.uid), (doc) => {
-                    setcurrentUserCart(doc.data())
-                });
+            const unsub = onSnapshot(doc(db, "user", currentUser.uid), (doc) => {
+                setcurrentUserCart(doc.data())
+            });
+            setLoading(false)
+            return unsub
+        }
+    }, [currentUser])
 
-            }
-
-
-
-        }, [currentUser])
-
-    return <dbContext.Provider value={{ currentUserCart, setcurrentUserCart }}>
+    return <dbContext.Provider value={{ currentUserCart, setcurrentUserCart, loading }}>
         {children}
     </dbContext.Provider>
 }

@@ -26,13 +26,13 @@ const ProductDetail = () => {
     const shoppingCart = useContext(CartContext).shoppingCart
     const { qty, totalPrice } = useContext(CartContext)
     const { loading } = useContext(productContext)
+    
 
     const dbCart = useContext(dbContext).currentUserCart.shoppingCart
     const dbUserCart = useContext(dbContext).currentUserCart
     const setLoadingDb = useContext(dbContext).setLoading
     const headerContextState = useContext(headerContext)
 
-    console.log(dbUserCart)
     const { dispath } = useContext(CartContext)
     const handleAdd = async () => {
         if (!currentUser) {dispath({ type: 'add_to_cart', id: productDetail.id, product: productDetail })}
@@ -43,13 +43,16 @@ const ProductDetail = () => {
                     autoClose: 1500,
                 });
             } else {
+                if(productDetail) {
+                    productDetail.price = Math.floor(productDetail.price)
+                }
                 productDetail['qty'] = 1
-                
+                    
                 headerContextState.setHeaderState({
-                    shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: dbUserCart.totalPrice + productDetail.price
+                    shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)
                 })
                 const userRef = doc(db, "user", currentUser && currentUserUid);
-                await setDoc(userRef, { shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: dbUserCart.totalPrice + productDetail.price });
+                await setDoc(userRef, { shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)) });
                 toast.success('Add successfully!', {
                     autoClose: 1500,
                 });
@@ -116,7 +119,7 @@ const ProductDetail = () => {
 
                             </div>
                             <div className="price-productDetail">
-                                <h4 > ${productDetail.price}</h4>
+                                <h4 > ${Math.floor(productDetail.price)}</h4>
                             </div>
                             <div className="desciption-productDetail">
                                 <p > {productDetail.description}</p>

@@ -10,10 +10,13 @@ import { productContext } from '../../ProductContext/ProductContext';
 import { dbContext } from '../../DbContext/dbContext';
 import { headerContext } from '../HeaderContext/HeaderContext';
 import { Menu, Dropdown, Button, message, Space, Tooltip } from 'antd';
-import { LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+import { LogoutOutlined, SettingOutlined, UnorderedListOutlined,HomeOutlined,ShopOutlined,ContactsOutlined  } from '@ant-design/icons';
+
+
 
 
 const Header = ({ userCartState }) => {
+  const { SubMenu } = Menu;
   const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
   const currentUserCart = useContext(dbContext)
@@ -37,7 +40,30 @@ const Header = ({ userCartState }) => {
 
     <header>
       <div className="container-fluid">
-        <div>
+        <div className='tabMenu-header'>
+          <div><UnorderedListOutlined /></div>
+          <div className='tab-menu-dropdown'>
+            <div className='tab-dropdown-group'>
+              <Link to='/'>
+                Home
+                <HomeOutlined />
+              </Link>
+            </div>
+            <div className='tab-dropdown-group'>
+              <Link to='/product'>
+                Products
+                <ShopOutlined />
+              </Link>
+            </div>
+            <div className='tab-dropdown-group'>
+              <Link to='/contact'>
+                Contact
+                <ContactsOutlined />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className='img-logo-header'>
           <img src={logo} alt="" />
         </div>
         <div className='navLinkHeader'>
@@ -46,7 +72,9 @@ const Header = ({ userCartState }) => {
             <li><Link to='/product'>Product</Link></li>
             <li><Link to='/contact'>Contact</Link></li>
           </ul>
+
         </div>
+
         <div className='search-header'>
           <input type="text" placeholder='Search smt....' />
           <div ><i className="bi bi-search"></i></div>
@@ -66,7 +94,7 @@ const Header = ({ userCartState }) => {
               </div>
               <div className='textCart'>
                 <h5>Cart</h5>
-                <span>{currentUser ? (headerState.headerState.totalPrice || 0) : (data.totalPrice > 0 ? data.totalPrice : 0)}$</span>
+                <span>{currentUser ? ((Math.floor(headerState.headerState.totalPrice)) || 0) : (data.totalPrice > 0 ? (Math.floor(data.totalPrice)) : 0)}$</span>
               </div>
             </div>
           </Link>

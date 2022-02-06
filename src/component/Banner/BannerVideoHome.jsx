@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import VideoCenter from './Video/VideoCenter.webm'
 import productBanner from '../../img/productBanner.png'
 import '../../responsive/responsiveHome.scss'
@@ -16,6 +16,7 @@ const BannerVideoHome = () => {
 
     const [abouteRef, setAboutRef] = useState()
     const [productRef, setProductRef] = useState()
+
 
     return <>
         <Menu abouteRef={abouteRef} productRef={productRef} />

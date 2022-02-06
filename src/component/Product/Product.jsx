@@ -23,7 +23,7 @@ const Product = () => {
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
-    const totalPage = Math.ceil(products.length / productsPerPage)
+    const totalPage = Math.floor(products.length / productsPerPage)
     const [height, setHeight] = useState(window.innerWidth / 4.1)
     const { loading } = useContext(productContext)
     
@@ -105,7 +105,7 @@ const Product = () => {
                                                 <img src={product.image} height={height} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body ">
                                                     <h5 className="card-title products-title">{product.title}</h5>
-                                                    <p className="card-text">${Math.round(product.price)}</p>
+                                                    <p className="card-text">${Math.floor(product.price)}</p>
                                                 </div>
                                             </div>
                                         </Link>

@@ -1,7 +1,7 @@
 import './App.css';
 import BannerVideoHome from './component/Banner/BannerVideoHome';
 import Menu from './component/Menu/Menu';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Footer from './component/Footer/Footer';
 import Product from './component/Product/Product';
 import ProductContextProvide from './ProductContext/ProductContext';
@@ -22,45 +22,49 @@ import NotFound from './component/NotFound/NotFound';
 
 
 
-
 function App() {
   const { currentUser } = useAuth()
+  const location = useLocation()
+  
 
   return (
-    <div className="App">
-
-      <ToastContainer />
-      <ProductContextProvide >
-        <CartContextProvider>
-          <DbContextProvider>
-            <HeaderContextProvider>
-
-              <Header />
-              <Routes >
-                <Route path='/' element={<BannerVideoHome />} />
-                <Route path='/product' element={<Product />} />
-                <Route path='/product/:title/:id' element={<ProductDetail />} />
-
-                <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
-                <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
-                <Route path='/product/:title/:id' element={<ProductDetail />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/setting/*' element={<Setting />} />
-                <Route path='*' element={<NotFound />} />
-                  
-
-                
-
-              </Routes>
-            </HeaderContextProvider>
-          </DbContextProvider>
-        </CartContextProvider>
+    
+      <div className="App">
 
 
-        <Footer />
-      </ProductContextProvide>
 
-    </div>
+        <ToastContainer />
+        <ProductContextProvide >
+          <CartContextProvider>
+            <DbContextProvider>
+              <HeaderContextProvider>
+
+                {location.pathname !=='/' && <Header />}
+                <Routes >
+                  <Route path='/' element={<BannerVideoHome />} />
+                  <Route path='/product' element={<Product />} />
+                  <Route path='/product/:title/:id' element={<ProductDetail />} />
+
+                  <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
+                  <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
+                  <Route path='/product/:title/:id' element={<ProductDetail />} />
+                  <Route path='/cart' element={<Cart />} />
+                  <Route path='/setting/*' element={<Setting />} />
+                  <Route path='*' element={<NotFound />} />
+
+
+
+
+                </Routes>
+              </HeaderContextProvider>
+            </DbContextProvider>
+          </CartContextProvider>
+
+
+          <Footer />
+        </ProductContextProvide>
+      </div>
+    
   );
 }
 
