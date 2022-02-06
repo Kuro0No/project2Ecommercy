@@ -26,15 +26,23 @@ const Product = () => {
     const totalPage = Math.floor(products.length / productsPerPage)
     const [height, setHeight] = useState(window.innerWidth / 4.1)
     const { loading } = useContext(productContext)
-    
-    
+
 
     
+
 
 
     useEffect(() => {
         const resizeHandle = () => {
-            setHeight(window.innerWidth / 4.1)
+            if (window.innerWidth > 767) {
+
+                setHeight(window.innerWidth / 4.1)
+            }
+        
+            if (window.innerWidth <= 767) {
+                setHeight(window.innerWidth / 2.8)
+
+            }
 
         }
         window.addEventListener('resize', resizeHandle)
@@ -72,7 +80,7 @@ const Product = () => {
                         {loading && skeleLopArray.map(number => {
 
                             return (
-                                <div key={number} className="col-6 col-sm-6 col-md-4 pb-3 ">
+                                <div key={number} className="col-6 col-sm-6  col-md-4 pb-3 ">
                                     <div className="card " aria-hidden="true">
                                         <img src="https://semantic-ui.com/images/wireframe/square-image.png" className="card-img-top card-img-top products-image" alt="..." />
                                         <div className="card-body">
@@ -97,7 +105,7 @@ const Product = () => {
                         {currentProducts.map((product, index) => {
                             return (
 
-                                <div key={index} className="col-6 col-sm-6 col-md-4 pb-3 product-container-thumb">
+                                <div key={index} className="col-6 col-sm-6 col-md-4 px-1 pb-3 product-container-thumb">
                                     <div className="card">
 
                                         <Link onClick={() => window.scrollTo(0, 0)} to={`${product.title}/${product.id}`} key={index} >

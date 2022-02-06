@@ -18,6 +18,7 @@ const BannerVideoHome = () => {
     const [productRef, setProductRef] = useState()
 
 
+
     return <>
         <Menu abouteRef={abouteRef} productRef={productRef} />
 
@@ -57,20 +58,34 @@ const BannerVideoHome = () => {
 
 const NewLists = ({ setAboutRef }) => {
     const ref = useRef()
+    const [fontSizeConcepText, setfontSizeConcepText] = useState(40)
     useEffect(() =>
         ref && setAboutRef(ref.current)
         , [])
 
     useEffect(() => {
         Aos.init({ duration: 1500 })
+        
     }, [])
+    useEffect(() => {
+        const resizeHandle = () => {
+            window.innerWidth < 542 && setfontSizeConcepText(window.innerWidth / 14)
+
+        }
+        window.addEventListener('resize', resizeHandle)
+
+        return () =>    {
+            window.removeEventListener('resize', resizeHandle)
+        }
+    }, [])
+
     return (
         <div className='new-list-container' id='about' ref={ref}>
             <Link className='news-list-link' to='news'> NEW LIST </Link>
             <div className='p-index-container'>
                 <div className='p-index-about'>
                     <img data-aos="fade-left" style={{ width: "100%" }} className='animation-img' src='https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-nu-dep-nhat-the-gioi_113857663.jpg' />
-                    <div data-aos="fade-up"  className='p-index-about-description text-center'>
+                    <div data-aos="fade-up" className='p-index-about-description text-center'>
                         <h3 >ABOUT PRODUCT</h3>
                         <h1> A SMART CHOICE </h1>
                         <h2> Crispy, Fluffy and Creamy in one little triangle!</h2>
@@ -84,9 +99,9 @@ const NewLists = ({ setAboutRef }) => {
                     </div>
                 </div>
                 <div className='p-index-concept ' >
-                    <img className='concept-img' data-aos="fade-up"  src='https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_23/3482366/210611-gender-fluid-clothing-2x1-cs.jpg' />
+                    <img className='concept-img' data-aos="fade-up" src='https://media-cldnry.s-nbcnews.com/image/upload/newscms/2021_23/3482366/210611-gender-fluid-clothing-2x1-cs.jpg' />
                     <div data-aos="zoom-in-down" className='concept-text-div'>
-                        <h1 className='concept-text text-center' >BEST <br /> & CLOTHING</h1>
+                        <h1 className='concept-text text-center' style={{ fontSize: fontSizeConcepText }} >BEST <br /> & CLOTHING</h1>
 
                     </div>
 
@@ -237,13 +252,13 @@ const Product = ({ setProductRef }) => {
         <>
             <div className='text-center p-index-product' ref={productRef}>
 
-                <h1 className='mb-5'>CLOTHING</h1>
-                <div className='product-introduce mb-5' >
+                <h1 data-aos="zoom-in" className='mb-5'>CLOTHING</h1>
+                <div  data-aos="zoom-in" className='product-introduce mb-5' >
                     <h3>1 Product: 20$ <label>(Tax included)</label></h3>
                     <h3>4 Product: 80$ <label>(Tax included)</label></h3>
-                </div>
+                </div >
                 <div className='banner-product'>
-                    <img  data-aos="zoom-in-up" src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
+                    <img data-aos="zoom-in-up" src="https://static.onecms.io/wp-content/uploads/sites/23/2019/02/27/athleisure-work-clothes_0-2000.jpg" alt="" />
                 </div>
                 <div className=' p-index-product-desc-feature'>
                     <div className='p-index-product-desc-div'>
@@ -257,7 +272,7 @@ const Product = ({ setProductRef }) => {
                     </div>
 
                     <div data-aos="flip-up" className='product-feature'>
-                        <img  src={productBanner} />
+                        <img src={productBanner} />
                         <div className="circle-multiple">
                             <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
                                 <span style={{ fontSize: size }}>{hat}</span>

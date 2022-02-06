@@ -1,0 +1,49 @@
+.modal-container {
+    display: none;
+}
+
+.modal-container-active {
+    display: block;
+    position: fixed;
+    top: 75px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #e6dce6;
+    transition: ease 0.5s;
+    .active-container {
+        padding: 20px;
+        ul {
+            list-style: none;
+            font-size: 25px;
+            .active-li-modal-group {
+                padding-bottom: 20px;
+
+                a {
+                    color: #383c44;
+                }
+                span {
+                    cursor: pointer;
+                    transform: translateY(-7px);
+                    padding-left: 20px;
+                }
+            }
+            .input-search-modal {
+                transform: translateY(0);
+                span {
+                    transform: translateY(0);
+                    padding-left: 0;
+                    input{
+                        height: 50px;
+                    }
+                    button{
+                        height: 50px;
+                        svg{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

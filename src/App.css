@@ -10,3 +10,6 @@ a{
 ul {
   padding: 0;
 }
+.modalOpen {
+  height: 100vh;
+}

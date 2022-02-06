@@ -10,12 +10,12 @@ import { productContext } from '../../ProductContext/ProductContext';
 import { dbContext } from '../../DbContext/dbContext';
 import { headerContext } from '../HeaderContext/HeaderContext';
 import { Menu, Dropdown, Button, message, Space, Tooltip } from 'antd';
-import { LogoutOutlined, SettingOutlined, UnorderedListOutlined,HomeOutlined,ShopOutlined,ContactsOutlined  } from '@ant-design/icons';
+import { LogoutOutlined, SettingOutlined, UnorderedListOutlined,HomeOutlined,ShopOutlined,ContactsOutlined,CloseOutlined  } from '@ant-design/icons';
 
 
 
 
-const Header = ({ userCartState }) => {
+const Header = ({ setOpenActive,openActive }) => {
   const { SubMenu } = Menu;
   const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
@@ -24,7 +24,7 @@ const Header = ({ userCartState }) => {
   const menu = (
     <Menu>
       <Menu.Item key="1" icon={<SettingOutlined />}>
-        <Link to='/setting'>
+        <Link to='/setting/updateava'>
           Setting
         </Link>
       </Menu.Item>
@@ -41,27 +41,8 @@ const Header = ({ userCartState }) => {
     <header>
       <div className="container-fluid">
         <div className='tabMenu-header'>
-          <div><UnorderedListOutlined /></div>
-          <div className='tab-menu-dropdown'>
-            <div className='tab-dropdown-group'>
-              <Link to='/'>
-                Home
-                <HomeOutlined />
-              </Link>
-            </div>
-            <div className='tab-dropdown-group'>
-              <Link to='/product'>
-                Products
-                <ShopOutlined />
-              </Link>
-            </div>
-            <div className='tab-dropdown-group'>
-              <Link to='/contact'>
-                Contact
-                <ContactsOutlined />
-              </Link>
-            </div>
-          </div>
+        <div onClick={() => setOpenActive(!openActive)} ><UnorderedListOutlined /></div>
+         
         </div>
         <div className='img-logo-header'>
           <img src={logo} alt="" />

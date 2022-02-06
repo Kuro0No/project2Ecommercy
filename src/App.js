@@ -19,17 +19,20 @@ import Header from './component/Header/Header';
 import HeaderContextProvider from './component/HeaderContext/HeaderContext';
 import Setting from './component/Setting/Setting';
 import NotFound from './component/NotFound/NotFound';
+import Modal from './component/Modal/Modal';
+import { useState } from 'react';
 
 
 
 function App() {
   const { currentUser } = useAuth()
   const location = useLocation()
+  const [openActive,setOpenActive] = useState(false)
   
 
   return (
     
-      <div className="App">
+      <div className={`App ${openActive ? 'modalOpen' : ''}`}>
 
 
 
@@ -39,7 +42,7 @@ function App() {
             <DbContextProvider>
               <HeaderContextProvider>
 
-                {location.pathname !=='/' && <Header />}
+                {location.pathname !=='/' && <Header openActive={openActive} setOpenActive={setOpenActive}/>}
                 <Routes >
                   <Route path='/' element={<BannerVideoHome />} />
                   <Route path='/product' element={<Product />} />
@@ -62,6 +65,7 @@ function App() {
 
 
           <Footer />
+          {location.pathname !=='/' && <Modal openActive={openActive} setOpenActive={setOpenActive}/>}
         </ProductContextProvide>
       </div>
     

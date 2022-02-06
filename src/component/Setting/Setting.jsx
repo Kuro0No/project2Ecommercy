@@ -5,6 +5,7 @@ import Avatar from './Avatar';
 import DisplayName from './DisplayName';
 import Password from './Password';
 import { PictureOutlined, EditOutlined, LockOutlined } from '@ant-design/icons';
+import NotFound from '../NotFound/NotFound';
 
 const Setting = () => {
     return <div className='d-flex container-setting'>
@@ -40,6 +41,7 @@ const Setting = () => {
                 <Route path='updateava' element={<Avatar />} />
                 <Route path='updatedisplayname' element={<DisplayName />} />
                 <Route path='updatepassword' element={<Password />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </div>
     </div>;

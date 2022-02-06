@@ -48,7 +48,7 @@ const Catalog = ({ setProducts, productsInit, setCurrentPage }) => {
     }
 
     return <div>
-        <div> Categories </div>
+        <div style={{fontWeight: 600}}> Categories </div>
         {categories.map((category, index) => (
             <div className='p-2' key={index}>
                 <input className="form-check-input mt-0 " checked={checkedCategory === category} onChange={() => onChangeCategory(category)} type="radio" aria-label="Checkbox for following text input" />
