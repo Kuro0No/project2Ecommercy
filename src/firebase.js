@@ -1,6 +1,8 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 
 
 const app = firebase.initializeApp({
@@ -15,16 +17,8 @@ const app = firebase.initializeApp({
 
 export const auth = app.auth()
 export const db = getFirestore();
-// const colRef = collection(d  b, 'user')
-// getDocs(colRef)
-//     .then((snapshot) => {
-//         let user = []
-//         snapshot.docs.forEach(doc => {
-//             user.push({...doc.data(), id:doc.id})
+export const storage  = getStorage(app)
 
-//         })
-//         console.log(user)
-//     })
 
 
 

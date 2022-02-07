@@ -52,7 +52,7 @@ function App() {
                   <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
                   <Route path='/product/:title/:id' element={<ProductDetail />} />
                   <Route path='/cart' element={<Cart />} />
-                  <Route path='/setting/*' element={<Setting />} />
+                  <Route path='/setting' element={<Setting />} />
                   <Route path='*' element={<NotFound />} />
 
 

@@ -26,16 +26,17 @@ const ProductDetail = () => {
     const shoppingCart = useContext(CartContext).shoppingCart
     const { qty, totalPrice } = useContext(CartContext)
     const { loading } = useContext(productContext)
-    
+
 
     const dbCart = useContext(dbContext).currentUserCart.shoppingCart
     const dbUserCart = useContext(dbContext).currentUserCart
     const setLoadingDb = useContext(dbContext).setLoading
     const headerContextState = useContext(headerContext)
+    console.log(dbUserCart)
 
     const { dispath } = useContext(CartContext)
     const handleAdd = async () => {
-        if (!currentUser) {dispath({ type: 'add_to_cart', id: productDetail.id, product: productDetail })}
+        if (!currentUser) { dispath({ type: 'add_to_cart', id: productDetail.id, product: productDetail }) }
         if (currentUser) {
             const check = dbCart.find(product => product.id == productDetail.id)
             if (check) {
@@ -43,27 +44,29 @@ const ProductDetail = () => {
                     autoClose: 1500,
                 });
             } else {
-                if(productDetail) {
+                if (productDetail) {
                     productDetail.price = Math.floor(productDetail.price)
                 }
                 productDetail['qty'] = 1
-                    
+
                 headerContextState.setHeaderState({
                     shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)
                 })
                 const userRef = doc(db, "user", currentUser && currentUserUid);
-                await setDoc(userRef, { shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)) });
+                await setDoc(userRef,
+                    {
+                        shoppingCart: [productDetail, ...dbCart],
+                        qty: dbUserCart.qty + 1,
+                        totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)),
+                        passwordUser:dbUserCart.passwordUser,
+                        avatar: dbUserCart.avatar
+                    });
                 toast.success('Add successfully!', {
                     autoClose: 1500,
                 });
             }
         }
     }
-    // useEffect(async () => {
-    //     const userRef = doc(db, "user", currentUser && currentUserUid);
-    //     await setDoc(userRef, { shoppingCart: [productDetail, ...dbCart], qty: dbUserCart.qty + 1, totalPrice: dbUserCart.totalPrice + productDetail.price });
-
-    // }, [userCartState])
 
     const buyAtProductDetail = () => {
         if (!currentUser) { toast.warn('You need to login to buy this product!', { autoClose: 1500 }) }

@@ -23,8 +23,7 @@ const Cart = () => {
 
     const currentUserCart = useContext(dbContext).currentUserCart.shoppingCart
     const dataUserCart = useContext(dbContext)
-
-
+    
 
     const increase = (cart, id) => {
         if (!currentUser) dispath({ type: 'increaseProduct', id: cart.id, cart: cart })
@@ -38,7 +37,14 @@ const Cart = () => {
                 currentUserCart[replaceUserCart] = productAfter
             }
 
-            setDoc(doc(db, 'user', currentUser.uid), { shoppingCart: currentUserCart, qty: dataUserCart.currentUserCart.qty, totalPrice: Math.floor(dataUserCart.currentUserCart.totalPrice) + Math.floor(cart.price) });
+            setDoc(doc(db, 'user', currentUser.uid),
+                {
+                    shoppingCart: currentUserCart,
+                    qty: dataUserCart.currentUserCart.qty,
+                    totalPrice: Math.floor(dataUserCart.currentUserCart.totalPrice) + Math.floor(cart.price),
+                    avatar: dataUserCart.currentUserCart.avatar,
+                    passwordUser: dataUserCart.currentUserCart.passwordUser
+                });
         }
     };
 
@@ -61,7 +67,14 @@ const Cart = () => {
                     currentUserCart[replaceUserCart] = productAfter
                 }
 
-                setDoc(doc(db, 'user', currentUser.uid), { shoppingCart: currentUserCart, qty: dataUserCart.currentUserCart.qty, totalPrice: Math.floor(dataUserCart.currentUserCart.totalPrice) - Math.floor(cart.price) });
+                setDoc(doc(db, 'user', currentUser.uid),
+                    {
+                        shoppingCart: currentUserCart,
+                        qty: dataUserCart.currentUserCart.qty,
+                        totalPrice: Math.floor(dataUserCart.currentUserCart.totalPrice) - Math.floor(cart.price),
+                        avatar: dataUserCart.currentUserCart.avatar,
+                        passwordUser: dataUserCart.currentUserCart.passwordUser
+                    });
             }
         }
 
@@ -76,7 +89,7 @@ const Cart = () => {
                 //     shoppingCart: deleteField()
                 shoppingCart: arrayRemove(cart),
                 qty: dataUserCart.currentUserCart.qty - 1,
-                totalPrice: (dataUserCart.currentUserCart.totalPrice - (cart.price  * cart.qty))
+                totalPrice: (dataUserCart.currentUserCart.totalPrice - (cart.price * cart.qty))
             });
 
 
@@ -108,7 +121,7 @@ const Cart = () => {
                         </thead>
 
                         <tbody>
-                            
+
 
                             {!currentUser && dataqty == 0 &&
                                 <tr>
@@ -181,8 +194,8 @@ const Cart = () => {
                 <div className="card text-white bg-danger mb-3 col-3 cardPayment" >
                     <h3 className="card-header text-center">DETAIL</h3>
                     <div className="card-body">
-                        <h5 className="card-title">Total Product: {currentUser ? (dataUserCart.currentUserCart.qty ) : dataqty}</h5>
-                        <h5 className="card-text">Total Price : {currentUser ? (Math.floor(dataUserCart.currentUserCart.totalPrice) * dataUserCart.currentUserCart.qty) : (Math.floor)}$</h5>
+                        <h5 className="card-title">Total Product: {currentUser ? (dataUserCart.currentUserCart.qty) : dataqty}</h5>
+                        <h5 className="card-text">Total Price : {currentUser ? (Math.floor(dataUserCart.currentUserCart.totalPrice) * dataUserCart.currentUserCart.qty) : datatotalPrice}$</h5>
                         <small className="card-text">Be careful! Before buying this product, you need to carefully check all the product in your cart! </small>
                         <div className='mb-5'>
                             <input type="checkbox" name="" id="" className='mx-3' checked={checked} onChange={(e) => setChecked(!checked)} />

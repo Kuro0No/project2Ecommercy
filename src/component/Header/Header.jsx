@@ -24,7 +24,7 @@ const Header = ({ setOpenActive,openActive }) => {
   const menu = (
     <Menu>
       <Menu.Item key="1" icon={<SettingOutlined />}>
-        <Link to='/setting/updateava'>
+        <Link to='/setting'>
           Setting
         </Link>
       </Menu.Item>
