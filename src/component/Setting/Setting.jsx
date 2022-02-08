@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Setting.scss'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 import { useAuth } from '../../AuthContext/AuthContext';
 import { toast } from 'react-toastify';
 import { dbContext } from '../../DbContext/dbContext';
-import { Upload } from 'antd';
-
-import { updatePassword, updateProfile } from "firebase/auth";
-import { storage } from '../../firebase';
-import { getDownloadURL, ref, } from 'firebase/storage';
 
 
 
@@ -37,25 +32,25 @@ const Setting = () => {
     //loading
     const [loading, setLoading] = useState(false)
     // photoUrl
-    const [photoURL, setPhotoURL] = useState()
-    const [nameImg,setNameImg] = useState()
+    const [photoURL, setPhotoURL] = useState('https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png')
+    const [photo, setPhoto] = useState(null)
     const handleChangeAva = (e) => {
 
-        if (e.target.files[0]) {
-            const fileAvatar = URL.createObjectURL(e.target.files[0])
-            setPhotoURL(fileAvatar)
-            setNameImg(e.target.value)
+        const file = e.target.files[0]
+        file.preview = URL.createObjectURL(file)
+        setPhoto(file)
 
 
-        }
     }
     useEffect(() => {
         setPhotoURL(currentUser?.photoURL)
     }, [currentUser])
+
     const handleConfirmAva = async () => {
-        upload(photoURL, currentUser,nameImg)
+        upload(photo, currentUser)
+
     }
-    console.log(currentUser?.photoURL )
+
     const handleClick = (id) => {
         if (id === 1) {
             setActive1(true)
@@ -147,8 +142,8 @@ const Setting = () => {
             {active1 ?
                 <div className='setting-group-child active1'  >
 
-                    <div className='title-option-setting'>Name</div>
-                    <div className='title-update-displayname'>
+                    <div className='title-option-setting col-sm-3 col-2'>Name</div>
+                    <div className='title-update-displayname col-sm-9 col-10'>
 
                         <Form
                             name="normal_login"
@@ -213,8 +208,8 @@ const Setting = () => {
                 :
                 <div className='setting-group-child' onClick={() => handleClick(1)} >
 
-                    <div className='title-option-setting'>Name</div>
-                    <div className='title-option-content' >
+                    <div className='title-option-setting col-sm-3 col-2'>Name</div>
+                    <div className='title-option-content col-sm-9 col-10' >
                         <div className='description-setting' >{currentUser?.displayName}</div>
                         <div className='title-option-action'>Edit</div>
 
@@ -230,14 +225,14 @@ const Setting = () => {
             <div>
                 <div className='setting-group' >
                     <div className='setting-group-child' >
-                        <div className='title-option-setting'>Avatar</div>
-                        <div className='title-option-content-ava'>
-                            <img src={photoURL} alt="" />
+                        <div className='title-option-setting col-2 col-sm-3'>Avatar</div>
+                        <div className='title-option-content-ava col-sm-9 col-10'>
+                            <img src={photo ? photo.preview : currentUser?.photoURL} alt="" />
                             <div>
 
                                 <div>
                                     <input onChange={handleChangeAva} type="file" id='updateAva' hidden />
-                                    <label className='button-updateAva btn btn-primary' htmlFor="updateAva">
+                                    <label className='button-updateAva btn btn-light' htmlFor="updateAva">
                                         <span>Update Avatar</span>
                                         <div className='icon-update-avatar'>
 
@@ -245,11 +240,11 @@ const Setting = () => {
                                         </div>
                                     </label>
 
-                                    <button style={{ cursor: 'pointer' }} onClick={handleConfirmAva}>
-                                        Confirm
-                                    </button>
 
                                 </div>
+                                <button className=' btn btn-primary' style={{ cursor: 'pointer' }} disabled={!photo} onClick={handleConfirmAva}>
+                                    Confirm
+                                </button>
 
                             </div>
                         </div>
@@ -260,8 +255,8 @@ const Setting = () => {
             :
             <div onClick={() => handleClick(2)} className='setting-group' >
                 <div className='setting-group-child' >
-                    <div className='title-option-setting'>Avatar</div>
-                    <div className='title-option-content'>
+                    <div className='title-option-setting col-sm-3 col-2'>Avatar</div>
+                    <div className='title-option-content col-sm-9 col-10'>
                         <div className='description-setting' >Update your Avatar.</div>
                         <div className='title-option-action'>Edit</div>
 
@@ -274,9 +269,9 @@ const Setting = () => {
             <>
                 <div className='setting-group' >
                     <div className='setting-group-child active3' >
-                        <div className='title-option-setting'>Password</div>
+                        <div className='title-option-setting  col-sm-3 col-2'>Password</div>
 
-                        <div className='field-change-pass'>
+                        <div className='field-change-pass '>
                             <div className='title-option-content-new-pass'>
                                 <div className='description-setting description-new text-center' > Change your password.</div>
 
@@ -347,10 +342,10 @@ const Setting = () => {
             :
             <div onClick={() => handleClick(3)} className='setting-group' >
                 <div className='setting-group-child' >
-                    <div className='title-option-setting'>Password</div>
-                    <div className='title-option-content'>
+                    <div className='title-option-setting col-sm-3 col-2'>Password</div>
+                    <div className='title-option-content col-sm-9 col-10'>
 
-                        <div className='description-setting' >Change your password? Click here!</div>
+                        <div className='description-setting ' >Change your password? Click here!</div>
                         <div className='title-option-action'>Edit</div>
                     </div>
 

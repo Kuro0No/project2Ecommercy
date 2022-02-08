@@ -1,6 +1,4 @@
 import { toast } from 'react-toastify';
-import { dbContext } from '../../DbContext/dbContext';
-import { setDoc } from 'firebase/firestore';
 
 
 
@@ -8,13 +6,13 @@ import { setDoc } from 'firebase/firestore';
 export const CartReducer = (state, action) => {
     const { shoppingCart, totalPrice, qty } = state
     let product;
-    let index;
+    // let index;
     let updatePrice;
     let updateQty;
 
     switch (action.type) {
         case 'add_to_cart':
-            const check = shoppingCart.find(product => product.id == action.id)
+            const check = shoppingCart.find(product => product.id === action.id)
             if (check) {
                 toast.warn('The product is already in your cart!', {
                     autoClose: 1500,

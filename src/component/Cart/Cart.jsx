@@ -1,6 +1,5 @@
 import React from 'react';
-import { useContext, useEffect, useState } from 'react/cjs/react.development';
-import Header from '../Header/Header';
+import { useContext, useState } from 'react/cjs/react.development';
 import { CartContext } from './CartContext';
 import './Cart.scss'
 import { Link } from 'react-router-dom';
@@ -8,8 +7,8 @@ import { useAuth } from '../../AuthContext/AuthContext';
 import { toast } from 'react-toastify';
 import { db } from '../../firebase';
 import { dbContext } from '../../DbContext/dbContext';
-import { doc, setDoc, updateDoc, arrayUnion, arrayRemove, getDocs } from "firebase/firestore";
-import { Skeleton, Space, Divider, Switch, Form, Radio } from 'antd';
+import { doc, setDoc, updateDoc, arrayRemove } from "firebase/firestore";
+
 
 
 
@@ -30,7 +29,7 @@ const Cart = () => {
         if (currentUser) {
 
             // To increase in firebase :
-            const productAfter = currentUserCart.find(item => item.id == cart.id);
+            const productAfter = currentUserCart.find(item => item.id === cart.id);
             productAfter.qty = productAfter.qty + 1
             const replaceUserCart = currentUserCart.indexOf(cart)
             if (replaceUserCart !== -1) {
@@ -58,7 +57,7 @@ const Cart = () => {
         // to Decrease in firebase
         if (currentUser) {
 
-            const productAfter = currentUserCart.find(item => item.id == cart.id);
+            const productAfter = currentUserCart.find(item => item.id === cart.id);
             if (productAfter.qty > 1) {
 
                 productAfter.qty = productAfter.qty - 1
@@ -123,12 +122,12 @@ const Cart = () => {
                         <tbody>
 
 
-                            {!currentUser && dataqty == 0 &&
+                            {!currentUser && dataqty === 0 &&
                                 <tr>
                                     <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
-                            {currentUser && dataUserCart.currentUserCart?.qty == 0 &&
+                            {currentUser && dataUserCart.currentUserCart?.qty === 0 &&
                                 <tr>
                                     <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
@@ -201,7 +200,7 @@ const Cart = () => {
                             <input type="checkbox" name="" id="" className='mx-3' checked={checked} onChange={(e) => setChecked(!checked)} />
                             <label htmlFor="">I checked</label>
                         </div>
-                        <button onClick={payment} style={{ width: '100%' }} disabled={!checked || (currentUser ? dataUserCart.currentUserCart.qty == 0 || dataUserCart.currentUserCart.length == 0 : dataqty == 0)} type="button" className="btn btn-primary">Payment</button>
+                        <button onClick={payment} style={{ width: '100%' }} disabled={!checked || (currentUser ? dataUserCart.currentUserCart.qty === 0 || dataUserCart.currentUserCart.length === 0 : dataqty === 0)} type="button" className="btn btn-primary">Payment</button>
                     </div>
                 </div>
             </div>

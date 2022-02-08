@@ -3,6 +3,7 @@ import './Register.scss'
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useAuth } from '../../AuthContext/AuthContext';
+import {toast} from 'react-toastify'
 
 
 
@@ -19,13 +20,17 @@ const Register = () => {
 
     const handleSignUpSubmit = async (e) => {
         e.preventDefault()
-        setLoading(true)
-       await register(emailRef.current.value, passwordRef.current.value,displayName.current.value)
+        try{
+            setLoading(true)
+           await register(emailRef.current.value, passwordRef.current.value,displayName.current.value)
+
+        } catch {
+            toast.warning('Failed Sign up')
+        }
        setLoading(false)
        currentUser && navigate('/product')
         
     }
-    console.log(currentUser)
 
     return (
         <>

@@ -1,28 +1,30 @@
-import React, { useCallback, useContext } from 'react';
-import { useState, useEffect } from 'react/cjs/react.development';
+import React, { useContext } from 'react';
+import { useState } from 'react/cjs/react.development';
 import { memo } from 'react';
-import axios from 'axios';
 import { productContext } from '../../ProductContext/ProductContext';
+import { useLocation } from 'react-router-dom';
 
 
 const Catalog = ({ setProducts, productsInit, setCurrentPage }) => {
     const categories = ["electronics", "jewelery", "men's clothing", "women's clothing"]
-    const sortByPrice = ["Increase", "Decrease"]
+    // const sortByPrice = ["Increase", "Decrease"]
     const [checkedCategory, setCheckedCategory] = useState()
-    const [checkedPirce, setCheckedPrice] = useState()
+    // const [checkedPirce, setCheckedPrice] = useState()
     const products = useContext(productContext).products
+
+    const location = useLocation()
 
 
 
     const onChangeCategory = (category) => {
         setCheckedCategory(category)
-        const filter = products.filter(product => product.category == category)
-        if (category == 'electronic') {
+        const filter = products.filter(product => product.category === category)
+        if (category === 'electronic') {
             setProducts(filter)
-        } else if (category == 'jewelery') {
+        } else if (category === 'jewelery') {
             setProducts(filter)
 
-        } else if (category == "men's clothing") {
+        } else if (category === "men's clothing") {
             setProducts(filter)
 
         } else {
@@ -33,26 +35,26 @@ const Catalog = ({ setProducts, productsInit, setCurrentPage }) => {
 
     }
 
-    const onChangPrice = (sortPrice) => {
-        setCheckedPrice(sortPrice)
-        // const sortProduct = products.sort((a,b) => a-b)
-        const decreaseSort = products.sort((a, b) => a.price - b.price)
-        const increaseSort = products.sort((a, b) => b.price - a.price)
-        console.log(decreaseSort)
+    // const onChangPrice = (sortPrice) => {
+    //     setCheckedPrice(sortPrice)
+    //     // const sortProduct = products.sort((a,b) => a-b)
+    //     const decreaseSort = products.sort((a, b) => a.price - b.price)
+    //     const increaseSort = products.sort((a, b) => b.price - a.price)
+    //     console.log(decreaseSort)
 
-        if (sortPrice == 'Increase') {
-            setProducts(increaseSort)
-        } else {
-            setProducts(decreaseSort)
-        }
-    }
+    //     if (sortPrice == 'Increase') {
+    //         setProducts(increaseSort)
+    //     } else {
+    //         setProducts(decreaseSort)
+    //     }
+    // }
 
     return <div>
         <div style={{fontWeight: 600}}> Categories </div>
         {categories.map((category, index) => (
-            <div className='p-2' key={index}>
+            <div className='p-2 catalog-group' key={index}>
                 <input className="form-check-input mt-0 " checked={checkedCategory === category} onChange={() => onChangeCategory(category)} type="radio" aria-label="Checkbox for following text input" />
-                <label className='ps-3'>{category.toUpperCase()}</label>
+                <label className='ps-2'>{category}</label>
             </div>
         ))}
 
@@ -68,7 +70,7 @@ const Catalog = ({ setProducts, productsInit, setCurrentPage }) => {
             <button onClick={() => {
                 setProducts(productsInit)
                 setCheckedCategory(false)
-                setCheckedPrice(false)
+                // setCheckedPrice(false)
             }} type="button" className="btn btn-outline-danger">Clear Filter</button>
 
         </div>

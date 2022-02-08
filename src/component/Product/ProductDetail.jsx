@@ -1,14 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import { productContext } from "../../ProductContext/ProductContext";
 import { CartContext } from "../Cart/CartContext";
-import Header from "../Header/Header";
 import './ProductDetail.scss'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../AuthContext/AuthContext";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Rate } from 'antd';
 import { ShoppingCartOutlined, CheckCircleOutlined, FieldTimeOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons';
@@ -18,27 +16,26 @@ import { headerContext } from "../HeaderContext/HeaderContext";
 
 
 const ProductDetail = () => {
-    const { title, id } = useParams()
+    const { id } = useParams()
     const { currentUser } = useAuth()
     const currentUserUid = currentUser && currentUser.uid
     const products = useContext(productContext).products
     let productDetail = products.find(item => item.id == id)
-    const shoppingCart = useContext(CartContext).shoppingCart
-    const { qty, totalPrice } = useContext(CartContext)
+    // const shoppingCart = useContext(CartContext).shoppingCart
+    // const { qty, totalPrice } = useContext(CartContext)
     const { loading } = useContext(productContext)
 
 
     const dbCart = useContext(dbContext).currentUserCart.shoppingCart
     const dbUserCart = useContext(dbContext).currentUserCart
-    const setLoadingDb = useContext(dbContext).setLoading
+    // const setLoadingDb = useContext(dbContext).setLoading
     const headerContextState = useContext(headerContext)
-    console.log(dbUserCart)
 
     const { dispath } = useContext(CartContext)
     const handleAdd = async () => {
         if (!currentUser) { dispath({ type: 'add_to_cart', id: productDetail.id, product: productDetail }) }
         if (currentUser) {
-            const check = dbCart.find(product => product.id == productDetail.id)
+            const check = dbCart.find(product => product.id === productDetail.id)
             if (check) {
                 return toast.warn('The product is already in your cart!', {
                     autoClose: 1500,

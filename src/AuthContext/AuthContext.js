@@ -29,12 +29,12 @@ export default function AuthProvider({ children }) {
         })
 
     }
-    async function login(email, password) {
-        return await auth.signInWithEmailAndPassword(email, password,)
+     function login(email, password) {
+        return  auth.signInWithEmailAndPassword(email, password)
     }
     
-    async function upload (file, currentUser, nameImg) {
-        const fileRef =  ref(storage, `userImg/${currentUser?.email}/${currentUser.uid}` )
+    async function upload (file, currentUser) {
+        const fileRef =  ref(storage, `image/${currentUser?.uid}.png` ) 
         // setLoading(true)
         const snapshot = await uploadBytes(fileRef, file)
         const photoURL = await getDownloadURL(fileRef)

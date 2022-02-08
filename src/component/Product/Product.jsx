@@ -1,13 +1,10 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import './Products.scss'
 import Pagination from "./Pagination";
 import Catalog from "./Catalog";
 import { productContext } from "../../ProductContext/ProductContext";
 import { Link } from "react-router-dom";
-import Header from "../Header/Header";
-import { CartContext } from "../Cart/CartContext";
-import { headerContext } from "../HeaderContext/HeaderContext";
+
 
 const Product = () => {
 
@@ -40,7 +37,7 @@ const Product = () => {
             }
         
             if (window.innerWidth <= 767) {
-                setHeight(window.innerWidth / 2.8)
+                setHeight(window.innerWidth / 4)
 
             }
 
@@ -70,10 +67,10 @@ const Product = () => {
         <>
 
             <div className="product-container d-flex">
-                <div className="catalog col-3">
+                <div className="catalog col-md-3 col-5">
                     <Catalog setProducts={setProducts} productsInit={productsInit} setCurrentPage={setCurrentPage} />
                 </div>
-                <div className="product col-9">
+                <div className="product col-7 col-md-9">
                     <div className="row">
 
 
@@ -102,7 +99,7 @@ const Product = () => {
                         })}
 
 
-                        {currentProducts.map((product, index) => {
+                        { currentProducts.map((product, index) => {
                             return (
 
                                 <div key={index} className="col-6 col-sm-6 col-md-4 px-1 pb-3 product-container-thumb">
