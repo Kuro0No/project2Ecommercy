@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, { useContext,useState } from 'react';
 import { memo } from 'react';
 import { productContext } from '../../ProductContext/ProductContext';
 import { useLocation } from 'react-router-dom';
