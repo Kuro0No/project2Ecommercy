@@ -88,19 +88,17 @@ const Menu = ({ abouteRef, productRef }) => {
                             <Link to='' onClick={handleTopScroll}>TOP</Link>
                         </li>
                         <li>
-                            <Link to='' onClick={handleAboutScroll}>- ABOUT PRODUCT</Link>
+                            <Link to='' onClick={handleAboutScroll}>--- ABOUT PRODUCT</Link>
                         </li>
                         <li>
-                            <Link to='' onClick={handleProductScroll}>- PRODUCT</Link>
+                            <Link to='' onClick={handleProductScroll}>--- PRODUCT</Link>
                         </li>
-                        <li>
-                            <Link to=''>NEWS</Link>
-                        </li>
+                        
                         <li>
                             <Link to='/product' onClick={() => window.scrollTo(0, 0)}>SHOP</Link>
                         </li>
                         <li>
-                            <Link to=''>CONTACT</Link>
+                            <Link to='/contact'>CONTACT</Link>
                         </li>
 
                     </ul>

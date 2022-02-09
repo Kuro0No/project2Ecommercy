@@ -20,55 +20,56 @@ import HeaderContextProvider from './component/HeaderContext/HeaderContext';
 import Setting from './component/Setting/Setting';
 import NotFound from './component/NotFound/NotFound';
 import Modal from './component/Modal/Modal';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import Contact from './component/Contact/Contact';
 
 
 function App() {
   const { currentUser } = useAuth()
   const location = useLocation()
-  const [openActive,setOpenActive] = useState(false)
-  
+  const [openActive, setOpenActive] = useState(false)
+  const [avatarUser,setAvatarUser]= useState(currentUser?.photoURL)
 
   return (
-    
-      <div className={`App ${openActive ? 'modalOpen' : ''}`}>
+
+    <div className={`App ${openActive ? 'modalOpen' : ''}`}>
 
 
 
-        <ToastContainer />
-        <ProductContextProvide >
-          <CartContextProvider>
-            <DbContextProvider>
-              <HeaderContextProvider>
+      <ToastContainer />
+      <ProductContextProvide >
+        <CartContextProvider>
+          <DbContextProvider>
+            <HeaderContextProvider>
 
-                {location.pathname !=='/' && <Header openActive={openActive} setOpenActive={setOpenActive}/>}
-                <Routes >
-                  <Route path='/' element={<BannerVideoHome />} />
-                  <Route path='/product' element={<Product />} />
-                  <Route path='/product/:title/:id' element={<ProductDetail />} />
+              {location.pathname !== '/' && <Header avatarUser={avatarUser}  openActive={openActive} setOpenActive={setOpenActive} />}
+              <Routes >
+                <Route path='/' element={<BannerVideoHome />} />
+                <Route path='/product' element={<Product />} />
+                <Route path='/product' element={<Product />} />
+                <Route path='/contact' element={<Contact />} />
 
-                  <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
-                  <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
-                  <Route path='/product/:title/:id' element={<ProductDetail />} />
-                  <Route path='/cart' element={<Cart />} />
-                  <Route path='/setting' element={<Setting />} />
-                  <Route path='*' element={<NotFound />} />
-
-
-
-
-                </Routes>
-              </HeaderContextProvider>
-            </DbContextProvider>
-          </CartContextProvider>
+                <Route path='/login' element={currentUser ? <Navigate to='/product' /> : <Login />} />
+                <Route path='/register' element={currentUser ? <Navigate to='/product' /> : <Register />} />
+                <Route path='/product/:title/:id' element={<ProductDetail />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/setting' element={currentUser ? <Setting  setAvatarUser={setAvatarUser}/> : <Navigate to='/product' />} />
+                <Route path='*' element={<NotFound />} />
 
 
-          <Footer />
-          {location.pathname !=='/' && <Modal openActive={openActive} setOpenActive={setOpenActive}/>}
-        </ProductContextProvide>
-      </div>
-    
+
+
+              </Routes>
+            </HeaderContextProvider>
+          </DbContextProvider>
+        </CartContextProvider>
+
+
+        <Footer />
+        {location.pathname !== '/' && <Modal openActive={openActive} setOpenActive={setOpenActive} />}
+      </ProductContextProvide>
+    </div>
+
   );
 }
 

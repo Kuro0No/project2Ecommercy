@@ -28,39 +28,11 @@
                     padding-left: 20px;
                 }
             }
-            .input-search-modal {
-                transform: translateY(0);
-                display: flex;
-                font-size: 15px;
-                input {
-                    height: 40px;
-                    width: 90%;
-                    border-radius: 10px;
-                }
-                span{
-                    padding: 0;
-                    font-size: 30px;
-                    transform: translateY(3px);
-                }
-                // span {
-                //     transform: translateY(0);
-                //     padding-left: 0;
-                //     input{
-                //         height: 30px;
-                //     }
-                //     button{
-                //         height: 50px;
-                //         svg{
-                //             font-size: 20px;
-                //         }
-                //     }
-                // }
-            }
         }
     }
 }
 .search-image-img {
-    img{
+    img {
         width: 100px;
         height: 100px;
     }
@@ -69,23 +41,49 @@
     display: flex;
     margin-bottom: 20px;
     width: calc(100% - 20px);
-    &:hover{
+    &:hover {
         background: #ccc;
     }
-    
 }
 .modal-search-filter-product {
     height: 500px;
     overflow: overlay;
-    a{
+    a {
         color: #000;
         font-size: 13px;
         font-weight: 500;
     }
 }
 
-@media screen  and (min-width:445px) {
-    .modal-container-active{
+// @media screen  and (max-width:445px) {
+//     .modal-container-active{
+//         display: none;
+//     }
+// }
+
+@media screen and (min-width: 810px) {
+    .modal-container-active {
         display: none;
+    }
+}
+@media screen and (max-width: 810px) {
+    .input-search-modal {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 446px) {
+    .input-search-modal {
+        transform: translateY(0);
+        display: flex;
+        font-size: 15px;
+        input {
+            height: 40px;
+            width: 90%;
+            border-radius: 10px;
+        }
+       i{
+           font-size: 25px;
+       }
     }
 }

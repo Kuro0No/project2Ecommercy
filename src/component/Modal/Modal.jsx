@@ -5,12 +5,13 @@ import { Input } from 'antd';
 import { productContext } from '../../ProductContext/ProductContext';
 import { useRef, useState, useEffect, useContext } from 'react';
 import UseDebounce from '../Header/UseDebounce';
-import {SearchOutlined  } from '@ant-design/icons';
 
 
 const Modal = ({ setOpenActive, openActive }) => {
     const { Search } = Input;
 
+
+    
 
     //productContext
     const { products } = useContext(productContext)
@@ -81,7 +82,7 @@ const Modal = ({ setOpenActive, openActive }) => {
                     {/* onBlur={blurSearch} onFocus={focusSearch} */}
                     {/* <Search value={searchTerm} onBlur={blurSearch} onFocus={focusSearch} onChange={e => setSearchTerm(e.target.value)}  placeholder="Search smt..." enterButton /> */}
                     <input type="text" onBlur={blurSearch} onFocus={focusSearch} value={searchTerm} onChange={e => setSearchTerm(e.target.value)}  aria-label="Last name" className="form-control"></input>
-                    <SearchOutlined />
+                    <i className="bi bi-search"></i>
                 </li>
             </ul>
             <div className='modal-search-filter-product' ref={fielSearchRef}>

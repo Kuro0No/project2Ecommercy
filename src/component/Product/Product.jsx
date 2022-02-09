@@ -25,7 +25,7 @@ const Product = () => {
     const { loading } = useContext(productContext)
 
 
-    
+
 
 
 
@@ -35,7 +35,7 @@ const Product = () => {
 
                 setHeight(window.innerWidth / 4.1)
             }
-        
+
             if (window.innerWidth <= 767) {
                 setHeight(window.innerWidth / 4)
 
@@ -59,7 +59,7 @@ const Product = () => {
 
     }
     const handleNext = () => {
-        currentPage < totalPage && setCurrentPage(currentPage + 1)
+        currentPage <= totalPage && setCurrentPage(currentPage + 1)
     }
 
 
@@ -99,7 +99,7 @@ const Product = () => {
                         })}
 
 
-                        { currentProducts.map((product, index) => {
+                        {currentProducts.map((product, index) => {
                             return (
 
                                 <div key={index} className="col-6 col-sm-6 col-md-4 px-1 pb-3 product-container-thumb">
@@ -121,12 +121,12 @@ const Product = () => {
 
                             )
                         })}
-                        <div className="mt-4">
-                            <Pagination currentPage={currentPage} productsPerPage={productsPerPage} handleNext={handleNext} paginate={paginate} handlePre={handlePre} totalProductsLength={products.length} />
-                        </div>
                     </div>
                 </div>
             </div>;
+            <div className="mt-4">
+                <Pagination currentPage={currentPage} productsPerPage={productsPerPage} handleNext={handleNext} paginate={paginate} handlePre={handlePre} totalProductsLength={products.length} />
+            </div>
         </>)
 };
 

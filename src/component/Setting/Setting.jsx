@@ -9,7 +9,7 @@ import { dbContext } from '../../DbContext/dbContext';
 
 
 
-const Setting = () => {
+const Setting = ({setAvatarUser}) => {
     const { currentUser, upload } = useAuth()
     const { currentUserCart } = useContext(dbContext)
 
@@ -42,12 +42,14 @@ const Setting = () => {
 
 
     }
-    useEffect(() => {
-        setPhotoURL(currentUser?.photoURL)
-    }, [currentUser])
+   
 
     const handleConfirmAva = async () => {
         upload(photo, currentUser)
+        setAvatarUser(photo?.preview)
+        toast.success('Update successfully', {
+            autoClose: 1500,
+        });
 
     }
 
@@ -227,7 +229,7 @@ const Setting = () => {
                     <div className='setting-group-child' >
                         <div className='title-option-setting col-2 col-sm-3'>Avatar</div>
                         <div className='title-option-content-ava col-sm-9 col-10'>
-                            <img src={photo ? photo.preview : currentUser?.photoURL} alt="" />
+                            <img src={photo ? photo.preview : currentUser?.photoURL || `https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png`} alt="" />
                             <div>
 
                                 <div>

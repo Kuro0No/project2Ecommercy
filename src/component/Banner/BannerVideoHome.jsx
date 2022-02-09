@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
 import { Link, useLocation } from 'react-router-dom';
-import VideoCenter from './Video/VideoCenter.webm'
+// import VideoCenter from './Video/VideoCenter.webm'
+import VideoCenter2 from './Video/videoCenter2.mp4'
 import productBanner from '../../img/productBanner.png'
 import '../../responsive/responsiveHome.scss'
 import Menu from '../Menu/Menu';
@@ -65,7 +66,7 @@ const NewLists = ({ setAboutRef }) => {
 
     useEffect(() => {
         Aos.init({ duration: 1500 })
-        
+
     }, [])
     useEffect(() => {
         const resizeHandle = () => {
@@ -74,14 +75,17 @@ const NewLists = ({ setAboutRef }) => {
         }
         window.addEventListener('resize', resizeHandle)
 
-        return () =>    {
+        return () => {
             window.removeEventListener('resize', resizeHandle)
         }
     }, [])
+    
+    const videoRef = useRef()
+    
 
     return (
         <div className='new-list-container' id='about' ref={ref}>
-            <Link className='news-list-link' to='news'> NEW LIST </Link>
+            {/* <Link className='news-list-link' to='news'> NEW LIST </Link> */}
             <div className='p-index-container'>
                 <div className='p-index-about'>
                     <img data-aos="fade-left" style={{ width: "100%" }} className='animation-img' src='https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-nu-dep-nhat-the-gioi_113857663.jpg' />
@@ -125,7 +129,9 @@ const NewLists = ({ setAboutRef }) => {
                             <img data-aos="fade-up-right" src="https://cdn.dribbble.com/users/1019864/screenshots/9189989/blue_dribbble.gif" alt="" />
                         </div>
                         <div className='video-center'>
-                            <video data-aos="zoom-in" src={VideoCenter}></video>
+                            <video  controls data-aos="zoom-in" ref={videoRef} src={VideoCenter2}  ></video>
+
+                            {/* <i  ref={playRef}  className='bi bi-play play-video-home'></i> */}
                         </div>
                         <div className='gif-left-bottom'>
                             <img data-aos="zoom-in-left" src="https://media4.giphy.com/media/3oipPTHYlTpCw8oBBy/giphy.gif" alt="" />
@@ -253,7 +259,7 @@ const Product = ({ setProductRef }) => {
             <div className='text-center p-index-product' ref={productRef}>
 
                 <h1 data-aos="zoom-in" className='mb-5'>CLOTHING</h1>
-                <div  data-aos="zoom-in" className='product-introduce mb-5' >
+                <div data-aos="zoom-in" className='product-introduce mb-5' >
                     <h3>1 Product: 20$ <label>(Tax included)</label></h3>
                     <h3>4 Product: 80$ <label>(Tax included)</label></h3>
                 </div >

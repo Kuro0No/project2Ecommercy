@@ -6,13 +6,16 @@ import { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import { CartContext } from '../Cart/CartContext';
 import { headerContext } from '../HeaderContext/HeaderContext';
 import { Menu, Dropdown, Button, Space } from 'antd';
-import { LogoutOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { LogoutOutlined, SettingOutlined, UnorderedListOutlined, CloseOutlined } from '@ant-design/icons';
 import { productContext } from '../../ProductContext/ProductContext';
 import UseDebounce from './UseDebounce';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { storage } from '../../firebase';
 
 
 
-const Header = ({ setOpenActive, openActive }) => {
+
+const Header = ({ setOpenActive, openActive,avatarUser }) => {
   const { SubMenu } = Menu;
   const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
@@ -22,7 +25,6 @@ const Header = ({ setOpenActive, openActive }) => {
   // productContext //////////////////////////////////////////////////////////////////////
   const { products } = useContext(productContext)
 
-
   //Search//////////////////////////////////////////////////////////////////////
   const [searchTerm, setSearchTerm] = useState('')
   const [filterSearch, setFilterSearch] = useState([])
@@ -30,7 +32,7 @@ const Header = ({ setOpenActive, openActive }) => {
   const fieldRef = fielSearchRef?.current
 
   const debounceSearchTerm = UseDebounce(searchTerm, 500)
-  
+
 
   useEffect(() => {
 
@@ -61,8 +63,6 @@ const Header = ({ setOpenActive, openActive }) => {
 
   }
 
-
-
   // dropdown//////////////////////////////////////////////////////////////////////
   const menu = (
     <Menu>
@@ -79,12 +79,17 @@ const Header = ({ setOpenActive, openActive }) => {
   );
 
 
+
+
   return (
 
     <header>
       <div className="container-fluid">
         <div className='tabMenu-header'>
-          <div onClick={() => setOpenActive(!openActive)} ><UnorderedListOutlined /></div>
+          <div onClick={() => setOpenActive(!openActive)} >
+            {openActive ? <CloseOutlined /> : <UnorderedListOutlined />}
+
+          </div>
 
         </div>
         <div className='img-logo-header'>
@@ -158,7 +163,7 @@ const Header = ({ setOpenActive, openActive }) => {
                   <Space wrap>
                     <Dropdown overlay={menu} trigger={['click']}>
                       <Button size='large'>
-                        <i className="bi bi-person"></i>
+                        <img src={ avatarUser || currentUser?.photoURL ||`https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png`} className='avatarUser' alt="" />
                       </Button>
                     </Dropdown>
                   </Space>

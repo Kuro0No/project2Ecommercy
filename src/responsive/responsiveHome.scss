@@ -1,4 +1,4 @@
-@media only screen and (min-width: 360px) and (max-width: 1024px) {
+@media only screen and (min-width: 320px) and (max-width: 1024px) {
     @keyframes borderColor {
         0% {
             background: #bb9494;
@@ -42,6 +42,10 @@
             transform: translateX(0px);
         }
     }
+    .p-index-product-sub-image {
+        margin-top: 20px;
+    }
+
     .p-index-about-description {
         right: 0;
         background: #fff;
@@ -92,6 +96,7 @@
     .banner-container {
         margin-bottom: 80px;
         .p-top {
+            padding: 0 20px;
             display: flex;
             height: 100px;
             align-items: center;
@@ -102,6 +107,7 @@
         .video-pText {
             display: flex;
             justify-content: space-evenly;
+            padding: 0 10px;
 
             .p-left {
                 display: flex;
@@ -118,6 +124,7 @@
                     width: 2px;
                     height: 50px;
                     background: #000;
+                    transform: translateY(-10px);
 
                     // animation: borderColor ease-in 2s infinite;
                 }
@@ -374,6 +381,13 @@
         a {
             text-decoration: none;
             color: #fff;
+            p {
+                transition: ease 0.5s;
+                &:hover {
+                    transform: translateX(30px);
+                    transition: ease 0.5s;
+                }
+            }
         }
     }
     .p-index-contact-right {
@@ -382,6 +396,13 @@
         cursor: none;
         a {
             text-decoration: none;
+            p {
+                transition: ease 0.5s;
+                &:hover {
+                    transform: translateX(30px);
+                    transition: ease 0.5s;
+                }
+            }
         }
     }
     #mouseMoveShop {
@@ -403,6 +424,7 @@
         transform: translate(-45%, -45%);
     }
 }
+
 @media screen and (min-width: 550px) {
     .p-index-shop-container {
         display: flex;
@@ -423,6 +445,8 @@
         .banner-container {
             margin-bottom: 80px;
             .p-top {
+            padding: 0 20px;
+
                 display: flex;
                 height: 100px;
                 align-items: center;
@@ -499,7 +523,7 @@
 
                 .p-index-about {
                     position: relative;
-                    
+
                     .p-index-about-description {
                         width: 600px;
                         position: absolute;
@@ -577,7 +601,6 @@
                         .video-center {
                             video {
                                 position: absolute;
-                                width: 700px;
                                 left: 20%;
                                 top: 42%;
                                 cursor: pointer;
@@ -632,7 +655,6 @@
             height: 0;
         }
     }
-
 
     .p-index-product {
         position: relative;
@@ -847,5 +869,66 @@
         pointer-events: none;
         border-radius: 50%;
         transform: translate(-45%, -45%);
+    }
+}
+
+@media screen and (max-width: 740px) {
+    @keyframes scrollClip {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 200px;
+        }
+        100% {
+            height: 0;
+        }
+    }
+    .scroll-clip {
+        animation: scrollClip 2.5s ease-in infinite;
+    }
+}
+@media screen and (max-width: 520px) {
+    @keyframes scrollClip {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 150px;
+        }
+        100% {
+            height: 0;
+        }
+    }
+    .scroll-clip {
+        animation: scrollClip 2.5s ease-in infinite;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    @keyframes scrollClip {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 100px;
+        }
+        100% {
+            height: 0;
+        }
+    }
+    .scroll-clip {
+        animation: scrollClip 2.5s ease-in infinite;
+    }
+}
+
+.video-center {
+    video {
+        cursor: pointer;
+        width: 55%;
+
     }
 }

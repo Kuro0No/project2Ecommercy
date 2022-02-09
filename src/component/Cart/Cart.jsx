@@ -124,12 +124,12 @@ const Cart = () => {
 
                             {!currentUser && dataqty === 0 &&
                                 <tr>
-                                    <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
+                                    <td colSpan='4' style={{fontSize: '20px'}}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
                             {currentUser && dataUserCart.currentUserCart?.qty === 0 &&
                                 <tr>
-                                    <td colSpan='4'>Empty Cart! <Link to='/product'>Shop now!</Link></td>
+                                    <td colSpan='4' style={{fontSize: '20px'}}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
 
@@ -138,8 +138,8 @@ const Cart = () => {
                                     return <tr key={index} className="align-middle cart-tabel">
                                         <td scope="row" className='cart-img col-6'>
                                             <div className='d-flex align-items-center   '>
-                                                <img src={userCart.image} alt="" />
-                                                <label>{userCart.title}</label>
+                                                <img  src={userCart.image} alt="" />
+                                                <label className='title-cart-group'>{userCart.title}</label>
                                             </div>
                                         </td>
                                         <td >
@@ -151,8 +151,9 @@ const Cart = () => {
 
                                         </td>
                                         <td>${Math.floor(Math.floor(userCart.price) * userCart.qty)} </td>
-                                        <td>
-                                            <button onClick={() => deleteCart(userCart)} className='btn btn-danger'>Delete</button>
+                                        <td className='trash-del'>
+                                            {/* <button onClick={() => deleteCart(userCart)} className='btn btn-danger'>Delete</button> */}
+                                            <i onClick={() => deleteCart(userCart)} className='bi bi-trash' ></i>
 
                                         </td>
                                     </tr>
@@ -177,7 +178,9 @@ const Cart = () => {
                                         </td>
                                         <td>{cart.price * cart.qty} </td>
                                         <td>
-                                            <button onClick={() => deleteCart(cart)} className='btn btn-danger'>Delete</button>
+                                            {/* <button onClick={() => deleteCart(cart)} className='btn btn-danger'>Delete</button> */}
+
+                                            <i onClick={() => deleteCart(cart)} className=' bi bi-trash ' ></i>
 
                                         </td>
                                     </tr>

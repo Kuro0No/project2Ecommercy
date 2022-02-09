@@ -5,6 +5,7 @@ import { db } from '../firebase'
 import { doc, setDoc,  } from "firebase/firestore"; 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from '../firebase';
+import { toast } from 'react-toastify';
 import { updateProfile } from 'firebase/auth';
 
 
@@ -42,7 +43,7 @@ export default function AuthProvider({ children }) {
             photoURL
         })
         // setLoading(false)
-        alert('success')
+        
 
     }
 
