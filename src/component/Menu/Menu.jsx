@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, { useEffect, useRef, useState } from 'react';
 import './Menu.scss'
 import { Link } from 'react-router-dom'
 import '../../responsive/responsiveMenu.scss'
