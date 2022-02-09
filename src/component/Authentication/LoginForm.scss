@@ -1,6 +1,8 @@
 .loginDiv {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
+    padding: 0 20px;
+
     input {
         border-radius: 10px;
     }

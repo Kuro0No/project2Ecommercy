@@ -1,4 +1,4 @@
-import React, {useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CartContext } from './CartContext';
 import './Cart.scss'
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const Cart = () => {
 
     const currentUserCart = useContext(dbContext).currentUserCart.shoppingCart
     const dataUserCart = useContext(dbContext)
-    
+
 
     const increase = (cart, id) => {
         if (!currentUser) dispath({ type: 'increaseProduct', id: cart.id, cart: cart })
@@ -121,12 +121,12 @@ const Cart = () => {
 
                             {!currentUser && dataqty === 0 &&
                                 <tr>
-                                    <td colSpan='4' style={{fontSize: '20px'}}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
+                                    <td colSpan='4' style={{ fontSize: '20px' }}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
                             {currentUser && dataUserCart.currentUserCart?.qty === 0 &&
                                 <tr>
-                                    <td colSpan='4' style={{fontSize: '20px'}}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
+                                    <td colSpan='4' style={{ fontSize: '20px' }}>Empty Cart! <Link to='/product'>Shop now!</Link></td>
                                 </tr>
                             }
 
@@ -135,7 +135,7 @@ const Cart = () => {
                                     return <tr key={index} className="align-middle cart-tabel">
                                         <td scope="row" className='cart-img col-6'>
                                             <div className='d-flex align-items-center   '>
-                                                <img  src={userCart.image} alt="" />
+                                                <img src={userCart.image} alt="" />
                                                 <label className='title-cart-group'>{userCart.title}</label>
                                             </div>
                                         </td>
@@ -162,7 +162,7 @@ const Cart = () => {
                                         <td scope="row" className='cart-img col-6'>
                                             <div className='d-flex align-items-center   '>
                                                 <img src={cart.image} alt="" />
-                                                <label>{cart.title}</label>
+                                                <label className='title-cart-group'>{cart.title}</label>
                                             </div>
                                         </td>
                                         <td >
@@ -184,11 +184,29 @@ const Cart = () => {
 
                                 })
 
+
+
                             }
-
-
                         </tbody>
+
                     </table>
+                    {(currentUser && dataUserCart.currentUserCart.qty > 0) || dataqty > 0 &&
+
+                        <div className='payment-button'>
+                            <div>
+                                <div>
+                                    Total product: {currentUser ? (dataUserCart.currentUserCart.qty) : (dataqty)}
+                                </div>
+                                <div>
+                                    Total price: {currentUser ? (dataUserCart.currentUserCart.totalPrice) : (datatotalPrice)}
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    }
                 </div>
                 <div className="card text-white bg-danger mb-3 col-3 cardPayment" >
                     <h3 className="card-header text-center">DETAIL</h3>
@@ -206,7 +224,7 @@ const Cart = () => {
             </div>
         </div>
 
-    </div>;
+    </div >;
 };
 
 export default Cart;
