@@ -15,7 +15,7 @@ import { storage } from '../../firebase';
 
 
 
-const Header = ({ setOpenActive, openActive,avatarUser }) => {
+const Header = ({ setOpenActive, openActive, avatarUser }) => {
   const { SubMenu } = Menu;
   const { currentUser, logOut } = useAuth()
   const data = useContext(CartContext)
@@ -30,6 +30,8 @@ const Header = ({ setOpenActive, openActive,avatarUser }) => {
   const [filterSearch, setFilterSearch] = useState([])
   const fielSearchRef = useRef()
   const fieldRef = fielSearchRef?.current
+  const searchHeaderRef = useRef()
+
 
   const debounceSearchTerm = UseDebounce(searchTerm, 500)
 
@@ -43,6 +45,7 @@ const Header = ({ setOpenActive, openActive,avatarUser }) => {
     )
     if (searchTerm == '') {
       setFilterSearch([])
+      fieldRef && (fieldRef.style.display = 'none')
     }
     if (searchTerm.length == 0) {
       fieldRef && (fieldRef.style.display = 'none')
@@ -53,12 +56,27 @@ const Header = ({ setOpenActive, openActive,avatarUser }) => {
 
   }, [debounceSearchTerm])
 
-  const blurSearch = () => {
-    fieldRef && (fieldRef.style.display = 'none')
-  }
+
   const focusSearch = () => {
     if (searchTerm.length > 0) {
       return fieldRef && (fieldRef.style.display = 'block')
+    }
+
+  }
+  useEffect(() => {
+    document.addEventListener('click', isClickOutside)
+    return () => {
+      document.removeEventListener('click', isClickOutside)
+
+    }
+  }, [searchTerm])
+  const isClickOutside = (e) => {
+    if (searchHeaderRef.current.contains(e.target)) {
+     return searchTerm.length > 0 && fieldRef && (fieldRef.style.display = 'block')
+    }
+    if(fieldRef) {
+
+      (fieldRef.style.display = 'none')
     }
 
   }
@@ -104,9 +122,9 @@ const Header = ({ setOpenActive, openActive,avatarUser }) => {
 
         </div>
 
-
-        <div className='search-header'>
-          <input value={searchTerm} onBlur={blurSearch} onFocus={focusSearch} onChange={e => setSearchTerm(e.target.value)} type="text" placeholder='Search smt....' />
+        {/* onBlur={blurSearch} */}
+        <div ref={searchHeaderRef} className='search-header'>
+          <input value={searchTerm} onFocus={focusSearch} onChange={e => setSearchTerm(e.target.value)} type="text" placeholder='Search smt....' />
           <div ><i className="bi bi-search"></i></div>
 
           <div className='field-Search' ref={fielSearchRef}>
@@ -163,7 +181,7 @@ const Header = ({ setOpenActive, openActive,avatarUser }) => {
                   <Space wrap>
                     <Dropdown overlay={menu} trigger={['click']}>
                       <Button size='large'>
-                        <img src={ avatarUser || currentUser?.photoURL ||`https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png`} className='avatarUser' alt="" />
+                        <img src={avatarUser || currentUser?.photoURL || `https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png`} className='avatarUser' alt="" />
                       </Button>
                     </Dropdown>
                   </Space>

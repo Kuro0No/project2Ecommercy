@@ -1,5 +1,4 @@
-import React from 'react';
-import { useContext, useState } from 'react/cjs/react.development';
+import React, {useContext, useState } from 'react';
 import { CartContext } from './CartContext';
 import './Cart.scss'
 import { Link } from 'react-router-dom';
@@ -8,8 +7,6 @@ import { toast } from 'react-toastify';
 import { db } from '../../firebase';
 import { dbContext } from '../../DbContext/dbContext';
 import { doc, setDoc, updateDoc, arrayRemove } from "firebase/firestore";
-
-
 
 
 const Cart = () => {
