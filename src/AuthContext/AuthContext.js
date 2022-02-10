@@ -2,11 +2,13 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase'
 import { db } from '../firebase'
-import { doc, setDoc,  } from "firebase/firestore"; 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { collection, doc, setDoc,  } from "firebase/firestore"; 
+import { getDownloadURL, ref, uploadBytes,serverTimestamp  } from 'firebase/storage'
 import { storage } from '../firebase';
 import { toast } from 'react-toastify';
 import { updateProfile } from 'firebase/auth';
+import { query, where, getDocs } from "firebase/firestore";
+
 
 
 const AuthContext = createContext()
@@ -33,7 +35,22 @@ export default function AuthProvider({ children }) {
      function login(email, password) {
         return  auth.signInWithEmailAndPassword(email, password)
     }
-    
+    async function comment(data) {
+        const {cmt,id} = data
+        const setCmt = setDoc(collection(db, "posts", id), {
+            comment: cmt,
+            userName: currentUser?.displayName, 
+            // currentTime: serverTimestamp()
+          });
+          const q = query(collection(db, 'posts'))
+          const querySnapshot = await getDocs(q)
+          const queryData = querySnapshot.docs.map((detail) => ({
+               ...detail.data(),
+               
+          })) 
+          console.log(queryData)
+    }
+
     async function upload (file, currentUser) {
         const fileRef =  ref(storage, `image/${currentUser?.uid}.png` ) 
         // setLoading(true)
@@ -64,7 +81,8 @@ export default function AuthProvider({ children }) {
         register,
         login,
         logOut,
-        upload
+        upload,
+        comment
 
 
     }

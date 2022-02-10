@@ -12,7 +12,7 @@ import { Rate } from 'antd';
 import { ShoppingCartOutlined, CheckCircleOutlined, FieldTimeOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons';
 import { dbContext } from "../../DbContext/dbContext";
 import { headerContext } from "../HeaderContext/HeaderContext";
-
+import Comments from "./Comments";
 
 
 const ProductDetail = () => {
@@ -55,7 +55,7 @@ const ProductDetail = () => {
                         shoppingCart: [productDetail, ...dbCart],
                         qty: dbUserCart.qty + 1,
                         totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)),
-                        passwordUser:dbUserCart.passwordUser,
+                        passwordUser: dbUserCart.passwordUser,
                         avatar: dbUserCart.avatar
                     });
                 toast.success('Add successfully!', {
@@ -71,6 +71,7 @@ const ProductDetail = () => {
 
 
     return <div>
+
         <div className="d-flex productDetail">
             {loading &&
                 <>
@@ -152,6 +153,9 @@ const ProductDetail = () => {
                     </div>
                 </>
             }
+        </div>
+        <div className="comment">
+            <Comments productID={id}/>
         </div>
     </div>;
 };

@@ -1,0 +1,45 @@
+.cmt-container {
+    padding-left: 50px;
+    width: 500px;
+    .willCmt{
+        width: calc(100% - 50px);
+    }
+    .cmt-content-parent {
+        display: flex;
+
+        .comment-content {
+            padding-left: 20px;
+            padding-bottom: 50px;
+            textarea {
+                min-height: 100px;
+                max-height: 100px;
+                width: 100%;
+
+                padding: 5px 10px;
+                border-radius: 10px;
+                outline: none;
+            }
+        }
+    }
+}
+.img-user {
+    img {
+        width: 50px;
+
+        height: 50px;
+    }
+}
+.totalCmt {
+    display: flex;
+    .cmt-user-container{
+        padding-left: 20px;
+    }
+    .cmt-user{
+        width: 600px;
+        background: #fff;
+        min-height: 50px;
+        p{
+            padding: 10px;
+        }
+    }
+}
