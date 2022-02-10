@@ -1,13 +1,12 @@
 .productDetail {
-    height: 800px;
+    // height: 800px;
     .left {
-        padding-left: 50px;
         margin: 0 auto;
         img {
             display: flex;
             margin: 0 auto;
-            height: 500px;
-            width: 70%;
+            max-height: 800px;
+            width: 95%;
             object-fit: fill;
         }
     }
@@ -30,15 +29,15 @@
         }
     }
 }
+.count-review {
+    transform: translateY(5px);
+}
 
 .anticon-shopping-cart {
     transform: translateY(-6px);
 }
 .desciption-productDetail {
     color: #58595b;
-    p {
-        font-size: 18px;
-    }
 }
 .price-productDetail {
     h4 {
@@ -56,19 +55,160 @@
         font-size: 20px;
     }
 }
-.policy {
-    div {
-        font-size: 16px;
-        color: #58595b;
-        padding: 5px 0;
-        span{
-            font-size: 20px;
-            transform: translateY(-6px);
-            margin: 0 5px;
+
+@media screen and (min-width: 1024px) {
+    .right {
+        .title-productDetail {
+            h1 {
+                font-size: 30px;
+            }
+        }
+        .star-productDetail {
+            span {
+                font-size: 22px;
+            }
+        }
+        .price-productDetail {
+            h4 {
+                font-size: 22px;
+            }
+        }
+        .desciption-productDetail {
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .policy {
+            div {
+                font-size: 16px;
+                color: #58595b;
+                padding: 5px 0;
+                span {
+                    font-size: 20px;
+                    transform: translateY(-6px);
+                    margin: 0 5px;
+                }
+            }
+            .isStock {
+                font-size: 20px;
+                color: #58595b;
+            }
         }
     }
-    .isStock {
-        font-size: 20px;
-        color: #58595b;
+}
+
+@media screen and (max-width: 1024px) {
+    .right {
+        .title-productDetail {
+            h1 {
+                font-size: 25px;
+            }
+        }
+        .star-productDetail {
+            span {
+                font-size: 17px;
+            }
+        }
+        .price-productDetail {
+            h4 {
+                font-size: 17px;
+            }
+        }
+        .desciption-productDetail {
+            p {
+                font-size: 15x;
+            }
+        }
+        // button {
+        // }
+        .policy {
+            div {
+                font-size: 16px;
+                color: #58595b;
+                padding: 5px 0;
+                span {
+                    font-size: 20px;
+                    transform: translateY(-6px);
+                    margin: 0 5px;
+                }
+            }
+            .isStock {
+                font-size: 20px;
+                color: #58595b;
+            }
+        }
     }
 }
+
+@media screen and (max-width: 752px) {
+    .right {
+        .title-productDetail {
+            h1 {
+                font-size: 20px;
+            }
+        }
+        .star-productDetail {
+            span {
+                font-size: 17px;
+            }
+        }
+        .price-productDetail {
+            h4 {
+                font-size: 17px;
+            }
+        }
+        .desciption-productDetail {
+            p {
+                font-size: 15x;
+            }
+        }
+        button {
+            font-size: inherit;
+        }
+        .buttonDetail {
+            padding: 5px 0px !important;
+        }
+
+        .policy {
+            div {
+                font-size: 12.4px;
+                color: #58595b;
+                padding: 5px 0;
+                span {
+                    font-size: 15px;
+                    transform: translateY(-6px);
+                    margin: 0 5px;
+                }
+            }
+            .isStock {
+                label {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+
+    
+}
+
+
+
+@media screen and (max-width: 565px) {
+    .left {
+        margin: 0;
+        width: 100%!important;
+        padding-bottom: 30px;
+    }
+    .productDetail {
+        display: block!important;
+    }
+    .right{
+        width: 100%!important;
+        padding: 0 15px;
+    }
+    .button {
+        font-size: large;
+    }
+}
+

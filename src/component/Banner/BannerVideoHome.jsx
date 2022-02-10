@@ -153,7 +153,7 @@ const Product = ({ setProductRef }) => {
     const [trousers, setTrousers] = useState('TROUSERS')
     const [shoes, setShoes] = useState('SHOES')
     const [jacket, setJacket] = useState('JACKET')
-    const [size, setSize] = useState(Math.round(window.innerWidth / 30))
+    const [size, setSize] = useState(Math.round(window.innerWidth / 40))
     const [witdh, setWidth] = useState(window.innerWidth)
 
     useEffect(() => {

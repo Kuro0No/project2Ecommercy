@@ -162,13 +162,13 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
                 </i>
                 <div className='cart-count'>
                   <span className=''>
-                    {currentUser ? (headerState ? headerState.headerState.qty : 0) : (data.qty > 0 ? data.qty : 0)}
+                    {currentUser ? (headerState ? headerState.headerState?.qty : 0) : (data.qty > 0 ? data.qty : 0)}
                   </span>
                 </div>
               </div>
               <div className='textCart'>
                 <h5>Cart</h5>
-                <span>{currentUser ? ((Math.floor(headerState.headerState.totalPrice)) || 0) : (data.totalPrice > 0 ? (Math.floor(data.totalPrice)) : 0)}$</span>
+                <span>{currentUser ? ((Math.floor(headerState.headerState?.totalPrice)) || 0) : (data.totalPrice > 0 ? (Math.floor(data.totalPrice)) : 0)}$</span>
               </div>
             </div>
           </Link>

@@ -12,7 +12,7 @@ import { Rate } from 'antd';
 import { ShoppingCartOutlined, CheckCircleOutlined, FieldTimeOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons';
 import { dbContext } from "../../DbContext/dbContext";
 import { headerContext } from "../HeaderContext/HeaderContext";
-import Comments from "./Comments";
+
 
 
 const ProductDetail = () => {
@@ -55,7 +55,7 @@ const ProductDetail = () => {
                         shoppingCart: [productDetail, ...dbCart],
                         qty: dbUserCart.qty + 1,
                         totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)),
-                        passwordUser: dbUserCart.passwordUser,
+                        passwordUser:dbUserCart.passwordUser,
                         avatar: dbUserCart.avatar
                     });
                 toast.success('Add successfully!', {
@@ -71,7 +71,6 @@ const ProductDetail = () => {
 
 
     return <div>
-
         <div className="d-flex productDetail">
             {loading &&
                 <>
@@ -113,7 +112,7 @@ const ProductDetail = () => {
                                         <Rate allowHalf disabled value={productDetail.rating.rate} />
                                     </span>
                                 </div>
-                                <div>
+                                <div className="count-review">
 
                                     <span >{productDetail.rating.count} review</span>
                                 </div>
@@ -125,7 +124,7 @@ const ProductDetail = () => {
                             <div className="desciption-productDetail">
                                 <p > {productDetail.description}</p>
                             </div>
-                            <div className="py-3">
+                            <div className="py-3 buttonDetail">
                                 <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}><ShoppingCartOutlined />   Add To Cart</button>
                                 <button type="button" onClick={buyAtProductDetail} className="btn btn-outline-danger btn-lg">Buy Now!</button>
                             </div>
@@ -135,7 +134,7 @@ const ProductDetail = () => {
                                 </div>
                                 <div>
                                     <FieldTimeOutlined />
-                                    <label>Order by 12pm EST to ship same business day</label>
+                                    <label>Order by 12pm to ship same business day</label>
                                 </div>
                                 <div>
                                     <CarOutlined />
@@ -153,9 +152,6 @@ const ProductDetail = () => {
                     </div>
                 </>
             }
-        </div>
-        <div className="comment">
-            <Comments productID={id}/>
         </div>
     </div>;
 };

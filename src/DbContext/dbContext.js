@@ -5,7 +5,6 @@ import { useAuth } from "../AuthContext/AuthContext";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../component/Cart/CartContext";
 
-
 export const dbContext = createContext()
 
 const DbContextProvider = ({ children }) => {
