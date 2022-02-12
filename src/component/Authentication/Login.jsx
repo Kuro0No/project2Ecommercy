@@ -10,7 +10,7 @@ import { Button } from 'antd';
 
 
 const Login = () => {
-    const { login } = useAuth()
+    const { login,currentUser } = useAuth()
 
     const [loading, setLoading] = useState(false)
     const [emailValue, setEmailValue] = useState('')
@@ -29,6 +29,12 @@ const Login = () => {
         setLoading(false)
     }
 
+    useEffect(() => {
+
+        return () => {
+            handleSubmitLogin()
+        }
+    },[currentUser])
 
 
 

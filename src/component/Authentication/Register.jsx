@@ -1,7 +1,7 @@
 import Header from "../Header/Header";
 import './Register.scss'
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect } from "react";
 import { useAuth } from '../../AuthContext/AuthContext';
 import {toast} from 'react-toastify'
 
@@ -31,6 +31,14 @@ const Register = () => {
        currentUser && navigate('/product')
         
     }
+
+    useEffect(() => {
+
+        return () => {
+            handleSignUpSubmit()
+        }
+    },[])
+
 
     return (
         <>

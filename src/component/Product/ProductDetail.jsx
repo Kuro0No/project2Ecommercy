@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { productContext } from "../../ProductContext/ProductContext";
 import { CartContext } from "../Cart/CartContext";
@@ -12,7 +12,8 @@ import { Rate } from 'antd';
 import { ShoppingCartOutlined, CheckCircleOutlined, FieldTimeOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons';
 import { dbContext } from "../../DbContext/dbContext";
 import { headerContext } from "../HeaderContext/HeaderContext";
-
+import { Button } from 'antd';
+import { collection, query, where, getDocs, docs} from "firebase/firestore";
 
 
 const ProductDetail = () => {
@@ -55,7 +56,7 @@ const ProductDetail = () => {
                         shoppingCart: [productDetail, ...dbCart],
                         qty: dbUserCart.qty + 1,
                         totalPrice: (Math.floor(dbUserCart.totalPrice) + Math.floor(productDetail.price)),
-                        passwordUser:dbUserCart.passwordUser,
+                        passwordUser: dbUserCart.passwordUser,
                         avatar: dbUserCart.avatar
                     });
                 toast.success('Add successfully!', {
@@ -67,6 +68,26 @@ const ProductDetail = () => {
 
     const buyAtProductDetail = () => {
         if (!currentUser) { toast.warn('You need to login to buy this product!', { autoClose: 1500 }) }
+    }
+    /// cmt
+    const [willCmt, setWillCmt] = useState('')
+
+    const handleCmt =async () => {
+        // const q = query(collection(db, "products"));
+
+        // const querySnapshot = await getDocs(q);
+        // const queryData = querySnapshot.docs.map((doc) => {
+        //     console.log(doc.id, " => ", doc.data());
+        // });
+        //  queryData.map(async (v,id) => {
+            await setDoc(doc(db, `products/product-${id}/comment`, currentUser?.displayName, {
+                comment: willCmt,
+                avatar: currentUser?.photoURL,
+                userName: currentUser?.displayName
+            }))
+            
+        // })
+        
     }
 
 
@@ -152,6 +173,36 @@ const ProductDetail = () => {
                     </div>
                 </>
             }
+        </div>
+
+        <div className='cmt-container'>
+            <div className='will-cmt'>
+                <div className='will-cmt'>
+                    <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-avatar-dep-21.jpg" alt="" />
+                </div>
+                <div>
+
+                    <div >
+                        <textarea className='will-my-cmt' value={willCmt} onChange={(e) => setWillCmt(e.target.value)} name="" id="" ></textarea>
+                    </div>
+
+                    <Button onClick={handleCmt} type="primary" shape="round" >
+                        Send
+                    </Button>
+                </div>
+            </div>
+            <div className='other-cmt'>
+                <div className='other-a-user-cmt'>
+
+                    <div className='other-user-cmt'>
+                        <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-avatar-dep-21.jpg" alt="" />
+
+                    </div>
+                    <div className='content-other-cmt'>
+                        aaaaaa
+                    </div>
+                </div>
+            </div>
         </div>
     </div>;
 };
