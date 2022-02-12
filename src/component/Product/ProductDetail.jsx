@@ -12,8 +12,9 @@ import { Rate } from 'antd';
 import { ShoppingCartOutlined, CheckCircleOutlined, FieldTimeOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons';
 import { dbContext } from "../../DbContext/dbContext";
 import { headerContext } from "../HeaderContext/HeaderContext";
-import { Button } from 'antd';
-import { collection, query, where, getDocs, docs} from "firebase/firestore";
+
+import Comments from "./Comments";
+
 
 
 const ProductDetail = () => {
@@ -70,32 +71,14 @@ const ProductDetail = () => {
         if (!currentUser) { toast.warn('You need to login to buy this product!', { autoClose: 1500 }) }
     }
     /// cmt
-    const [willCmt, setWillCmt] = useState('')
-
-    const handleCmt =async () => {
-        // const q = query(collection(db, "products"));
-
-        // const querySnapshot = await getDocs(q);
-        // const queryData = querySnapshot.docs.map((doc) => {
-        //     console.log(doc.id, " => ", doc.data());
-        // });
-        //  queryData.map(async (v,id) => {
-            await setDoc(doc(db, `products/product-${id}/comment`, currentUser?.displayName, {
-                comment: willCmt,
-                avatar: currentUser?.photoURL,
-                userName: currentUser?.displayName
-            }))
-            
-        // })
-        
-    }
+    
 
 
     return <div>
         <div className="d-flex productDetail">
             {loading &&
                 <>
-                    <div className="col-6 left"><img src="https://semantic-ui.com/images/wireframe/square-image.png" className="card-img-top" alt="..." /></div>
+                    <div className="col-6 left"><img src="https://www.webthietke.vn/wp-content/uploads/2021/09/5ad047a18772cf0488a908d98942f9bf.gif" className="card-img-top" alt="..." /></div>
                     <div className="col-6 right">
 
                         <div className="card-body">
@@ -175,35 +158,7 @@ const ProductDetail = () => {
             }
         </div>
 
-        <div className='cmt-container'>
-            <div className='will-cmt'>
-                <div className='will-cmt'>
-                    <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-avatar-dep-21.jpg" alt="" />
-                </div>
-                <div>
-
-                    <div >
-                        <textarea className='will-my-cmt' value={willCmt} onChange={(e) => setWillCmt(e.target.value)} name="" id="" ></textarea>
-                    </div>
-
-                    <Button onClick={handleCmt} type="primary" shape="round" >
-                        Send
-                    </Button>
-                </div>
-            </div>
-            <div className='other-cmt'>
-                <div className='other-a-user-cmt'>
-
-                    <div className='other-user-cmt'>
-                        <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-avatar-dep-21.jpg" alt="" />
-
-                    </div>
-                    <div className='content-other-cmt'>
-                        aaaaaa
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Comments productID={id}/>
     </div>;
 };
 

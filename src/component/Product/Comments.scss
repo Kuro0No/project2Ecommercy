@@ -1,45 +1,38 @@
 .cmt-container {
-    padding-left: 50px;
-    width: 500px;
-    .willCmt{
-        width: calc(100% - 50px);
-    }
-    .cmt-content-parent {
+    padding: 20px;
+    .will-cmt {
         display: flex;
-
-        .comment-content {
-            padding-left: 20px;
-            padding-bottom: 50px;
-            textarea {
-                min-height: 100px;
-                max-height: 100px;
-                width: 100%;
-
-                padding: 5px 10px;
-                border-radius: 10px;
-                outline: none;
-            }
+        padding-right: 20px;
+        padding-bottom: 50px;
+        img {
+            width: 70px;
+            height: 70px;
+        }
+        textarea {
+            width: 500px;
+            min-height: 100px;
+            max-height: 100px;
+            padding: 10px;
         }
     }
-}
-.img-user {
-    img {
-        width: 50px;
-
-        height: 50px;
-    }
-}
-.totalCmt {
-    display: flex;
-    .cmt-user-container{
-        padding-left: 20px;
-    }
-    .cmt-user{
-        width: 600px;
-        background: #fff;
-        min-height: 50px;
-        p{
+    .other-cmt {
+        .other-a-user-cmt {
+            display: flex;
+            padding-bottom: 15px;
+        }
+        .other-user-cmt {
+            padding-right: 20px;
+            img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        .content-other-cmt {
+            background: #fff;
+            width: 500px;
+            max-height: 70px ;
             padding: 10px;
+
         }
     }
 }

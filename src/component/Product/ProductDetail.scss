@@ -59,43 +59,7 @@
     padding-bottom: 50px;
 }
 
-.cmt-container {
-    padding: 20px;
-    .will-cmt {
-        display: flex;
-        padding-right: 20px;
-        padding-bottom: 50px;
-        img {
-            width: 70px;
-            height: 70px;
-        }
-        textarea {
-            width: 500px;
-            min-height: 100px;
-            max-height: 100px;
-            padding: 10px;
-        }
-    }
-    .other-cmt {
-        .other-a-user-cmt {
-            display: flex;
-        }
-        .other-user-cmt {
-            padding-right: 20px;
-            img {
-                width: 70px;
-                height: 70px;
-            }
-        }
-        .content-other-cmt {
-            background: #fff;
-            width: 500px;
-            max-height: 70px ;
-            padding: 10px;
 
-        }
-    }
-}
 
 @media screen and (min-width: 1024px) {
     .right {

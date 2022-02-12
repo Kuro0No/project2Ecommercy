@@ -19,7 +19,7 @@ export default function AuthProvider({ children }) {
 
     async function register(email, password, username) {
         const res = await auth.createUserWithEmailAndPassword(email, password)
-        res.user.updateProfile({ displayName: username })
+        res.user.updateProfile({ displayName: username, photoURL: 'https://www.nicepng.com/png/detail/207-2071257_computer-icons-avatar-youtube-download-share-icon-icone.png' })
         setDoc(doc(db, "user", res.user.uid), {
             uid:res.user.uid,
             qty:0,

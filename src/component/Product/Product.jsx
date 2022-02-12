@@ -79,7 +79,7 @@ const Product = () => {
                             return (
                                 <div key={number} className="col-6 col-sm-6  col-md-4 pb-3 ">
                                     <div className="card " aria-hidden="true">
-                                        <img src="https://semantic-ui.com/images/wireframe/square-image.png" className="card-img-top card-img-top products-image" alt="..." />
+                                        <img src="https://www.webthietke.vn/wp-content/uploads/2021/09/5ad047a18772cf0488a908d98942f9bf.gif" className="card-img-top card-img-top products-image" alt="..." />
                                         <div className="card-body">
                                             <h5 className="card-title placeholder-glow products-title">
                                                 <span className="placeholder col-6"></span>
