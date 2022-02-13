@@ -6,6 +6,8 @@ import '../../responsive/responsiveMenu.scss'
 
 const Menu = ({ abouteRef, productRef }) => {
     const menuShowRef = useRef()
+    const menuRef = useRef()
+
     const [active, setActive] = useState(false)
     const [menuText, setMenuText] = useState(true)
     const handleAboutScroll = () => {
@@ -21,18 +23,33 @@ const Menu = ({ abouteRef, productRef }) => {
         setActive(false)
     }
 
+    const spanRef =useRef()
 
 
     useEffect(() => {
         const handleScrollMenu = () => {
-            if (window.scrollY >= 100) {
-                menuShowRef.current.style.width = '210px'
-                menuShowRef.current.style.height = '100px'
-            }
-            else {
-                menuShowRef.current.style.width = '300px'
-                menuShowRef.current.style.height = '150px'
+            if (window.innerWidth >= 755) {
+                if (window.scrollY >= 100) {
+                    menuShowRef.current.style.width = '210px'
+                    menuShowRef.current.style.height = '100px'
+                }
+                else {
+                    menuShowRef.current.style.width = '260px'
+                    menuShowRef.current.style.height = '150px'
 
+                }
+            }
+            if (window.innerWidth < 755) {
+                menuRef.current.style.fontSize = '22px'
+                if (window.scrollY >= 100) {
+                    menuShowRef.current.style.width = '120px'
+                menuShowRef.current.style.height = '60px'
+                }
+                else {
+                    menuShowRef.current.style.width = '150px'
+                menuShowRef.current.style.height = '70px'
+
+                }
             }
         }
         window.addEventListener('scroll', handleScrollMenu)
@@ -68,10 +85,10 @@ const Menu = ({ abouteRef, productRef }) => {
 
         <div className={`menu-show ${active ? 'active' : ''}`} ref={menuShowRef} onMouseMove={menuMouseMove} onMouseLeave={menuMouseLeave} >
             <div className='mouse-move' ref={mousemoveRef}></div>
-            <div className='menu justify-content-center' onClick={active ? handleCancleMenu : handleShowMenu}>
+            <div ref={menuRef} className=' menu justify-content-center' onClick={active ? handleCancleMenu : handleShowMenu}>
 
 
-                <span> {menuText && 'MENU'}</span>
+                <span ref={spanRef}> {menuText && 'MENU'}</span>
                 <div className={`${active ? 'active-timeX' : ''}`}>
                     {active ? <i className='bi bi-x-lg' onClick={handleCancleMenu}></i> : <i className='bi bi-list'></i>}
                 </div>
@@ -92,7 +109,7 @@ const Menu = ({ abouteRef, productRef }) => {
                         <li>
                             <Link to='' onClick={handleProductScroll}>--- PRODUCT</Link>
                         </li>
-                        
+
                         <li>
                             <Link to='/product' onClick={() => window.scrollTo(0, 0)}>SHOP</Link>
                         </li>
