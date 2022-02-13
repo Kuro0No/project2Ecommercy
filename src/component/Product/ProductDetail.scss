@@ -1,5 +1,5 @@
 .productDetail {
-    max-height: 800px;
+    // max-height: 800px;
     .left {
         margin: 0 auto;
         img {
@@ -59,9 +59,11 @@
     padding-bottom: 50px;
 }
 
-
-
 @media screen and (min-width: 1024px) {
+    .productDetail {
+        max-height: 800px;
+    }
+
     .right {
         .title-productDetail {
             h1 {
@@ -196,6 +198,7 @@
 }
 
 @media screen and (max-width: 565px) {
+    
     .left {
         margin: 0;
         width: 100% !important;

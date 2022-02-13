@@ -71,95 +71,102 @@ const ProductDetail = () => {
         if (!currentUser) { toast.warn('You need to login to buy this product!', { autoClose: 1500 }) }
     }
     /// cmt
+
+
+
+    return <>
     
+        <div>
+            <div>
 
 
-    return <div>
-        <div className="d-flex productDetail">
-            {loading &&
-                <>
-                    <div className="col-6 left"><img src="https://www.webthietke.vn/wp-content/uploads/2021/09/5ad047a18772cf0488a908d98942f9bf.gif" className="card-img-top" alt="..." /></div>
-                    <div className="col-6 right">
+                <div className="d-flex productDetail">
+                    {loading &&
+                        <>
+                            <div className="col-6 left"><img src="https://www.webthietke.vn/wp-content/uploads/2021/09/5ad047a18772cf0488a908d98942f9bf.gif" className="card-img-top" alt="..." /></div>
+                            <div className="col-6 right">
 
-                        <div className="card-body">
-                            <h5 className="card-title placeholder-glow">
-                                <span className="placeholder col-6"></span>
-                            </h5>
-                            <p className="card-text placeholder-glow">
-                                <span className="placeholder col-7"></span>
-                                <span className="placeholder col-4"></span>
-                                <span className="placeholder col-4"></span>
-                                <span className="placeholder col-6"></span>
-                                <span className="placeholder col-8"></span>
-                            </p>
-                            <div className="d-flex">
+                                <div className="card-body">
+                                    <h5 className="card-title placeholder-glow">
+                                        <span className="placeholder col-6"></span>
+                                    </h5>
+                                    <p className="card-text placeholder-glow">
+                                        <span className="placeholder col-7"></span>
+                                        <span className="placeholder col-4"></span>
+                                        <span className="placeholder col-4"></span>
+                                        <span className="placeholder col-6"></span>
+                                        <span className="placeholder col-8"></span>
+                                    </p>
+                                    <div className="d-flex">
 
-                                <a href="#" tabIndex="-1" className="btn btn-primary disabled placeholder col-3 me-5"></a>
-                                <a href="#" tabIndex="-1" className="btn btn-primary disabled placeholder col-3"></a>
+                                        <a href="#" tabIndex="-1" className="btn btn-primary disabled placeholder col-3 me-5"></a>
+                                        <a href="#" tabIndex="-1" className="btn btn-primary disabled placeholder col-3"></a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </>}
-            {products.length > 0 &&
-                <>
-                    <div className="col-6 left"><img src={productDetail.image} alt="" /></div>
-                    <div className="col-6 right">
-                        <div>
-
-
-                            <div className="title-productDetail">
-                                <h1>{productDetail.title}</h1>
-                            </div>
-                            <div className="pb-2 star-productDetail">
+                        </>}
+                    {products.length > 0 &&
+                        <>
+                            <div className="col-6 left"><img src={productDetail.image} alt="" /></div>
+                            <div className="col-6 right">
                                 <div>
-                                    <span >{productDetail.rating.rate}
-                                        <Rate allowHalf disabled value={productDetail.rating.rate} />
-                                    </span>
-                                </div>
-                                <div className="count-review">
 
-                                    <span >{productDetail.rating.count} review</span>
-                                </div>
 
-                            </div>
-                            <div className="price-productDetail">
-                                <h4 > ${Math.floor(productDetail.price)}</h4>
-                            </div>
-                            <div className="desciption-productDetail">
-                                <p > {productDetail.description}</p>
-                            </div>
-                            <div className="py-3 buttonDetail">
-                                <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}><ShoppingCartOutlined />   Add To Cart</button>
-                                <button type="button" onClick={buyAtProductDetail} className="btn btn-outline-danger btn-lg">Buy Now!</button>
-                            </div>
-                            <div className="policy">
-                                <div className="isStock">
-                                    <label>Availability:<CheckCircleOutlined /> In Stock.</label>
-                                </div>
-                                <div>
-                                    <FieldTimeOutlined />
-                                    <label>Order by 12pm to ship same business day</label>
-                                </div>
-                                <div>
-                                    <CarOutlined />
-                                    <label>Free shipping VN on orders $45+ USD</label>
+                                    <div className="title-productDetail">
+                                        <h1>{productDetail.title}</h1>
+                                    </div>
+                                    <div className="pb-2 star-productDetail">
+                                        <div>
+                                            <span >{productDetail.rating.rate}
+                                                <Rate allowHalf disabled value={productDetail.rating.rate} />
+                                            </span>
+                                        </div>
+                                        <div className="count-review">
 
-                                </div>
-                                <div>
-                                    <CalendarOutlined />
-                                    <label>60 Day Happiness Guarantee</label>
+                                            <span >{productDetail.rating.count} review</span>
+                                        </div>
 
-                                </div>
+                                    </div>
+                                    <div className="price-productDetail">
+                                        <h4 > ${Math.floor(productDetail.price)}</h4>
+                                    </div>
+                                    <div className="desciption-productDetail">
+                                        <p > {productDetail.description}</p>
+                                    </div>
+                                    <div className="py-3 buttonDetail">
+                                        <button type="button" className="btn btn-outline-primary btn-lg" onClick={handleAdd}><ShoppingCartOutlined />   Add To Cart</button>
+                                        <button type="button" onClick={buyAtProductDetail} className="btn btn-outline-danger btn-lg">Buy Now!</button>
+                                    </div>
+                                    <div className="policy">
+                                        <div className="isStock">
+                                            <label>Availability:<CheckCircleOutlined /> In Stock.</label>
+                                        </div>
+                                        <div>
+                                            <FieldTimeOutlined />
+                                            <label>Order by 12pm to ship same business day</label>
+                                        </div>
+                                        <div>
+                                            <CarOutlined />
+                                            <label>Free shipping VN on orders $45+ USD</label>
 
+                                        </div>
+                                        <div>
+                                            <CalendarOutlined />
+                                            <label>60 Day Happiness Guarantee</label>
+
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </>
-            }
+                        </>
+                    }
+                </div>
+
+            </div>
         </div>
-
-        <Comments productID={id}/>
-    </div>;
+        <Comments productID={id} />
+    </>
 };
 
 export default ProductDetail;
