@@ -94,7 +94,12 @@ const Cart = () => {
     }
     const payment = () => {
         if (!currentUser) {
-            toast.warn('You need to login to pay for products', { autoClose: 1500 })
+            return toast.warn('You need to login to pay for products', { autoClose: 1500 })
+        }
+        if (currentUser) {
+
+            return alert('Sorry for the problem :(')
+
         }
     }
     return <div>
@@ -184,29 +189,52 @@ const Cart = () => {
 
                                 })
 
+                            }
+                            {currentUser && (currentUserCart.qty > 0 || dataqty > 0) &&
 
+                                <tr>
+                                    <td align="right" className='payment-button-responsive' colSpan='4'>
+                                        <div >
+
+                                            <div>
+                                                Total Product: {currentUser ? (dataUserCart.currentUserCart.qty) : dataqty}
+                                            </div>
+                                            <div>
+                                                Total price: {currentUser ? (dataUserCart.currentUserCart.totalPrice) : (datatotalPrice)}
+                                            </div>
+                                            <div>
+                                                <button onClick={() => {
+                                                    if (!currentUser) return toast.warn('You need to login to pay for products', { autoClose: 1500 })
+                                                    if (currentUser) return alert('Sorry for the problem :(')
+                                                }} type="button" className="btn btn-primary">Payment</button>
+
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
 
                             }
                         </tbody>
 
                     </table>
-                    {(currentUser && dataUserCart.currentUserCart.qty > 0) || dataqty > 0 &&
 
-                        <div className='payment-button'>
+
+                    {/* <div className='payment-button'>
+                        <div>
                             <div>
-                                <div>
-                                    Total product: {currentUser ? (dataUserCart.currentUserCart.qty) : (dataqty)}
-                                </div>
-                                <div>
-                                    Total price: {currentUser ? (dataUserCart.currentUserCart.totalPrice) : (datatotalPrice)}
-                                </div>
-
+                                Total product: {currentUser ? (dataUserCart.currentUserCart.qty) : (dataqty)}
                             </div>
+                            <div>
+                                Total price: {currentUser ? (dataUserCart.currentUserCart.totalPrice) : (datatotalPrice)}
+                            </div>
+
                         </div>
+                    </div> */}
 
 
 
-                    }
+
                 </div>
                 <div className="card text-white bg-danger mb-3 col-3 cardPayment" >
                     <h3 className="card-header text-center">DETAIL</h3>

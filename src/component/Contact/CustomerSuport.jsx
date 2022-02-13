@@ -1,6 +1,7 @@
 import map from '../../img/map.jpg'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 
 export const Thongtinlienhe = ({ activeId }) => {
@@ -52,6 +53,21 @@ export const Thongtinlienhe = ({ activeId }) => {
 
 
 export const EmailChoChungToi = ({ activeId, getActive }) => {
+    const [value, setValue] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        title: '',
+        content: ''
+    })
+
+    const handleSubmit = () => {
+        if (!value || value.fullName == '' || value.email == '' || value.title == ''|| value.phone == ''|| value.content == '') {
+             toast.warn('Please fill in this form!', { autoClose: 1500 })
+        }
+
+        toast.success('Send succesfully!', { autoClose: 2000 })
+    }
 
     return (
         <form id={activeId}  >
@@ -60,31 +76,31 @@ export const EmailChoChungToi = ({ activeId, getActive }) => {
                 <div className='sendEmail border-bottom '>
                     <div className='sendEmailInput-group  '>
                         <label htmlFor='your-full-name...  '>Full name</label>
-                        <input placeholder='Enter your full name' type='text' name='your-full-name' id='your-full-name' />
+                        <input placeholder='Enter your full name' value={value.fullName} onChange={e => setValue({ ...value, fullName: e.target.value })} type='text' name='your-full-name' id='your-full-name' />
                     </div>
                     <div className='sendEmailInput-group clear-fix d-flex justify-content-between'>
                         <div className='pull-left'>
                             <label>Email</label>
-                            <input placeholder='Enter your email...' type='email' name='your-email' id='your-email' />
+                            <input value={value.email} onChange={e => setValue({ ...value, email: e.target.value })} placeholder='Enter your email...' type='email' name='your-email' id='your-email' />
                         </div>
                         <div className='pull-right'>
                             <label>Phone number</label>
-                            <input placeholder='Enter your phone number...' type='text' name='your-phoneNumber' id='your-phoneNumber' />
+                            <input value={value.phone} onChange={e => setValue({ ...value, phone: e.target.value })} placeholder='Enter your phone number...' type='text' name='your-phoneNumber' id='your-phoneNumber' />
                         </div>
                     </div>
 
                     <div className='sendEmailInput-group '>
                         <label>Email title</label>
-                        <input type='text' name='your-email-title' id='your-email-title' />
+                        <input value={value.title} onChange={e => setValue({ ...value, title: e.target.value })} type='text' name='your-email-title' id='your-email-title' />
                     </div>
                     <div className='sendEmailInput-group '>
                         <label>Email content</label>
-                        <textarea name='your-email-content' wrap="hard" id='your-email-content' />
+                        <textarea value={value.content} onChange={e => setValue({ ...value, content: e.target.value })} name='your-email-content' wrap="hard" id='your-email-content' />
                     </div>
                 </div>
             </div>
             <div className='container text-center'>
-                <button onClick={() => toast.success('Send succesfully!', { autoClose: 2000 })} type="button" className="btn btn-primary btn-lg mx-auto">Send</button>
+                <button onClick={handleSubmit} type="button" className="btn btn-primary btn-lg mx-auto">Send</button>
             </div>
         </form>
     )

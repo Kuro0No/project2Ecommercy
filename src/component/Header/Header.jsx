@@ -81,6 +81,12 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
 
   }
 
+  useEffect(() => {
+    return () => {
+      isClickOutside()
+    }
+  },[])
+
   // dropdown//////////////////////////////////////////////////////////////////////
   const menu = (
     <Menu>

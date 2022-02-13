@@ -2,14 +2,17 @@
     padding: 20px;
     .will-cmt {
         display: flex;
-        padding-right: 20px;
         padding-bottom: 50px;
+        .will-cmt-2{
+        padding-right: 15px;
+
+        }
         img {
             width: 70px;
             height: 70px;
         }
         textarea {
-            width: 500px;
+            // width: 500px;
             min-height: 100px;
             max-height: 100px;
             padding: 10px;
@@ -21,7 +24,7 @@
             padding-bottom: 15px;
         }
         .other-user-cmt {
-            padding-right: 20px;
+            padding-right: 15px;
             img {
                 width: 70px;
                 height: 70px;
@@ -30,9 +33,36 @@
         .content-other-cmt {
             background: #fff;
             width: 500px;
-            max-height: 70px ;
             padding: 10px;
 
         }
     }
+}
+
+.text-cmt {
+    .show-more-less {
+        color: #1a83e5;
+        cursor: pointer;
+    }
+}
+
+.needCmt {
+    font-size: 24px;
+}
+.text-area-cmt {
+    width: 500px;
+    div{
+        width: 100%;
+        textarea{
+            width: 100%;
+        }
+    }
+}
+
+@media screen and(max-width: 390px) {
+    .nameAndTime {
+        display: block!important;
+    }
+    
+    
 }

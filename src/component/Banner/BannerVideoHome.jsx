@@ -14,6 +14,7 @@ import 'aos/dist/aos.css'
 
 
 const BannerVideoHome = () => {
+    
 
     const [abouteRef, setAboutRef] = useState()
     const [productRef, setProductRef] = useState()
@@ -79,9 +80,9 @@ const NewLists = ({ setAboutRef }) => {
             window.removeEventListener('resize', resizeHandle)
         }
     }, [])
-    
+
     const videoRef = useRef()
-    
+
 
     return (
         <div className='new-list-container' id='about' ref={ref}>
@@ -129,7 +130,7 @@ const NewLists = ({ setAboutRef }) => {
                             <img data-aos="fade-up-right" src="https://cdn.dribbble.com/users/1019864/screenshots/9189989/blue_dribbble.gif" alt="" />
                         </div>
                         <div className='video-center'>
-                            <video  controls data-aos="zoom-in" ref={videoRef} src={VideoCenter2}  ></video>
+                            <video controls data-aos="zoom-in" ref={videoRef} src={VideoCenter2}  ></video>
 
                             {/* <i  ref={playRef}  className='bi bi-play play-video-home'></i> */}
                         </div>
@@ -157,7 +158,8 @@ const Product = ({ setProductRef }) => {
     const [witdh, setWidth] = useState(window.innerWidth)
 
     useEffect(() => {
-        witdh > 1024 && setSize(28)
+        witdh > 1024 && setSize(Math.round(window.innerWidth / 60))
+
     })
 
     const CircleMove1 = () => {
@@ -236,7 +238,7 @@ const Product = ({ setProductRef }) => {
     useEffect(() => {
         const resizeHandle = () => {
             setWidth(window.innerWidth)
-            setSize(Math.round(window.innerWidth / 30))
+            setSize(Math.round(window.innerWidth / 40))
 
         }
         window.addEventListener('resize', resizeHandle)
@@ -281,25 +283,37 @@ const Product = ({ setProductRef }) => {
                         <img src={productBanner} />
                         <div className="circle-multiple">
                             <div className="circle text-center " onMouseMove={CircleMove1} onMouseLeave={MouseCircleLeave} >
-                                <span style={{ fontSize: size }}>{hat}</span>
+                                <div className='span-img-group'>
+                                    <span style={{ fontSize: size }}>{hat}</span>
+
+                                </div>
                                 <img ref={circle1Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple2" onMouseMove={CircleMove2} onMouseLeave={MouseCircleLeave2}>
                             <div className="circle text-center">
-                                <span style={{ fontSize: size }}>{jacket}</span>
+                                <div className='span-img-group'>
+                                    <span style={{ fontSize: size }}>{jacket}</span>
+
+                                </div>
                                 <img ref={circle2Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple3">
                             <div className="circle text-center" onMouseMove={CircleMove3} onMouseLeave={MouseCircleLeave3}>
-                                <span style={{ fontSize: size }}>{shoes}</span>
+                                <div className='span-img-group'>
+                                    <span style={{ fontSize: size }}>{shoes}</span>
+
+                                </div>
                                 <img ref={circle3Ref} />
                             </div>
                         </div>
                         <div className="circle-multiple4" onMouseMove={CircleMove4} onMouseLeave={MouseCircleLeave4}>
                             <div className="circle text-center">
-                                <span style={{ fontSize: size }}>{trousers}</span>
+                                <div className='span-img-group'>
+                                    <span style={{ fontSize: size }}>{trousers}</span>
+
+                                </div>
                                 <img ref={circle4Ref} />
                             </div>
                         </div>

@@ -130,3 +130,15 @@
     flex-direction: row-reverse;
     
 }
+
+// .payment-button-responsive {
+//     display: flex;
+//     flex-direction: row-reverse;
+// }
+
+
+@media screen and (min-width: 940px) {
+    .payment-button-responsive {
+        display: none;
+    }
+}

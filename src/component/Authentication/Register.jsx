@@ -1,9 +1,9 @@
 import Header from "../Header/Header";
 import './Register.scss'
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRef, useState,useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useAuth } from '../../AuthContext/AuthContext';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 
 
@@ -16,34 +16,34 @@ const Register = () => {
     const passwordConFirmRef = useRef()
     const displayName = useRef()
     const { register, updateProfile } = useAuth()
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleSignUpSubmit = async (e) => {
         e.preventDefault()
-        try{
+        try {
             setLoading(true)
-           await register(emailRef.current.value, passwordRef.current.value,displayName.current.value)
+            await register(emailRef.current.value, passwordRef.current.value, displayName.current.value)
 
         } catch {
             toast.warning('Failed Sign up')
         }
-       setLoading(false)
-       currentUser && navigate('/product')
-        
+        setLoading(false)
+        currentUser && navigate('/product')
+
     }
 
     useEffect(() => {
 
         return () => {
-            handleSignUpSubmit()
+            window.removeEventListener('click', handleSignUpSubmit)
         }
-    },[])
+    }, [currentUser])
 
 
     return (
         <>
-         
-            
+
+
             <div className="registerDiv">
 
                 <form className="registerForm " onSubmit={handleSignUpSubmit}>

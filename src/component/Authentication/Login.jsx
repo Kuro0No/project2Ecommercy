@@ -32,7 +32,7 @@ const Login = () => {
     useEffect(() => {
 
         return () => {
-            handleSubmitLogin()
+            window.removeEventListener('click', handleSubmitLogin)
         }
     },[currentUser])
 
