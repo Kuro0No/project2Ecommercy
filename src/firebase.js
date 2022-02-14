@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyDhZ5I_b4p58v1YX15Yy9sXF7C_rkOc1h0",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
@@ -18,7 +18,6 @@ const app = firebase.initializeApp({
 export const auth = app.auth()
 export const db = getFirestore();
 export const storage  = getStorage(app)
-
 
 
 
