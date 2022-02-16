@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, memo } from 'react';
 import './BannerVideoHome.scss'
 import Banner from './Video/1.mp4'
 import { Link, useLocation } from 'react-router-dom';
@@ -350,4 +350,4 @@ const Product = ({ setProductRef }) => {
 }
 
 
-export default BannerVideoHome;
+export default memo(BannerVideoHome);

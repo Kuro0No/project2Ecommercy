@@ -2,7 +2,7 @@ import './Header.scss'
 import logo from '../../img/logo.png'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
-import { useContext, useState, useEffect, useRef, useCallback } from 'react';
+import { useContext, useState, useEffect, useRef, useCallback, memo } from 'react';
 import { CartContext } from '../Cart/CartContext';
 import { headerContext } from '../HeaderContext/HeaderContext';
 import { Menu, Dropdown, Button, Space } from 'antd';
@@ -63,6 +63,8 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
     }
 
   }
+
+
   useEffect(() => {
     document.addEventListener('click', isClickOutside)
     return () => {
@@ -70,22 +72,25 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
 
     }
   }, [searchTerm])
+
   const isClickOutside = (e) => {
-    if (searchHeaderRef.current.contains(e.target)) {
-     return searchTerm.length > 0 && fieldRef && (fieldRef.style.display = 'block')
+    if ( searchHeaderRef.current?.contains(e.target)) {
+      return searchTerm.length > 0 && fieldRef && (fieldRef.style.display = 'block')
     }
-    if(fieldRef) {
+    if (fieldRef) {
 
       (fieldRef.style.display = 'none')
     }
 
   }
 
+
+
   useEffect(() => {
     return () => {
       isClickOutside()
     }
-  },[])
+  }, [])
 
   // dropdown//////////////////////////////////////////////////////////////////////
   const menu = (
@@ -174,7 +179,7 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
               </div>
               <div className='textCart'>
                 <h5>Cart</h5>
-                <span>{currentUser ? ((Math.floor(headerState.headerState?.totalPrice)) || 0) : (data.totalPrice > 0 ? (Math.floor(data.totalPrice)) : 0)}$</span>
+                <span>{currentUser ? ((Math.floor(headerState.headerState?.totalPrice)) || 0) : (data.totalPrice > 0 ? (Math.ceil(data.totalPrice)) : 0)}$</span>
               </div>
             </div>
           </Link>
@@ -218,4 +223,4 @@ const Header = ({ setOpenActive, openActive, avatarUser }) => {
   )
 };
 
-export default Header;
+export default memo(Header);

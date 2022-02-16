@@ -162,6 +162,7 @@ const Cart = () => {
                                 })
                                 :
                                 data.map((cart, index) => {
+                                    const productPrice = Math.ceil(cart.price)
 
                                     return <tr key={index} className="align-middle cart-tabel">
                                         <td scope="row" className='cart-img col-6'>
@@ -178,8 +179,8 @@ const Cart = () => {
                                             </div>
 
                                         </td>
-                                        <td>{cart.price * cart.qty} </td>
-                                        <td>
+                                        <td>{productPrice * cart.qty} </td>
+                                        <td className='trash-del'>
                                             {/* <button onClick={() => deleteCart(cart)} className='btn btn-danger'>Delete</button> */}
 
                                             <i onClick={() => deleteCart(cart)} className=' bi bi-trash ' ></i>
@@ -190,7 +191,7 @@ const Cart = () => {
                                 })
 
                             }
-                            {currentUser && (currentUserCart.qty > 0 || dataqty > 0) &&
+                            {currentUser && (currentUserCart?.qty > 0 || dataqty > 0) &&
 
                                 <tr>
                                     <td align="right" className='payment-button-responsive' colSpan='4'>
@@ -240,7 +241,7 @@ const Cart = () => {
                     <h3 className="card-header text-center">DETAIL</h3>
                     <div className="card-body">
                         <h5 className="card-title">Total Product: {currentUser ? (dataUserCart.currentUserCart.qty) : dataqty}</h5>
-                        <h5 className="card-text">Total Price : {currentUser ? (Math.floor(dataUserCart.currentUserCart.totalPrice) * dataUserCart.currentUserCart.qty) : datatotalPrice}$</h5>
+                        <h5 className="card-text">Total Price : {currentUser ? (Math.ceil(dataUserCart.currentUserCart.totalPrice ) * dataUserCart.currentUserCart.qty) : Math.ceil(datatotalPrice)}$</h5>
                         <small className="card-text">Be careful! Before buying this product, you need to carefully check all the product in your cart! </small>
                         <div className='mb-5'>
                             <input type="checkbox" name="" id="" className='mx-3' checked={checked} onChange={(e) => setChecked(!checked)} />

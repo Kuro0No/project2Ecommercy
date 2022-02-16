@@ -22,7 +22,7 @@ export const CartReducer = (state, action) => {
                 product = action.product
                 product['qty'] = 1
                 updateQty = qty + 1
-                updatePrice = totalPrice + product.price
+                updatePrice = totalPrice + Math.ceil(product.price)
                 toast.success('Add successfully!', {
                     autoClose: 1500,
                 });
@@ -34,7 +34,7 @@ export const CartReducer = (state, action) => {
             product = action.cart
             product.qty = product.qty + 1
             updateQty = qty
-            updatePrice = totalPrice + product.price
+            updatePrice = totalPrice + Math.ceil(product.price)
             // localStorage.setItem('cart', JSON.stringify({
             //     shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice 
             // }))
@@ -46,7 +46,7 @@ export const CartReducer = (state, action) => {
 
                 product.qty = product.qty - 1
                 updateQty = qty
-                updatePrice = totalPrice - product.price
+                updatePrice = totalPrice - Math.ceil(product.price)
                 // localStorage.setItem('cart', JSON.stringify({
                 //     shoppingCart: [...shoppingCart], qty: updateQty, totalPrice: updatePrice
                 // }))
@@ -64,7 +64,7 @@ export const CartReducer = (state, action) => {
 
                 product = action.cart
                 updateQty = qty - 1
-                updatePrice = totalPrice - product.price * product.qty
+                updatePrice = totalPrice - Math.ceil(product.price) * product.qty
                 // localStorage.setItem('cart', JSON.stringify({
                 //     shoppingCart: [...filterd], qty: updateQty, totalPrice: updatePrice 
                 // }))

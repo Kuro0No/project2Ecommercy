@@ -110,7 +110,7 @@ const Product = () => {
                                                 <img src={product.image} height={height} className="card-img-top products-image" alt="..." />
                                                 <div className="card-body ">
                                                     <h5 className="card-title products-title">{product.title}</h5>
-                                                    <p className="card-text">${Math.floor(product.price)}</p>
+                                                    <p className="card-text">${Math.ceil(product.price)}</p>
                                                 </div>
                                             </div>
                                         </Link>
